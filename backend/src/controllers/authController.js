@@ -50,4 +50,17 @@ const logout = (req, res) => {
   res.json({ message: "Logged out successfully" });
 };
 
-export { register, login, logout };
+const registerCheck = async (req, res) => {
+  try {
+    const { email, username } = req.body;
+    const emailTaken = await User.findOne({ email });
+    const usernameTaken = await User.findOne({ username });
+    res
+      .status(200)
+      .json({ emailTaken: !!emailTaken, usernameTaken: !!usernameTaken });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { register, login, logout, registerCheck };
