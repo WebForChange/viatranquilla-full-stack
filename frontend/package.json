@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@iconscout/unicons": "^4.0.8",
+    "leaflet": "^1.9.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^6.22.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
