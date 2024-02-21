@@ -1,7 +1,7 @@
 export default function Register() {
     return (
         <div>
-            <h2>Create an Account</h2>
+            <h3>Create an Account</h3>
             <p>Enter your details below or <a href="">log in</a></p>
             <form action="">
                 <div>
