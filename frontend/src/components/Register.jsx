@@ -32,7 +32,7 @@ export default function Register() {
             setPwMatch(true);
             try {
                 const {email, username } = registerData;
-                const { data } = await axios.post('http://localhost:5000/auth/register-check', { email, username });
+                const { data } = await axios.post('http://localhost:3000/auth/register-check', { email, username });
                 if (data.emailTaken) {
                     setMailTaken(true);
                 } else {
@@ -44,7 +44,7 @@ export default function Register() {
                     setUserTaken(false);
                 }
                 if (!data.emailTaken && !data.userTaken) {
-                    await axios.post('http://localhost:5000/auth/register', registerData);
+                    await axios.post('http://localhost:3000/auth/register', registerData);
                     setRegisterData({
                         username: '',
                         email: '',
