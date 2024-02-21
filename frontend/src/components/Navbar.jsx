@@ -9,7 +9,7 @@ function Navbar() {
             Via Tranquilla
           </a>
         </div>
-        <div className="flex-none gap-2">
+        <div className="flex-none gap-2 ">
           <div className="form-control">
             <input
               type="text"
