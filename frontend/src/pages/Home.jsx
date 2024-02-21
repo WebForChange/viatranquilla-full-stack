@@ -10,13 +10,12 @@ function Home() {
       <Hero />
 
       {/* Features Section */}
-      <h2 className="text-center text-4xl font-bold pt-8 text-rose_taupe-700">
-      Features
-    </h2>
+      <h2 className="text-center text-4xl font-bold pt-8 text-sage-400">
+        Features
+      </h2>
 
       <Features />
       <Features />
-      
     </div>
   );
 }

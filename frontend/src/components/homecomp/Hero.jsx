@@ -3,7 +3,7 @@ import React from 'react'
 function Hero() {
   return (
     <div className="hero h-[300px] lg:h-[400px] xl:h-[550px] bg-hero-img bg-cover shadow-xl shadow-delft_blue-100">
-        <div className=" bg-delft_blue-100 w-3/4 lg:w-1/2 h-5/6 lg:h-2/3 rounded-3xl bg-opacity-60 backdrop-filter backdrop-blur-sm ">
+        <div className=" bg-delft_blue-100 w-3/4 lg:w-1/2 h-5/6 lg:h-2/3 rounded-3xl bg-opacity-40 backdrop-filter backdrop-blur-sm shadow-sm shadow-rose_taupe-100">
           <div className="hero-content text-center text-neutral-content ">
             <div className="max-w-md text-eggshell-800 pt-4 lg:pt-8 ">
               <h1 className="mb-5 text-3xl lg:text-5xl font-bold">
