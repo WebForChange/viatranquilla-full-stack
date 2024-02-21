@@ -18,7 +18,7 @@ export default function Register() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (
             registerData.password !== registerData.password2 ||
@@ -30,6 +30,32 @@ export default function Register() {
             setPwMatch(false);
         } else {
             setPwMatch(true);
+            try {
+                const {email, username } = registerData;
+                const { data } = await axios.post('http://localhost:5000/auth/register-check', { email, username });
+                if (data.emailTaken) {
+                    setMailTaken(true);
+                } else {
+                    setMailTaken(false);
+                }
+                if (data.userTaken) {
+                    setUserTaken(true);
+                } else {
+                    setUserTaken(false);
+                }
+                if (!data.emailTaken && !data.userTaken) {
+                    await axios.post('http://localhost:5000/auth/register', registerData);
+                    setRegisterData({
+                        username: '',
+                        email: '',
+                        birthday: '',
+                        password: '',
+                        password2: ''
+                    });
+                } 
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
