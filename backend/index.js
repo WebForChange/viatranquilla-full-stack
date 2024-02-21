@@ -9,7 +9,7 @@ app.use(express.json());
 
 //mongoose.connect('MongoDBConnectionString');
 
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
