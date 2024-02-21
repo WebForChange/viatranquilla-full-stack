@@ -9,7 +9,7 @@ export default function AuthProvider( {children} ) {
     
     const checkLoggedIn = async () => {
         try {
-                const response = await axios.get('http://localhost:5000/auth/loggedIn', 
+                const response = await axios.get('http://localhost:5000/auth/me', 
                 {
                     withCredentials: true
                 }
