@@ -7,6 +7,8 @@ export default function Register() {
         password2: ''
     });
     const [pwMatch, setPwMatch] = useState(null);
+    const [mailTaken, setMailTaken] = useState(null);
+    const [userTaken, setUserTaken] = useState(null);
 
 
     const handleChange = (e) => {
@@ -28,7 +30,6 @@ export default function Register() {
             setPwMatch(false);
         } else {
             setPwMatch(true);
-            //Logic to send data to server
         }
     };
 
