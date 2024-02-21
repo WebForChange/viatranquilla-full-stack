@@ -22,7 +22,7 @@ export default function Register() {
         e.preventDefault();
         if (
             registerData.password !== registerData.password2 ||
-            !registerData.name ||
+            !registerData.username ||
             !registerData.email ||
             !registerData.birthday ||
             !registerData.password
