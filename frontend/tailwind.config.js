@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["../index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
       transparent: "transparent",
@@ -115,7 +115,11 @@ export default {
         900: "#d7d7d7",
       },
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-img': "url('./src/assets/vw-roadtrip.png')",
+      }
+    },
   },
   plugins: [require("daisyui")],
 };
