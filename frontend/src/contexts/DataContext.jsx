@@ -6,6 +6,7 @@ export default function DataContext({children}) {
     const [profileData, setProfileData] = useState({});
     const [allUser, setAllList] = useState([]);
 
+    // Get profile data by User-ID. Do not send sensitive non display data like password - route is not implemented yet so it is not defined here and will not work :(
     async function getProfileDataByID(id) {
         try {
             const response = await axios.get(`http://localhost:3000/profile/${id}`);
@@ -14,7 +15,7 @@ export default function DataContext({children}) {
             console.error(error);
         }
     }
-    
+
     // Get all user as a list of IDs - route is not implemented yet so it is not defined here and will not work :(
         async function getAllUser() {
             try {
