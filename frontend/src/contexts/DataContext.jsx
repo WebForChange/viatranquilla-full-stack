@@ -6,33 +6,34 @@ export default function DataContext({children}) {
     const [profileData, setProfileData] = useState({});
     const [allUser, setAllList] = useState([]);
 
-    function getProfileDataByID(id) {
-        axios.get(`http://localhost:3000/profile/${id}`)
-        .then((response) => {
+    // Get profile data by User-ID. Do not send sensitive non display data like password - route is not implemented yet so it is not defined here and will not work :(
+    async function getProfileDataByID(id) {
+        try {
+            const response = await axios.get(`http://localhost:3000/profile/${id}`);
             setProfileData(response.data);
-        })
-        .catch((error) => {
+        } catch (error) {
             console.error(error);
-        });
+        }
     }
-    // Get all user as a list of IDs - route is not implemented yet
-    function getAllUser() {
-        axios.get(`http://localhost:3000/`)
-        .then((response) => {
-            setAllList(response.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-    }
+
+    // Get all user as a list of IDs with username and profilePicture - route is not implemented yet so it is not defined here and will not work :(
+        async function getAllUser() {
+            try {
+                const response = await axios.get(`http://localhost:3000/`);
+                setAllList(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
 
 
 
     return (
         <DataContext.Provider value=
         {{
-            profileData, 
-            setProfileData,
+            profileData,
+            allUser, 
+            getProfileDataByID,
             getProfileDataByID
         }}>
             {children}
