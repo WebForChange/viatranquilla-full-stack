@@ -1,4 +1,4 @@
-export default function Login() {
+export default function LoginForm() {
     const [mailError, setMailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [postLogin, setPostLogin] = useState({
@@ -14,7 +14,7 @@ export default function Login() {
     };
 
     const handleSubmit = async (e) => {
-        
+
     };
     
     return (
