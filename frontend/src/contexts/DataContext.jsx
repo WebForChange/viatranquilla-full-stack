@@ -15,7 +15,7 @@ export default function DataContext({children}) {
             console.error(error);
         });
     }
-    // Get all user as a list of IDs
+    // Get all user as a list of IDs - route is not implemented yet
     function getAllUser() {
         axios.get(`http://localhost:3000/`)
         .then((response) => {
