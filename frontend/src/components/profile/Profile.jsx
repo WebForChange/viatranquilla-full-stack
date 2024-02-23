@@ -1,7 +1,8 @@
-export default function Profile() {
+export default function Profile( {user} ) {
+
     return (
-        <div>
-            <h1>Profile</h1>
+        <div id="parent">
+            <h2>Profile</h2>
             <p>Profile information goes here</p>
         </div>
     );
