@@ -15,7 +15,7 @@ export default function DataContext({children}) {
             console.error(error);
         });
     }
-    // Get all user as a list of IDs - route is not implemented yet
+    // Get all user as a list of IDs - route is not implemented yet so it is not defined here and will not work :(
     function getAllUser() {
         axios.get(`http://localhost:3000/`)
         .then((response) => {
@@ -31,8 +31,9 @@ export default function DataContext({children}) {
     return (
         <DataContext.Provider value=
         {{
-            profileData, 
-            setProfileData,
+            profileData,
+            allUser, 
+            getProfileDataByID,
             getProfileDataByID
         }}>
             {children}
