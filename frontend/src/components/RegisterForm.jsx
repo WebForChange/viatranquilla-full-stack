@@ -1,4 +1,4 @@
-export default function Register() {
+export default function RegisterForm() {
     const [registerData, setRegisterData] = useState({
         username: '',
         email: '',
