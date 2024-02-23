@@ -20,10 +20,9 @@ export default function DataContext({children}) {
             }
         }
 
-    // Get all user as a list of IDs with username and profilePicture - route is not implemented yet so it is not defined here and will not work :(
         async function getAllUser() {
             try {
-                const response = await axios.get(`http://localhost:3000/`);
+                const response = await axios.get(`http://localhost:3000/users`);
                 setAllList(response.data);
             } catch (error) {
                 console.error(error);
