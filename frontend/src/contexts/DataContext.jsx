@@ -5,16 +5,20 @@ const DataContext = createContext();
 export default function DataContext({children}) {
     const [profileData, setProfileData] = useState({});
     const [allUser, setAllList] = useState([]);
+    const [tripDataFull, setTripDataFull] = useState([]);
+    const [tripDataByID, setTripDataByID] = useState([]);
+    const [tripDataByUser, setTripDataByUser] = useState([]);
+    const [tripDataByQuery, setTripDataByQuery] = useState([]);
 
     // Get profile data by User-ID. Do not send sensitive non display data like password - route is not implemented yet so it is not defined here and will not work :(
-    async function getProfileDataByID(id) {
-        try {
-            const response = await axios.get(`http://localhost:3000/profile/${id}`);
-            setProfileData(response.data);
-        } catch (error) {
-            console.error(error);
+        async function getProfileDataByID(id) {
+            try {
+                const response = await axios.get(`http://localhost:3000/profile/${id}`);
+                setProfileData(response.data);
+            } catch (error) {
+                console.error(error);
+            }
         }
-    }
 
     // Get all user as a list of IDs with username and profilePicture - route is not implemented yet so it is not defined here and will not work :(
         async function getAllUser() {
@@ -25,6 +29,44 @@ export default function DataContext({children}) {
                 console.error(error);
             }
         }
+    // Get a full list of all stored trips - route is not implemented yet so it is not defined here and will not work :(
+        async function getTripDataFull() {
+            try {
+                const response = await axios.get(`http://localhost:3000/trip`);
+                setTripDataFull(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    // Get trip data by trip-ID - route is not implemented yet so it is not defined here and will not work :(
+        async function getTripDataByID(id) {
+            try {
+                const response = await axios.get(`http://localhost:3000/trip/${id}`);
+                setTripDataByID(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    
+    // Get trip data by connected User-ID - route is not implemented yet so it is not defined here and will not work :(
+        async function getTripDataByUser(id) {
+            try {
+                const response = await axios.get(`http://localhost:3000/user/${id}/trips`);
+                setTripDataByUser(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    // Get trip data by query - route is not implemented yet so it is not defined here and will not work :(
+        async function getTripDataByQuery(query) {
+            try {
+                const response = await axios.get(`http://localhost:3000/trip?query=${query}`);
+                setTripDataByQuery(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
 
 
 
@@ -32,9 +74,18 @@ export default function DataContext({children}) {
         <DataContext.Provider value=
         {{
             profileData,
-            allUser, 
+            allUser,
+            tripDataFull,
+            tripDataByID,
+            tripDataByUser,
+            tripDataByQuery,
+            getAllUser, 
             getProfileDataByID,
-            getProfileDataByID
+            getProfileDataByID,
+            getTripDataFull,
+            getTripDataByID,
+            getTripDataByUser,
+            getTripDataByQuery
         }}>
             {children}
         </DataContext.Provider>
