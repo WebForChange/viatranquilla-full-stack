@@ -1,4 +1,9 @@
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthProvider';
+import axios from 'axios';
+
 export default function LoginForm() {
+    const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
     const [mailError, setMailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [postLogin, setPostLogin] = useState({
@@ -14,14 +19,31 @@ export default function LoginForm() {
     };
 
     const handleSubmit = async (e) => {
-
-
+        e.preventDefault();
+        try {
+            const { data } = await axios.post('http://localhost:3000/auth/login', postLogin);
+            if (data.error === 'email') {
+                setMailError(true);
+            } else {
+                setMailError(false);
+            }
+            if (data.error === 'password') {
+                setPasswordError(true);
+            } else {
+                setPasswordError(false);
+            }
+            if (data.token) {
+                setLoggedIn(true);
+                checkLoggedIn();
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
     
     return (
         <div>
-            <h3>Welcome back!</h3>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" value={postLogin.email} onChange={handleChange} />

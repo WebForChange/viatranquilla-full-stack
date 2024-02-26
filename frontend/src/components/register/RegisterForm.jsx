@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 export default function RegisterForm() {
     const [registerData, setRegisterData] = useState({
         username: '',
@@ -62,7 +64,6 @@ export default function RegisterForm() {
 
     return (
         <div>
-            <h3>Create an Account</h3>
             <p>Enter your details below or <a href="">log in</a></p>
             <form onSubmit={handleSubmit}>
                 <div>
