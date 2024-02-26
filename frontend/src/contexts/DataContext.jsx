@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-const DataContext = createContext();
+export const DataContext = createContext();
 
-export default function dataContext({children}) {
+export function DataContextProvider({children}) {
     const [profileData, setProfileData] = useState({});
     const [allUser, setAllList] = useState([]);
     const [tripDataFull, setTripDataFull] = useState([]);
