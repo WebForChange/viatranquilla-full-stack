@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DataContext } from "../../contexts/DataContext";
+import {DataContext} from "../../contexts/DataContextProvider";
 
 function Profileheader() {
   const { getProfileDataByID, profileData } = useContext(DataContext);

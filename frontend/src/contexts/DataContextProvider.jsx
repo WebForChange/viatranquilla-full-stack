@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 export const DataContext = createContext();
 
-export function DataContextProvider({children}) {
+export default function DataContextProvider({children}) {
     const [profileData, setProfileData] = useState({});
     const [allUser, setAllList] = useState([]);
     const [tripDataFull, setTripDataFull] = useState([]);
@@ -79,7 +79,6 @@ export function DataContextProvider({children}) {
             tripDataByUser,
             tripDataByQuery,
             getAllUser, 
-            getProfileDataByID,
             getProfileDataByID,
             getTripDataFull,
             getTripDataByID,
