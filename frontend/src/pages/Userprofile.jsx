@@ -6,9 +6,9 @@ import Usertrips from "../components/profilecomp/Usertrips";
 function Userprofile() {
   return (
     <div className="flex flex-col w-full h-auto p-12">
-      <Profileheader />
-      <About />
-      <Usertrips />
+        <Profileheader />
+        <About />
+        <Usertrips />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export default function AuthProvider( {children} ) {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -37,7 +37,7 @@ export default function AuthProvider( {children} ) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{user, setUser, loggedIn, setLoggedIn}}>
+        <AuthContext.Provider value={{user, setUser, loggedIn, setLoggedIn, checkLoggedIn}}>
             {children}
         </AuthContext.Provider>
     )
