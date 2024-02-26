@@ -43,7 +43,7 @@ export default function LoginForm() {
     
     return (
         <div>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" value={postLogin.email} onChange={handleChange} />
