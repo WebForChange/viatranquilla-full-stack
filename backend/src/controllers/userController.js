@@ -11,6 +11,6 @@ export const getProfileDataByID = asyncHandler(async (req,res,next) => {
     const {id} = req.params;
 
     const profileDataByID = await User.findById(id);
-    if(!profileDataByID) throw ErrorResponse(`Profile ${id} does not exist!`, 404)
+    if(!profileDataByID) throw new ErrorResponse(`Profile ${id} does not exist!`, 404)
     res.json(profileDataByID)
 })
