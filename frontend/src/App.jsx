@@ -13,6 +13,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/user/:id" element={<Userprofile />} />
         <Route path="/user" element={<Userprofile />} />
         <Route path="/tripdetails" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
