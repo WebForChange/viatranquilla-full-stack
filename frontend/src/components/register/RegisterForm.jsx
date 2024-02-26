@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function RegisterForm() {
     const [registerData, setRegisterData] = useState({
@@ -34,7 +36,12 @@ export default function RegisterForm() {
             setPwMatch(true);
             try {
                 const {email, username } = registerData;
-                const { data } = await axios.post('http://localhost:3000/auth/register-check', { email, username });
+                const { data } = await axios.post('http://localhost:3000/auth/register-check', { email, username }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    }
+                });
                 if (data.emailTaken) {
                     setMailTaken(true);
                 } else {
@@ -63,32 +70,33 @@ export default function RegisterForm() {
 
 
     return (
-        <div>
-            <p>Enter your details below or <a href="">log in</a></p>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <div className='text-eggshell-600 w-full h-screen p-4'>
+
+            <p className='font-semibold text-center mb-6'>Enter your details below or <Link to="/login">log in</Link></p>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4 justify-between items-center'>
+                <div className='flex flex-col'>
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" value={registerData.username} onChange={handleChange} />
+                    <input type="text" id="username" className='p-1 rounded text-delft_blue-100' value={registerData.username} onChange={handleChange} />
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" value={registerData.email} onChange={handleChange} />
+                    <input type="email" id="email" className='p-1 rounded text-delft_blue-100' value={registerData.email} onChange={handleChange} />
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="birthday">Date of Birth</label>
-                    <input type="date" id="birthday" value={registerData.birthday} onChange={handleChange} />
+                    <input type="date" id="birthday" className='p-1 rounded text-delft_blue-100' value={registerData.birthday} onChange={handleChange} />
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" value={registerData.password} onChange={handleChange}/>
+                    <input type="password" id="password" className='p-1 rounded text-delft_blue-100' value={registerData.password} onChange={handleChange}/>
                 </div>
-                <div>
+                <div className='flex flex-col'>
                     <label htmlFor="password2">Confirm Password</label>
-                    <input type="password" id="password2" value={registerData.password2} onChange={handleChange}/>
+                    <input type="password" id="password2" className='p-1 rounded text-delft_blue-100' value={registerData.password2} onChange={handleChange}/>
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit" className='btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500'>Register</button>
             </form>
-            <p><a href="">Forgot Password</a></p>
+            
         </div>
     )
 }
