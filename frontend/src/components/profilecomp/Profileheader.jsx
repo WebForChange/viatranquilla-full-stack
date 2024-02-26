@@ -29,7 +29,7 @@ function Profileheader() {
           <h1 className="text-5xl lg:text-8xl font-bold mb-4 text-sunset-400">
             {profileData?.username}
           </h1>
-          <div className="flex justify-between w-full space-x-4">
+          <div className="flex justify-center w-full space-x-4">
             <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12">
               Add friend
             </button>
