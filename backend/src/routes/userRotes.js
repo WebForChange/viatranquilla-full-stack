@@ -7,4 +7,7 @@ const router = express.Router();
 router.route('/')
 .get(userController.getAllUser)
 
+router.route('/:id')
+.get(userController.getProfileDataByID)
+
 export default router;
