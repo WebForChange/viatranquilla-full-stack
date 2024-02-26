@@ -42,7 +42,7 @@ export const getTripDataByQuery = asyncHandler(async (req,res,next) => {
             { title: { $regex: query, $options: 'i' } },
             { description: { $regex: query, $options: 'i' } },
             { location: { $regex: query, $options: 'i' } },
-            // { startDate: { $gte: new Date(query) } },
+            // { startDate: { $gte: new Date(query) } },  NEED HEEEELP :D
             // { endDate: { $lte: new Date(query) } }
         ]
     }).populate('participants').populate('creator');
