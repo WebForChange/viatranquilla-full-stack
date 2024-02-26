@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export default function AuthProvider( {children} ) {
     const [loggedIn, setLoggedIn] = useState(false);

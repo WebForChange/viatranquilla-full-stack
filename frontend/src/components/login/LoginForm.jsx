@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthProvider';
+import {AuthContext} from '../../contexts/AuthProvider';
 import axios from 'axios';
 
 export default function LoginForm() {
