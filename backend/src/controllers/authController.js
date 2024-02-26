@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
+import asyncHandler from "../utils/asyncHandler.js";
 
 const register = async (req, res) => {
   try {
@@ -25,8 +26,11 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, username, password } = req.body;
     const user = await User.findOne({ email });
+    if (!user) {
+      const user = await User.findOne({ username });
+    }
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -42,12 +46,16 @@ const login = async (req, res) => {
   }
 };
 
-const logout = (req, res) => {
-  // Todo: Logout
-  res.json({
+const logout = asyncHandler(async (req, res, next) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false, // set to true in production. HTTPS not setup on local server
+  });
+  res.status(200).send({
+    status: "success",
     message: "Logged out successfully. Client should now delete token.",
   });
-};
+});
 
 const registerCheck = async (req, res) => {
   try {
