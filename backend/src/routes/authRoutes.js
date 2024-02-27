@@ -4,6 +4,7 @@ import {
   login,
   logout,
   registerCheck,
+  authUser,
 } from "../controllers/authController.js";
 import verifyToken from '../middlewares/verifyToken.js';
 
@@ -12,6 +13,7 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/login", login);
 router.post("/register-check", registerCheck);
-router.get("/logout", logout);
+router.get('/me', verifyToken, authUser);
+router.get("/logout", verifyToken, logout);
 
 export default router;
