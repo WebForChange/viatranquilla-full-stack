@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import ErrorResponse from "../utils/ErrorResponse.js";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
+import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 const register = async (req, res) => {
@@ -24,11 +25,33 @@ const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+    const newProfile = await Profile.create({
+      username: username,
+      firstName: "",
+      lastName: "",
+      birthDate: "",
+      phone: "",
+      street: "",
+      houseNumber: "",
+      zip: "",
+      city: "",
+      country: "",
+      state: "",
+      profilePicture: "",
+      bio: "",
+      createdTrips: [],
+      joinedTrips: [],
     });
 
-    res.status(201).json({ user: newUser, token });
+    const token = jwt.sign(
+      { userId: newUser._id, username: username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
+
+    res.status(201).json({ id: newUser._id, username, token });
   } catch (error) {
     res.status(500).json({ errorCode: error.code, message: error.message });
   }
@@ -36,42 +59,34 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    // let user = null;
     const { email, password } = req.body;
-    // if (email) {
-    //   user = await User.findOne({ email });
-    // } else if (username) {
-    //   user = await User.findOne({ username });
-    // }
 
-    // if (!user || !(await bcrypt.compare(password, user.password))) {
-    //   return res.status(401).json({ message: "Invalid email or password" });
-    // }
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) throw new ErrorResponse("Email does not exist", 404);
 
-    const userFromDatabase = await User.findOne({ email }).select('+password');
-    if (!userFromDatabase) throw new ErrorResponse('Email does not exist', 404);
-  
-    const match = await bcrypt.compare(password, userFromDatabase.password);
-    if (!userFromDatabase) throw new ErrorResponse('Email or Pasword is incorrect', 401);
+    const match = await bcrypt.compare(password, user.password);
+    if (!user) throw new ErrorResponse("Email or Pasword is incorrect", 401);
 
-    const token = jwt.sign({ userId: userFromDatabase._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    // const userId = user._id.toString();
-    res.cookie('token', token, {maxAge: 3600000})
-    res.send({status: 'The login was successful.'})
-
-    // res.json({ userId, token });
+    const userId = user._id.toString();
+    res.cookie("token", token, { maxAge: 3600000 });
+    res.json({
+      userId: userId,
+      username: user.username,
+      status: "The login was successful.",
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export const authUser = asyncHandler(async (req,res,next) => {
-  const user = await User.findById(req.userId)
-  res.json(user)
-})
+export const authUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.userId);
+  res.json(user);
+});
 
 const logout = asyncHandler(async (req, res, next) => {
   res.clearCookie("token", {
