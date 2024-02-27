@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route("/").get(userController.getAllUsers);
 
-router.route("/:username").get(userController.getProfileDataByID);
+router.route("/:username").get(userController.getProfileDataByUsername);
 
 router.route("/:id/trips").get(tripController.getTripDataByUser);
 
