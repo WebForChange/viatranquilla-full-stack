@@ -26,11 +26,12 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    let user = null;
     const { email, username, password } = req.body;
     if (email) {
-      const user = await User.findOne({ email });
+      user = await User.findOne({ email });
     } else if (username) {
-      const user = await User.findOne({ username });
+      user = await User.findOne({ username });
     }
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
