@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import authRoutes from "./src/routes/authRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import tripRoutes from "./src/routes/tripRoutes.js";
+import { errorHandler } from "./src/middlewares/ErrorHandler.js";
 import "dotenv/config";
 import cors from "cors";
 
@@ -23,6 +24,9 @@ app.use('/user', userRoutes);
 app.use('/profile', userRoutes);
 app.use('/trips', tripRoutes);
 app.use('/trip', tripRoutes);
+
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

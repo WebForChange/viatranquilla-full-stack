@@ -1,6 +1,7 @@
 import express from "express";
 import { Router } from "express";
 import * as tripController from '../controllers/tripController.js'
+import verifyToken from '../middlewares/verifyToken.js';
 
 const router = express.Router();
 
