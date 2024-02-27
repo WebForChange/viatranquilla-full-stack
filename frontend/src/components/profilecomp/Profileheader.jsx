@@ -26,14 +26,14 @@ function Profileheader() {
           </button>
         </div>
         <div className="flex flex-col items-center">
-          <h1 className="text-5xl lg:text-8xl font-bold mb-4 text-sunset-400">
+          <h1 className="text-5xl lg:text-8xl font-bold mb-4 bg-gradient-to-br from-cambridge_blue-400 to-delft_blue-700 bg-clip-text text-transparent uppercase">
             {profileData?.username}
           </h1>
           <div className="flex justify-center w-full space-x-4">
-            <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12">
+            <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400">
               Add friend
             </button>
-            <button className="bg-transparent h-12 text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400">
+            <button className="bg-transparent h-12 text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 hover:bg-sunset-400">
               Message
             </button>
           </div>

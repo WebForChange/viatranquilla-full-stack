@@ -21,45 +21,45 @@ function About() {
         </div>
 
         <div className="flex flex-col mt-12">
-          <h1 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
             Blabla Brummbrumm
-          </h1>
+          </h3>
           <p className="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
             molestias!
           </p>
         </div>
         <div className="flex flex-col mt-12">
-          <h1 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
             Spontan oder geplant?
-          </h1>
+          </h3>
           <p className="text-justify">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
             molestias!
           </p>
         </div>
         <div className="flex flex-col mt-12">
-          <h1 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
           Frühaufsteher oder Nachteule?
-          </h1>
+          </h3>
           <p className="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
             molestias!
           </p>
         </div>
         <div className="flex flex-col mt-12">
-          <h1 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
           Strand, Berge oder Stadt?
-          </h1>
+          </h3>
           <p className="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
             molestias!
           </p>
         </div>
         <div className="flex flex-col mt-12">
-          <h1 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
           Kochen oder Essen gehen?
-          </h1>
+          </h3>
           <p className="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
             molestias!
