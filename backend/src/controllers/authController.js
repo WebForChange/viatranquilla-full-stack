@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import ErrorResponse from '../utils/ErrorResponse.js';
 
 const register = async (req, res) => {
   try {
@@ -30,7 +29,7 @@ const login = async (req, res) => {
     const { email, username, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      const user = await User.findOne({ username });
+      user = await User.findOne({ username });
     }
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
