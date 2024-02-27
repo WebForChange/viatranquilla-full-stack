@@ -1,4 +1,5 @@
 import React from "react";
+import TripCard from "../TripCard";
 
 function Usertrips() {
   return (
@@ -6,30 +7,14 @@ function Usertrips() {
       <h1 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400 mt-24">
         My Trips
       </h1>
-      <div className="flex flex-col lg:flex-row mt-24">
-        <div className="flex flex-col lg:flex-row gap-8 items-center justify-center lg:w-1/2">
-          <div className="card w-80 glass">
-            <figure>
-              <img src="https://picsum.photos/400/300" alt="car!" />
-            </figure>
-            <div className="card-body text-sunset-700">
-              <h2 className="card-title">Life hack</h2>
-              <p>How to park your car at your garage?</p>
-              <div className="card-actions justify-end"></div>
-            </div>
-          </div>
+      <div className="flex flex-col md:flex-row md:flex-wrap gap-8 justify-start items-center mt-12">
+        <TripCard />
+        <TripCard />
+        <TripCard />
+        <TripCard />
+        <TripCard />
+        <TripCard />
 
-          <div className="card w-80 glass">
-            <figure>
-              <img src="https://picsum.photos/400/300" alt="car!" />
-            </figure>
-            <div className="card-body text-sunset-700">
-              <h2 className="card-title">Life hack</h2>
-              <p>How to park your car at your garage?</p>
-              <div className="card-actions justify-end"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
