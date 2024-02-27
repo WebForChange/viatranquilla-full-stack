@@ -3,6 +3,7 @@ import authRoutes from "./src/routes/authRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import tripRoutes from "./src/routes/tripRoutes.js";
 import { errorHandler } from "./src/middlewares/ErrorHandler.js";
+import './src/db/server.js'
 import "dotenv/config";
 import cors from "cors";
 
