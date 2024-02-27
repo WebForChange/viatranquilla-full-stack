@@ -3,7 +3,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function ProfileForm() {
-    const { user } = useContext(AuthContext);
+    //const { user } = useContext(AuthContext);
 
     // user.id is the id of the logged in user from login state user.id
 
