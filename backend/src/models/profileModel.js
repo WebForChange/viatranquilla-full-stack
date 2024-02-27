@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const profileSchema = new mongoose.Schema({
-  id: { type: String },
+  username: { type: String, unique: true, required: true },
   firstName: { type: String, default: "" },
   lastName: { type: String, default: "" },
   birthDate: { type: Date, default: "" },
@@ -18,4 +18,6 @@ const profileSchema = new mongoose.Schema({
   joinedTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
 });
 
-export default mongoose.model("Profile", profileSchema);
+const Profile = mongoose.model("Profile", profileSchema);
+
+export default Profile;
