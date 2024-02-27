@@ -8,10 +8,10 @@ export const getAllUsers = asyncHandler(async (req, res, next) => {
   res.json(user);
 });
 
-export const getProfileDataByID = asyncHandler(async (req, res, next) => {
+export const getProfileDataByUsername = asyncHandler(async (req, res, next) => {
   const username = req.params.username;
 
-  const profile = await Profile.findOne({
+  const profile = await User.findOne({
     username: username,
   });
 
