@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function ProfileForm() {
@@ -28,7 +29,14 @@ export default function ProfileForm() {
         });
     }
 
-    function handleSubmit(event) {
+    // post api missing
+    async function handleSubmit(event) {
+        event.preventDefault();
+        try {
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
