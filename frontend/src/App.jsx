@@ -6,6 +6,7 @@ import Trips from "./pages/Trips";
 import TripDetails from "./pages/TripDetails";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
+import ProfileForm from "./components/profile/ProfileForm";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/user/:id" element={<Userprofile />} />
         <Route path="/user" element={<Userprofile />} />
+        <Route path="/user/edit/:id" element={<ProfileForm />} />
         <Route path="/trips" element={<Trips />} />
         <Route path="/tripdetails" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
