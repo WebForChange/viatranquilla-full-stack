@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {DataContext} from "../../contexts/DataContextProvider";
 
 function Profileheader() {
@@ -21,9 +21,8 @@ function Profileheader() {
             alt="profile"
             className="rounded-full h-24 w-24 lg:w-48 lg:h-48 mb-4"
           />
-          <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4">
-            Edit Profile
-          </button>
+          <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4"><Link to={`/user/edit/${id}`}>Edit Profile</Link></button>
+            
         </div>
         <div className="flex flex-col items-center">
           <h1 className="text-5xl lg:text-8xl font-bold mb-4 bg-gradient-to-br from-cambridge_blue-400 to-delft_blue-700 bg-clip-text text-transparent uppercase">

@@ -9,6 +9,15 @@ const register = async (req, res) => {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    let existingUser = null;
+    existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      existingUser = await User.findOne({ username });
+    }
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
     const newUser = await User.create({
       username,
       email,
@@ -21,7 +30,7 @@ const register = async (req, res) => {
 
     res.status(201).json({ user: newUser, token });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ errorCode: error.code, message: error.message });
   }
 };
 
