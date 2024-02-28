@@ -17,7 +17,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/user/:id" element={<Userprofile />} />
+        <Route path="/user/:username" element={<Userprofile />} />
         <Route path="/user" element={<Userprofile />} />
         <Route path="/user/edit/:id" element={<ProfileForm />} />
         <Route path="/trips" element={<Trips />} />
