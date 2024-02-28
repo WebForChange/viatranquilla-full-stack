@@ -20,3 +20,16 @@ export const getProfileDataByUsername = asyncHandler(async (req, res, next) => {
 
   res.json(profile);
 });
+
+export const getFriends = asyncHandler(async (req, res, next) => {
+  const username = req.params.username;
+
+  const profile = await Profile.findOne({
+    username: username,
+  });
+
+  if (!profile)
+    throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
+
+  res.json(profile.friends);
+});
