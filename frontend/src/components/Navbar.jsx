@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/viatranquilla-logo.png";
 
 function Navbar() {
   return (
@@ -7,7 +8,7 @@ function Navbar() {
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
-            Via Tranquilla
+            <img src={logo} alt="via tranquilla logo" className="w-96" />
           </a>
         </div>
         <div className="flex-none gap-2 ">
