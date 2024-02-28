@@ -7,6 +7,7 @@ import TripDetails from "./pages/TripDetails";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import ProfileForm from "./components/profile/ProfileForm";
+import Footer from "./Footer";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
