@@ -8,6 +8,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import ProfileForm from "./components/profile/ProfileForm";
 import Footer from "./Footer";
+import NotFound from "./components/shared/NotFound";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/tripdetails" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />
     </div>
