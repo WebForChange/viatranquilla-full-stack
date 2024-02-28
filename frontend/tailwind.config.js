@@ -118,6 +118,7 @@ export default {
     extend: {
       backgroundImage: {
         'hero-img': "url('./src/assets/vw-roadtrip.png')",
+        '404': "url('./src/assets/404-bg.png')",
       }
     },
   },
