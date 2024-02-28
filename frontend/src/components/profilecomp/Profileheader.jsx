@@ -24,7 +24,7 @@ function Profileheader() {
             alt="profile"
             className="rounded-full h-24 w-24 lg:w-48 lg:h-48 mb-4"
           />
-          <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4"><Link to={`/user/edit/${id}`}>Edit Profile</Link></button>
+          <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4"><Link to={`/user/edit/${username}`}>Edit Profile</Link></button>
             
         </div>
         <div className="flex flex-col items-center">
