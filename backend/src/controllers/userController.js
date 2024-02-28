@@ -33,3 +33,35 @@ export const getFriends = asyncHandler(async (req, res, next) => {
 
   res.json(profile.friends);
 });
+
+// WIP
+export const addFriend = asyncHandler(async (req, res, next) => {
+  const friendUsername = req.params.username;
+  // const profile ID = TODO
+
+  //const profile = await Profile.findById( TODO )
+
+  if (!profile)
+    throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
+
+  const friendProfile = await Profile.findOne({
+    username: friendUsername,
+  });
+
+  if (!friendProfile)
+    throw new ErrorResponse(`Profile ${friendUsername} does not exist!`, 404);
+
+  if (profile.friends.includes(friendProfile._id))
+    throw new ErrorResponse(
+      `Profile ${username} is already friend with ${friendUsername}!`,
+      400
+    );
+
+  profile.friends.push(friendProfile._id);
+  friendProfile.friends.push(profile._id);
+
+  await profile.save();
+  await friendProfile.save();
+
+  res.json(profile.friends);
+});

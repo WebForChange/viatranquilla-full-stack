@@ -8,6 +8,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import ProfileForm from "./components/profile/ProfileForm";
 import Footer from "./Footer";
+import NotFound from "./components/shared/NotFound";
 
 export default function App() {
   return (
@@ -16,13 +17,14 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/user/:id" element={<Userprofile />} />
+        <Route path="/user/:username" element={<Userprofile />} />
         <Route path="/user" element={<Userprofile />} />
         <Route path="/user/edit/:id" element={<ProfileForm />} />
         <Route path="/trips" element={<Trips />} />
         <Route path="/tripdetails" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />
     </div>

@@ -8,5 +8,6 @@ router.route("/").get(userController.getAllUsers);
 router.route("/:username").get(userController.getProfileDataByUsername);
 router.route("/:id/trips").get(tripController.getTripDataByUser);
 router.route("/:username/friends").get(userController.getFriends);
+router.route("/:username/add-friend").post(userController.addFriend); // WIP
 
 export default router;
