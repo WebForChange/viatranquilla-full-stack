@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
+import { sendConfirmationEmail } from "../utils/EmailService.js"
 
 const register = async (req, res) => {
   try {
@@ -24,6 +25,8 @@ const register = async (req, res) => {
       email,
       password: hashedPassword,
     });
+
+    await sendConfirmationEmail(email, username);
 
     const newProfile = await Profile.create({
       username: username,
