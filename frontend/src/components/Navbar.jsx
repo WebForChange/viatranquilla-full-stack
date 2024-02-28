@@ -1,14 +1,19 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/viatranquilla-logo.png";
+import React, { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
 
 function Navbar() {
+  const { user } = useContext(AuthContext);
+  const username = user.username;
+
+
   return (
     <div>
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
-            <img src={logo} alt="via tranquilla logo" className="w-96" />
+            <img src={logo} alt="via tranquilla logo" className="sm:w-96 w-3/4" />
           </a>
         </div>
         <div className="flex-none gap-2 ">
@@ -37,7 +42,7 @@ function Navbar() {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate_gray-100 text-delft_blue-800 rounded-box w-52"
             >
               <li>
-                <Link to="/user" className="justify-between">
+                <Link to={"/user/" + username} className="justify-between">
                   Profile
                 </Link>
               </li>

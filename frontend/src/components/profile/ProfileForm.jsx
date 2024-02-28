@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 
 export default function ProfileForm() {
     const { user } = useContext(AuthContext);
+    const username = user.username;
     const { id } = useParams();
 
     // user.id is the id of the logged in user from login state user.id
@@ -53,7 +54,7 @@ export default function ProfileForm() {
     return (
         <div className='p-8 text-eggshell-700 flex justify-center items-center'>
             <form className='flex flex-col space-y-4 justify-between'>
-                <h2 className='text-3xl text-sunset-400'>Hello User</h2>
+                <h2 className='text-3xl text-sunset-400'>Hello {username}</h2>
                 <div className='flex flex-col'>
                     <label htmlFor="firstname">First Name</label>
                     <input type="text" id="firstname" className='rounded p-2 text-delft_blue-100' value={userData.firstname} onChange={handleChange}/>
