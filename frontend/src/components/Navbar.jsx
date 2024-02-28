@@ -8,7 +8,7 @@ function Navbar() {
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
-            <img src={logo} alt="via tranquilla logo" className="w-96" />
+            <img src={logo} alt="via tranquilla logo" className="sm:w-96 w-3/4" />
           </a>
         </div>
         <div className="flex-none gap-2 ">
