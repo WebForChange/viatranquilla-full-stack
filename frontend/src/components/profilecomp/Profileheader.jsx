@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import {DataContext} from "../../contexts/DataContextProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import ChatComponent from "../chat/ChatComponent";
+import { ChatContext } from "../../contexts/ChatContextProvider";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
@@ -12,6 +13,7 @@ function Profileheader() {
   const { getProfileDataByID, profileData } = useContext(DataContext);
   const { username } = useParams();
   const { user } = useContext(AuthContext);
+  const { socket, chatId, setChatId } = useContext(ChatContext);
   const loggedInUsername = user.username;
 
 
@@ -42,7 +44,7 @@ function Profileheader() {
             <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400">
               Add friend
             </button>
-            <MemorizedChatComponent username={username} />
+            <MemorizedChatComponent username={loggedInUsername} participantUsername={username} />
           </div>
         </div>
       </div>
