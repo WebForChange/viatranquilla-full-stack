@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const checkpointSchema = new mongoose.Schema({
-  checkpoint: { type: String, required: true, unique: true },
-  description: { type: String, required: true },
-  location: { type: Geolocation, required: true },
+  title: { type: String, required: true },
+  location: { type: Geolocation },
+  suggestedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 export default mongoose.model("Checkpoint", checkpointSchema);
