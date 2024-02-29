@@ -38,7 +38,7 @@ const getChats = async (req, res, next) => {
 
     const chats = await Chat.find({ participants: currentUser._id })
       .populate("participants", "username")
-      .select("-messages");
+      .select("messages");
 
     res.status(200).json(chats);
   } catch (error) {
@@ -73,7 +73,7 @@ const sendMessage = async (req, res, next) => {
       {
         $push: {
           messages: {
-            sender: currentUser.username,
+            sender: currentUser._id,
             message,
             timestamp: new Date()
           }
@@ -84,12 +84,6 @@ const sendMessage = async (req, res, next) => {
       .populate("participants", "username")
       .populate("messages.sender", "username")
       .select("messages");
-
-    // Emit the message to clients
-    io.to(chatId).emit("chat message", {
-      sender: currentUser.username,
-      message,
-    });
 
     res.status(200).json(updatedChat);
   } catch (error) {
