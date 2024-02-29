@@ -1,7 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, memo } from "react";
 import { Link, useParams } from "react-router-dom";
 import {DataContext} from "../../contexts/DataContextProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
+import ChatComponent from "../chat/ChatComponent";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
+
+const MemorizedChatComponent = memo(ChatComponent);
 
 function Profileheader() {
   const { getProfileDataByID, profileData } = useContext(DataContext);
@@ -14,7 +19,7 @@ function Profileheader() {
     getProfileDataByID(`${username}`);
   }, [username]);
 
-  console.log(profileData);
+
 
   return (
     <div>
@@ -26,6 +31,7 @@ function Profileheader() {
             className="rounded-full h-24 w-24 lg:w-48 lg:h-48 mb-4"
           />
           <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4"><Link to={`/user/edit/${loggedInUsername}`}>Edit Profile</Link></button>
+          
             
         </div>
         <div className="flex flex-col items-center">
@@ -36,9 +42,7 @@ function Profileheader() {
             <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400">
               Add friend
             </button>
-            <button className="bg-transparent h-12 text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 hover:bg-sunset-400">
-              Message
-            </button>
+            <MemorizedChatComponent username={username} />
           </div>
         </div>
       </div>
