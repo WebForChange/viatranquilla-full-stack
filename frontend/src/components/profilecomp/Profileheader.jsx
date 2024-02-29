@@ -5,13 +5,14 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 function Profileheader() {
   const { getProfileDataByID, profileData } = useContext(DataContext);
-  const { id } = useParams();
+  const { username } = useParams();
   const { user } = useContext(AuthContext);
-  const username = user.username;
+  const loggedInUsername = user.username;
+
 
   useEffect(() => {
-    getProfileDataByID(`${id}`);
-  }, [id]);
+    getProfileDataByID(`${username}`);
+  }, [username]);
 
   console.log(profileData);
 
@@ -24,7 +25,7 @@ function Profileheader() {
             alt="profile"
             className="rounded-full h-24 w-24 lg:w-48 lg:h-48 mb-4"
           />
-          <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4"><Link to={`/user/edit/${username}`}>Edit Profile</Link></button>
+          <button className="bg-sunset-400 hover:bg-sunset-500 text-white font-bold py-2 px-4 rounded-full mb-4"><Link to={`/user/edit/${loggedInUsername}`}>Edit Profile</Link></button>
             
         </div>
         <div className="flex flex-col items-center">

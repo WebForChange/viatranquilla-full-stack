@@ -10,10 +10,20 @@ export default function DataContextProvider({children}) {
     const [tripDataByUser, setTripDataByUser] = useState([]);
     const [tripDataByQuery, setTripDataByQuery] = useState([]);
 
-    // Get profile data by User-ID. Do not send sensitive non display data like password - route is not implemented yet so it is not defined here and will not work :(
-        async function getProfileDataByID(id) {
+    // Get profile data by Username. Do not send sensitive non display data like password - route is not implemented yet so it is not defined here and will not work :(
+        async function getProfileDataByID(username) {
+            
             try {
-                const response = await axios.get(`http://localhost:3000/profile/${id}`);
+                const response = await axios.get(`http://localhost:3000/users/${username}`);
+                setProfileData(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        async function updateProfile(username, data) {
+            try {
+                const response = await axios.put(`http://localhost:3000/users/edit/${username}`, data);
                 setProfileData(response.data);
             } catch (error) {
                 console.error(error);
