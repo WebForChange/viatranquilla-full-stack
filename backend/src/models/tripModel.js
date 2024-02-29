@@ -4,19 +4,22 @@ const Schema = mongoose.Schema;
 const tripSchema = new Schema(
   {
     title: { type: String, required: true },
-    description: { type: String, default: "" },
+    startDate: { type: Date },
+    endDate: { type: Date },
     participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    description: { type: String, default: "" },
     invitation: { type: String },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
-    pickupAdress: { address: { type: String },geolocation: { type: Schema.Types.ObjectId, ref: "Geolocation" }},
-    image: { link: { type: String },fileType: { type: String }},
-    checkpoints: { type: String },
-    connections: { type: String },
+    pickupAdress: {
+      address: { type: String },
+      geolocation: { type: Geolocation },
+    },
+    image: { link: { type: String } },
+    checkpoints: [{ type: Schema.Types.ObjectId, ref: "checkpoint" }],
+    connections: [{ type: String }],
     publishedDate: { type: Date },
-    creator: { type: Schema.Types.ObjectId, ref: "User" }
+    creator: { type: Schema.Types.ObjectId, ref: "User" },
   },
-  { timestamps:true }
+  { timestamps: true }
 );
 
 const Trip = mongoose.model("Trip", tripSchema);
