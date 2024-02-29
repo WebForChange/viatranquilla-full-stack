@@ -34,7 +34,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
   profile.bio = req.body.bio;
   profile.firstName = req.body.firstName;
   profile.lastName = req.body.lastName;
-  profile.birthDate = req.body.birthDate;
+  profile.birthDate = new Date(req.body.birthDate);
   profile.phone = req.body.phone;
   profile.street = req.body.street;
   profile.houseNumber = req.body.houseNumber;
