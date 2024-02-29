@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import { sendConfirmationEmail } from "../utils/EmailService.js"
+import { sendConfirmationEmail } from "../utils/EmailService.js";
 
 const register = async (req, res) => {
   try {
@@ -70,9 +70,13 @@ const login = async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!user) throw new ErrorResponse("Email or Pasword is incorrect", 401);
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     const userId = user._id.toString();
     res.cookie("token", token, { maxAge: 3600000 });

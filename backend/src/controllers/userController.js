@@ -12,7 +12,7 @@ export const getProfileDataByUsername = asyncHandler(async (req, res, next) => {
   const username = req.params.username;
 
   const profile = await Profile.findOne({
-    username: new RegExp(`^${username}$`, 'i'), // not case senitive anymore
+    username: new RegExp(`^${username}$`, "i"), // not case senitive anymore
   });
 
   if (!profile)
@@ -43,7 +43,6 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
   profile.country = req.body.country;
   profile.state = req.body.state;
   profile.profilePicture = req.body.profilePicture;
-  
 
   await profile.save();
 
@@ -63,12 +62,13 @@ export const getFriends = asyncHandler(async (req, res, next) => {
   res.json(profile.friends);
 });
 
-// WIP
 export const addFriend = asyncHandler(async (req, res, next) => {
+  const username = req.username;
   const friendUsername = req.params.username;
-  // const profile ID = TODO
 
-  //const profile = await Profile.findById( TODO )
+  const profile = await Profile.findOne({
+    username: username,
+  });
 
   if (!profile)
     throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
