@@ -6,8 +6,8 @@ export default function UserSettings() {
     const { user } = useContext(AuthContext);
     const [preferences, setPreferences] = useState({});
     const [settings, setSettings] = useState({
-        email: user.email,
         username: user.username,
+        email: preferences.email,
         profilevisibility: preferences.profilevisibility,
         picturevisibility: preferences.picturevisibility,
         gendervisibility: preferences.gendervisibility,
