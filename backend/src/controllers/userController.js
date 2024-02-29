@@ -12,11 +12,40 @@ export const getProfileDataByUsername = asyncHandler(async (req, res, next) => {
   const username = req.params.username;
 
   const profile = await Profile.findOne({
+    username: new RegExp(`^${username}$`, 'i'), // not case senitive anymore
+  });
+
+  if (!profile)
+    throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
+
+  res.json(profile);
+});
+
+export const updateProfile = asyncHandler(async (req, res, next) => {
+  const username = req.params.username;
+
+  const profile = await Profile.findOne({
     username: username,
   });
 
   if (!profile)
     throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
+
+  profile.bio = req.body.bio;
+  profile.firstName = req.body.firstName;
+  profile.lastName = req.body.lastName;
+  profile.birthDate = new Date(req.body.birthDate);
+  profile.phone = req.body.phone;
+  profile.street = req.body.street;
+  profile.houseNumber = req.body.houseNumber;
+  profile.zip = req.body.zip;
+  profile.city = req.body.city;
+  profile.country = req.body.country;
+  profile.state = req.body.state;
+  profile.profilePicture = req.body.profilePicture;
+  
+
+  await profile.save();
 
   res.json(profile);
 });

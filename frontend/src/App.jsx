@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Userprofile from "./pages/Userprofile";
 import Trips from "./pages/Trips";
 import TripDetails from "./pages/TripDetails";
@@ -9,10 +9,11 @@ import Register from "./components/register/Register";
 import ProfileForm from "./components/profile/ProfileForm";
 import Footer from "./Footer";
 import NotFound from "./components/shared/NotFound";
+import { useParams } from "react-router-dom";
 
 export default function App() {
+ const { username } = useParams();
   return (
-   
     <div className="">
       <Navbar />
       <Routes>
@@ -28,5 +29,5 @@ export default function App() {
       </Routes>
       <Footer />
     </div>
-  )
+  );
 }
