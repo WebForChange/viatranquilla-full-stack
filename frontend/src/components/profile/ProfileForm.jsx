@@ -15,7 +15,7 @@ export default function ProfileForm() {
         id: user.id,
         firstName: '',
         lastName: '',
-        birthdate: '',
+        birthDate: '',
         phone: '',
         street: '',
         houseNumber: '',
@@ -54,7 +54,7 @@ export default function ProfileForm() {
 
     return (
         <div className='p-8 text-eggshell-700 flex justify-center items-center'>
-            <form className='flex flex-col space-y-4 justify-between'>
+            <form className='flex flex-col space-y-4 justify-between' >
                 <h2 className='text-3xl text-sunset-400'>Hello {username}</h2>
                 <div className='flex flex-col'>
                     <label htmlFor="firstname">First Name</label>
@@ -66,7 +66,7 @@ export default function ProfileForm() {
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="birthdate">Birth Date</label>
-                    <input type="date" id="birthdate" className='rounded p-2 text-delft_blue-100' value={userData.birthdate} onChange={handleChange}/>
+                    <input type="date" id="birthDate" className='rounded p-2 text-delft_blue-100' value={userData.birthDate} onChange={handleChange}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="phone">Phone</label>
