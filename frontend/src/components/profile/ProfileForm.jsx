@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { DataContext } from '../../contexts/DataContextProvider';
 import { useParams } from 'react-router';
 
 export default function ProfileForm() {
@@ -12,17 +13,17 @@ export default function ProfileForm() {
 
     const [userData, setUserData] = useState({
         id: user.id,
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         birthdate: '',
         phone: '',
         street: '',
-        housenumber: '',
+        houseNumber: '',
         zip: '',
         city: '',
         country: '',
         state: '',
-        profilepicture: '',
+        profilePicture: '',
         bio: ''
     });
 
@@ -36,7 +37,7 @@ export default function ProfileForm() {
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:3000/.../${id}`, userData, {
+            const response = await axios.put(`http://localhost:3000/users/edit/${username}`, userData, {
                 withCredentials: true,  // Include this if you are using cookies for authentication
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,11 +58,11 @@ export default function ProfileForm() {
                 <h2 className='text-3xl text-sunset-400'>Hello {username}</h2>
                 <div className='flex flex-col'>
                     <label htmlFor="firstname">First Name</label>
-                    <input type="text" id="firstname" className='rounded p-2 text-delft_blue-100' value={userData.firstname} onChange={handleChange}/>
+                    <input type="text" id="firstName" className='rounded p-2 text-delft_blue-100' value={userData.firstName} onChange={handleChange}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="lastname">Last Name</label>
-                    <input type="text" id="lastname" className='rounded p-2 text-delft_blue-100' value={userData.lastname} onChange={handleChange}/>
+                    <input type="text" id="lastName" className='rounded p-2 text-delft_blue-100' value={userData.lastName} onChange={handleChange}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="birthdate">Birth Date</label>
@@ -77,7 +78,7 @@ export default function ProfileForm() {
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="housenumber">House Number</label>
-                    <input type="text" id="housenumber" className='rounded p-2 text-delft_blue-100' value={userData.housenumber} onChange={handleChange}/>
+                    <input type="text" id="houseNumber" className='rounded p-2 text-delft_blue-100' value={userData.houseNumber} onChange={handleChange}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="zip">ZIP</label>
@@ -97,7 +98,7 @@ export default function ProfileForm() {
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="profilepicture">Profile Picture</label>
-                    <input type="file" id="profilepicture" value={userData.profilepicture} onChange={handleChange}/>
+                    <input type="file" id="profilePicture" value={userData.profilePicture} onChange={handleChange}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="bio">Bio</label>
