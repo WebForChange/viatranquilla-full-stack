@@ -32,6 +32,22 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
   res.json(trips);
 });
 
+// Returns the trips which the logged in user is invited to
+// For dashboard, ...
+export const getInvitedTrips = asyncHandler(async (req, res, next) => {
+  const username = req.username;
+
+  if (!username)
+    throw new ErrorResponse(`Couldn't retrieve username from token`, 500);
+
+  const trips = await Profile.find({ username: username }).invitedToTrips;
+
+  if (!trips || trips.length === 0)
+    throw new ErrorResponse(`This user has no trips!`, 404);
+
+  res.json(trips);
+});
+
 // Returns all trips created by a user
 export const getTripDataByUser = asyncHandler(async (req, res, next) => {
   const userId = req.params.id;

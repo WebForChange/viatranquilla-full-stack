@@ -19,6 +19,7 @@ const profileSchema = new mongoose.Schema({
   bio: { type: String, default: "" },
   createdTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
   joinedTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+  invitedToTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
 });
 
 const Profile = mongoose.model("Profile", profileSchema);
