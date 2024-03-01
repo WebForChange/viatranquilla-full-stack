@@ -1,18 +1,14 @@
 import express from "express";
-import { Router } from "express";
-import * as tripController from '../controllers/tripController.js'
-import verifyToken from '../middlewares/verifyToken.js';
+import * as tripController from "../controllers/tripController.js";
+import verifyToken from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-router.route('/')
-.get(tripController.getTripDataFull)
+router.route("/").get(verifyToken, tripController.getUserTrips);
 // .post(tripController.createTrip)
 
-router.route('/search')
-    .get(tripController.getTripDataByQuery);
+router.route("/search").get(tripController.getTripDataByQuery);
 
-router.route('/:id')
-.get(tripController.getTripDataByID)
+router.route("/:id").get(tripController.getTripDataByID);
 
 export default router;
