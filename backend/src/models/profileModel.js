@@ -20,6 +20,13 @@ const profileSchema = new mongoose.Schema({
   createdTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
   joinedTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
   invitedToTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+  travelPreferences: {
+    blala: { type: String, default: "" },
+    earlyBird: { type: Boolean },
+    planning: { type: String },
+    MtBeachCity: { type: String },
+    cookEatOut: { type: String },
+  },
 });
 
 const Profile = mongoose.model("Profile", profileSchema);

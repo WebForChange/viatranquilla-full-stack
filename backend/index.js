@@ -3,6 +3,7 @@ import authRoutes from "./src/routes/authRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import tripRoutes from "./src/routes/tripRoutes.js";
 import chatRoutes from "./src/routes/chatRoutes.js";
+import preferencesRoutes from "./src/routes/preferencesRoutes.js";
 import { errorHandler } from "./src/middlewares/ErrorHandler.js";
 import "./src/db/server.js";
 import "dotenv/config";
@@ -16,18 +17,18 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
     origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
-  }
+    methods: ["GET", "POST"],
+  },
 });
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors(
-  {
+app.use(
+  cors({
     origin: "http://localhost:5173",
-    credentials: true
-  }
-));
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 io.on("connection", (socket) => {
@@ -47,6 +48,7 @@ app.use("/chat", chatRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/trips", tripRoutes);
+app.use("/preferences", preferencesRoutes);
 
 app.use(errorHandler);
 
