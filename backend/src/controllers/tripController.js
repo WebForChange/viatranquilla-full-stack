@@ -48,14 +48,21 @@ export const getInvitedTrips = asyncHandler(async (req, res, next) => {
   res.json(trips);
 });
 
-// Returns all trips created by a user
+// Returns a user's trips by username
+// Currently returns all created and joined trips regardless of date
 export const getTripDataByUser = asyncHandler(async (req, res, next) => {
-  const userId = req.params.id;
+  const username = req.params.username;
 
-  const trips = await Trip.find({ creator: userId });
+  if (!username) res.status(404).json({ message: "Username not found" });
+
+  const profile = await Profile.find({ username: username });
+
+  if (!profile) res.status(404).json({ message: "User Profile not found" });
+
+  const trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
 
   if (!trips || trips.length === 0)
-    throw new ErrorResponse(`This user has no trips!`, 404);
+    res.status(404).json({ message: "This user has no trips!" });
 
   res.json(trips);
 });
