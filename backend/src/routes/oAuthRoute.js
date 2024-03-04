@@ -6,9 +6,10 @@ const router = express.Router();
 
 router.post("/", async function(req,res,next) {
     res.header('Access-Controll-Allow-Origin','http://localhost:5173');
+    res.header("Access-Control-Allow-Credentials", 'true');
     res.header('Referrer-Policy','no-referrer-when-downgrade');
 
-    const redirectUrl = 'http://localhost:5173/oauth';
+    const redirectUrl = 'http://127.0.0.1:3000/oauth';
 
     const oAuth2Client = new OAuth2Client(
         process.env.CLIENT_ID,
