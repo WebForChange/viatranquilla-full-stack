@@ -2,6 +2,7 @@ import Trip from "../models/tripModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 
+// Creates a new trip
 export const createTrip = asyncHandler(async (req, res, next) => {
   const username = req.username;
 
@@ -22,6 +23,35 @@ export const createTrip = asyncHandler(async (req, res, next) => {
   }
 
   res.status(201).json(newTrip);
+});
+
+// Updates a trip
+export const updateTrip = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const updatedTrip = await Trip.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  res.status(200).json(updatedTrip);
+});
+
+// Deletes a trip
+export const deleteTrip = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    await Trip.findByIdAndDelete(id);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  res.status(200).json({ message: `Trip ${id} deleted!` });
 });
 
 // Returns a trip by its ID

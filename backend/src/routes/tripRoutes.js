@@ -10,6 +10,10 @@ router
   .post(verifyToken, tripController.createTrip);
 router.route("/").get(verifyToken, tripController.getInvitedTrips);
 router.route("/search").get(tripController.getTripDataByQuery);
-router.route("/:id").get(tripController.getTripDataByID);
+router
+  .route("/:id")
+  .get(tripController.getTripDataByID)
+  .put(verifyToken, tripController.updateTrip)
+  .delete(verifyToken, tripController.deleteTrip);
 
 export default router;
