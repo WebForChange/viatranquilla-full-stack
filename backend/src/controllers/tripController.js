@@ -2,6 +2,58 @@ import Trip from "../models/tripModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 
+// Creates a new trip
+export const createTrip = asyncHandler(async (req, res, next) => {
+  const username = req.username;
+
+  try {
+    const newTrip = new Trip(req.body);
+    await newTrip.save();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  try {
+    Prfile.findOneAndUpdate(
+      { username: username },
+      { $push: { createdTrips: newTrip._id } }
+    );
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  res.status(201).json(newTrip);
+});
+
+// Updates a trip
+export const updateTrip = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const updatedTrip = await Trip.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  res.status(200).json(updatedTrip);
+});
+
+// Deletes a trip
+export const deleteTrip = asyncHandler(async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    await Trip.findByIdAndDelete(id);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+
+  res.status(200).json({ message: `Trip ${id} deleted!` });
+});
+
 // Returns a trip by its ID
 export const getTripDataByID = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
@@ -87,18 +139,9 @@ export const getTripDataByQuery = asyncHandler(async (req, res, next) => {
   res.json(trips);
 });
 
-// Tonio: Does this return all trips? What is the intention?
+// Tonio: Does this return all trips of all users? What is the intention?
 export const getTripDataFull = asyncHandler(async (req, res, next) => {
   const trips = await Trip.find();
   if (!trips) throw new ErrorResponse(`There are no trips available`, 404);
   res.json(trips);
 });
-
-// export const createTrip = asyncHandler(async (req,res,next) => {
-//     const newTrip = new Trip(req.body)
-//     await newTrip.save()
-
-//     res.status(201).json(newTrip)
-//     if (!newTrip) throw new ErrorResponse(`Trip does not exist`, 404);
-//     res.send(newTrip);
-// })
