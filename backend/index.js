@@ -11,6 +11,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import oAuth from "./src/routes/oAuth.js"
+import oAuthRoutes from "./src/routes/oAuthRoute.js"
 
 const app = express();
 const httpServer = createServer(app);
@@ -49,6 +51,8 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/trips", tripRoutes);
 app.use("/preferences", preferencesRoutes);
+app.use("/oauth", oAuth);
+app.use("/request", oAuthRoutes);
 
 app.use(errorHandler);
 
