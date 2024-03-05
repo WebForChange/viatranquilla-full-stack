@@ -22,31 +22,44 @@ export const getProfileDataByUsername = asyncHandler(async (req, res, next) => {
 });
 
 export const updateProfile = asyncHandler(async (req, res, next) => {
-  const username = req.params.username;
+  try {
+      const username = req.params.username;
 
-  const profile = await Profile.findOne({
-    username: username,
-  });
+      const profile = await Profile.findOne({
+          username: username,
+      });
 
-  if (!profile)
-    throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
+      if (!profile)
+          throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
 
-  profile.bio = req.body.bio;
-  profile.firstName = req.body.firstName;
-  profile.lastName = req.body.lastName;
-  profile.birthDate = new Date(req.body.birthDate);
-  profile.phone = req.body.phone;
-  profile.street = req.body.street;
-  profile.houseNumber = req.body.houseNumber;
-  profile.zip = req.body.zip;
-  profile.city = req.body.city;
-  profile.country = req.body.country;
-  profile.state = req.body.state;
-  profile.profilePicture = req.body.profilePicture;
+      profile.bio = req.body.bio;
+      profile.firstName = req.body.firstName;
+      profile.lastName = req.body.lastName;
+      if (req.body.birthDate && !isNaN(new Date(req.body.birthDate).valueOf())) {
+        profile.birthDate = new Date(req.body.birthDate);
+      } else {
+        profile.birthDate = null; // or set to a default date if needed
+      }
+      profile.phone = req.body.phone;
+      profile.street = req.body.street;
+      profile.houseNumber = req.body.houseNumber;
+      profile.zip = req.body.zip;
+      profile.city = req.body.city;
+      profile.country = req.body.country;
+      profile.state = req.body.state;
 
-  await profile.save();
+      // Check if req.fileUrl is available and not empty
+      if (req.fileUrl) {
+        profile.profilePicture = req.fileUrl;
+      }
 
-  res.json(profile);
+      await profile.save();
+
+      res.json(profile);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 export const getFriends = asyncHandler(async (req, res, next) => {

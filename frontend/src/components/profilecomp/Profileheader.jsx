@@ -13,6 +13,8 @@ function Profileheader() {
   const { username } = useParams();
   const { user } = useContext(AuthContext);
 
+  console.log("Profile Data:", profileData);
+
   const loggedInUsername = user.username;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -33,7 +35,7 @@ function Profileheader() {
       <div className="flex flex-col lg:flex-row-reverse justify-around items-center text-white">
         <div className="flex flex-col items-center">
           <img
-            src="https://via.placeholder.com/250"
+            src={profileData.profilePicture}
             alt="profile"
             className="rounded-full h-24 w-24 lg:w-48 lg:h-48 mb-4"
           />
