@@ -58,9 +58,9 @@ export default function DataContextProvider({children}) {
         }
     
     // Get trip data by connected User-ID - route is not implemented yet so it is not defined here and will not work :(
-        async function getTripDataByUser(id) {
+        async function getTripDataByUser(username) {
             try {
-                const response = await axios.get(`http://localhost:3000/user/${id}/trips`);
+                const response = await axios.get(`http://localhost:3000/users/${username}/trips`);
                 setTripDataByUser(response.data);
             } catch (error) {
                 console.error(error);
