@@ -1,4 +1,5 @@
 import Trip from "../models/tripModel.js";
+import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 
