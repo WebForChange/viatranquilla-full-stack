@@ -7,7 +7,7 @@ const profileSchema = new mongoose.Schema({
   friendRequests: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
   firstName: { type: String, default: "" },
   lastName: { type: String, default: "" },
-  birthDate: { type: Date, default: "" },
+  birthDate: { type: Date, default: null },
   phone: { type: String, default: "" },
   street: { type: String, default: "" },
   houseNumber: { type: String, default: "" },
@@ -17,15 +17,24 @@ const profileSchema = new mongoose.Schema({
   state: { type: String, default: "" },
   profilePicture: { type: String, default: "" },
   bio: { type: String, default: "" },
-  createdTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
-  joinedTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
-  invitedToTrips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+  createdTrips: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+    default: [],
+  },
+  joinedTrips: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+    default: [],
+  },
+  invitedToTrips: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
+    default: [],
+  },
   travelPreferences: {
+    planning: { type: String, default: "" },
+    earlyBird: { type: Boolean, default: false },
+    mtBeachCity: { type: String, default: "" },
+    cookEatOut: { type: String, default: "" },
     blala: { type: String, default: "" },
-    earlyBird: { type: Boolean },
-    planning: { type: String },
-    MtBeachCity: { type: String },
-    cookEatOut: { type: String },
   },
 });
 

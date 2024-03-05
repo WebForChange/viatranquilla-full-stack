@@ -1,20 +1,24 @@
 import Trip from "../models/tripModel.js";
+import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
 
 // Creates a new trip
 export const createTrip = asyncHandler(async (req, res, next) => {
   const username = req.username;
+  let newTrip = null;
 
   try {
-    const newTrip = new Trip(req.body);
+    newTrip = new Trip(req.body);
     await newTrip.save();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 
+  if (!newTrip) res.status(500).json({ message: "Trip could not be created" });
+
   try {
-    Prfile.findOneAndUpdate(
+    Profile.findOneAndUpdate(
       { username: username },
       { $push: { createdTrips: newTrip._id } }
     );

@@ -3,9 +3,12 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const locationSchema = new Schema({
-  title: { type: String, required: true, unique: true }, // City or place name
-  description: { type: String, required: true },
-  checkpoints: [{ type: Schema.Types.ObjectId, ref: "Checkpoint" }],
+  title: { type: String, required: true, default: "New Location" }, // City or place name
+  description: { type: String, default: "Description" },
+  checkpoints: {
+    type: [{ type: Schema.Types.ObjectId, ref: "Checkpoint" }],
+    default: [],
+  },
 });
 
 const Location = mongoose.model("Location", locationSchema);
