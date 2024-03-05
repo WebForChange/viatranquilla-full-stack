@@ -3,7 +3,7 @@ import Profileheader from "../components/profilecomp/Profileheader";
 import About from "../components/profilecomp/About";
 import Usertrips from "../components/profilecomp/Usertrips";
 import { DataContext } from "../contexts/DataContextProvider";
-import { AuthContext } from "../../contexts/AuthProvider";
+
 import { useParams } from "react-router-dom";
 
 
@@ -13,7 +13,7 @@ function Userprofile() {
   
   useEffect(() => {
     getTripDataByUser(username);
-  }, [username]);
+  }, []);
 
   return (
     <div className="flex flex-col w-full h-auto p-12">
