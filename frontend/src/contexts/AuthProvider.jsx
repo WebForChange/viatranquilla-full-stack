@@ -14,6 +14,7 @@ export const AuthContext = createContext();
 export default function AuthProvider( {children} ) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
+    const [token, setToken] = useState('');
     console.log("AuthContext running");
     
     const checkLoggedIn = async () => {
@@ -26,6 +27,8 @@ export default function AuthProvider( {children} ) {
                 );
             if (response.data) {
                 console.log("CheckLoggedIn response.data is true");
+                console.log(token)
+                setToken(localStorage.getItem('token'));
             setLoggedIn(true);
             setUser(response.data);
             } else {
@@ -55,7 +58,7 @@ export default function AuthProvider( {children} ) {
     }, [loggedIn]);
 
     return (
-        <AuthContext.Provider value={{user, setUser, loggedIn, setLoggedIn, checkLoggedIn}}>
+        <AuthContext.Provider value={{user, setUser, loggedIn, setLoggedIn, checkLoggedIn, token}}>
             {children}
         </AuthContext.Provider>
     )

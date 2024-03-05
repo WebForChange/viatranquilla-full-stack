@@ -1,94 +1,128 @@
-import Chat from "../models/chatModel.js";
-import User from "../models/userModel.js";
+import Conversation from "../models/conversationModel.js";
+import Message from "../models/messageModel.js";
+import verifyToken from "../middlewares/verifyToken.js";
+import mongoose from "mongoose";
 
-
-const createChat = async (req, res, next) => {
+export const sendMessage = async (req, res) => {
+  const decoded = req.user;
   try {
-    const { participantUsername } = req.body;
-        
-    const currentUser = await User.findOne({ username: req.user.username });
-
-    const participantUser = await User.findOne({ username: participantUsername });
-
-        const existingChat = await Chat.findOne({
-      participants: { $all: [currentUser._id, participantUser._id] }
+    const { message } = req.body;
+    const { id: receiverId } = req.params;
+    const userToChatId = receiverId; // Assign userToChatId here
+    const senderId = decoded.userId; // Get the sender's id from the request user object
+    console.log("userToChatId:", userToChatId);
+    console.log("senderId:", senderId);
+    // Find the conversation between the sender and receiver
+    let conversation = await Conversation.findOne({
+      participants: { $all: [senderId, receiverId] },
     });
 
-    if (existingChat) {
-      return res.status(400).json({ message: "Chat already exists" });
+    // If the conversation does not exist, create a new one
+    if (!conversation) {
+      conversation = await Conversation.create({
+        _id: new mongoose.Types.ObjectId(userToChatId),
+        participants: [senderId, receiverId],
+      });
     }
 
-    // Create a new chat
-    const newChat = new Chat({
-      participants: [currentUser._id, participantUser._id],
-      messages: []
+    // Create a new message
+    const newMessage = new Message({
+      senderId: decoded.userId,
+      receiverId: userToChatId,
+      message,
     });
 
-    await newChat.save();
+    // Save the message
+    if (newMessage) {
+      conversation.messages.push(newMessage._id);
+      newMessage.save();
+      conversation.save();
+    }
 
-    res.status(201).json(newChat);
+    console.log("New Message:", newMessage);
+
+    res.status(201).json(newMessage);
   } catch (error) {
-    next(error);
+    console.error(error.message);
+    res.status(500).json(error.message);
   }
 };
 
-const getChats = async (req, res, next) => {
+export const getMessages = async (req, res) => {
   try {
-    const currentUser = await User.findOne({ username: req.user.username });
+    // Get the receiver's id from the request parameters
+    const { id: userToChatId } = req.params;
 
-    const chats = await Chat.find({ participants: currentUser._id })
-      .populate("participants", "username")
-      .select("messages");
+    // Get the sender's id from the request user object
+    const senderId = req.user ? req.user._id : null;
 
-    res.status(200).json(chats);
+    console.log("Receiver ID:", userToChatId);
+    console.log("Sender ID:", senderId);
+
+    // Find the conversation between the sender and receiver
+    const conversation = await Conversation.findOne({
+      participants: { $all: [senderId, userToChatId] },
+    }).populate("messages");
+
+    // If the conversation does not exist, return an empty array
+    if (!conversation) {
+      return res.status(404).json({ message: "Conversation not found" });
+    }
+
+    const messages = conversation.messages;
+
+    // If the conversation does exist, return the messages
+    res.status(200).json(messages);
   } catch (error) {
-    next(error);
+    console.error(error.message);
+    res.status(500).json(error.message);
   }
 };
 
-const getChatMessages = async (req, res, next) => {
+export const getConversations = async (req, res) => {
+  const decoded = req.user;
   try {
-    const { chatId } = req.params;
+    // Get the user's id from the request user object
+    const userId = decoded.userId;
 
-    const chat = await Chat.findById(chatId)
-      .populate("participants", "username")
-      .populate("messages.sender", "username")
-      .select("messages");
+    // Find all conversations where the user is a participant
+    const conversations = await Conversation.find({
+      participants: userId,
+    }).populate("messages");
 
-    res.status(200).json(chat);
+    // If the conversations do not exist, return an empty array
+    if (!conversations) {
+      return res.status(404).json({ message: "Conversations not found" });
+    }
+
+    // If the conversations do exist, return the conversations
+    res.status(200).json(conversations);
   } catch (error) {
-    next(error);
+    console.error(error.message);
+    res.status(500).json(error.message);
   }
 };
 
-const sendMessage = async (req, res, next) => {
+export const getMessagesInConversation = async (req, res) => {
   try {
-    const { chatId } = req.params;
-    const { message } = req.body;
+    const { conversationId } = req.params;
 
-    const currentUser = await User.findOne({ username: req.user.username });
+    // Check if conversationId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(conversationId)) {
+      return res.status(400).json({ message: 'Invalid conversationId' });
+    }
 
-    const updatedChat = await Chat.findByIdAndUpdate(
-      chatId,
-      {
-        $push: {
-          messages: {
-            sender: currentUser._id,
-            message,
-            timestamp: new Date()
-          }
-        }
-      },
-      { new: true }
-    )
-      .populate("participants", "username")
-      .populate("messages.sender", "username")
-      .select("messages");
+    const conversation = await Conversation.findById(conversationId).populate('messages');
 
-    res.status(200).json(updatedChat);
+    if (!conversation) {
+      return res.status(404).json({ message: 'Conversation not found' });
+    }
+
+    const messages = conversation.messages;
+
+    res.status(200).json(messages);
   } catch (error) {
-    next(error);
+    console.error(error.message);
+    res.status(500).json(error.message);
   }
 };
-
-export { createChat, getChats, getChatMessages, sendMessage };

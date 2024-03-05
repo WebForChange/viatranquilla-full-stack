@@ -2,26 +2,31 @@ import React, { useEffect, useState, useContext, memo } from "react";
 import { Link, useParams } from "react-router-dom";
 import {DataContext} from "../../contexts/DataContextProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
-import ChatComponent from "../chat/ChatComponent";
-import { ChatContext } from "../../contexts/ChatContextProvider";
 import Modal from "react-modal";
+import MessageContainer from "../chat/MessageContainer";
 Modal.setAppElement("#root");
 
-const MemorizedChatComponent = memo(ChatComponent);
+
 
 function Profileheader() {
   const { getProfileDataByID, profileData } = useContext(DataContext);
   const { username } = useParams();
   const { user } = useContext(AuthContext);
-  const { socket, chatId, setChatId } = useContext(ChatContext);
-  const loggedInUsername = user.username;
 
+  const loggedInUsername = user.username;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getProfileDataByID(`${username}`);
   }, [username]);
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div>
@@ -44,7 +49,23 @@ function Profileheader() {
             <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400">
               Add friend
             </button>
-            <MemorizedChatComponent username={loggedInUsername} participantUsername={username} />
+            <button
+              onClick={openModal}
+              className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400"
+            >
+              Message
+            </button>
+
+            {/* Use Modal component to conditionally render MessageContainer */}
+            <Modal
+              isOpen={isModalOpen}
+              onRequestClose={closeModal}
+              contentLabel="Message Modal"
+              portalClassName="modal-portal"  // Add portalClassName
+            >
+              <MessageContainer username={loggedInUsername} participantUsername={username} />
+              <button onClick={closeModal}>Close</button>
+            </Modal>
           </div>
         </div>
       </div>

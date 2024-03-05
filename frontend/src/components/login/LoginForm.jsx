@@ -47,11 +47,21 @@ export default function LoginForm() {
       if (data.token) {
         setLoggedIn(true);
         checkLoggedIn();
+        const token = data.token;
+        localStorage.setItem("token", token);
+        localStorage.getItem("token", token);
+        
+       
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+
+
+
+
 
   function navigate(url){
     window.location.href = url
@@ -63,6 +73,7 @@ export default function LoginForm() {
     navigate(data.url);
   }
 
+  
   return (
     <div className="text-eggshell-600 w-full h-screen p-4">
       <form
