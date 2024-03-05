@@ -63,15 +63,6 @@ export default function LoginForm() {
 
 
 
-  function navigate(url){
-    window.location.href = url
-  }
-
-  async function auth(){
-    const response = await fetch('http://127.0.0.1:3000/request',{method:'post'});
-    const data = await response.json();
-    navigate(data.url);
-  }
 
   
   return (
@@ -109,7 +100,6 @@ export default function LoginForm() {
         >
           Log in
         </button>
-        <button type="button" onClick={() => auth()}><img src={googleButton} alt="google sign in"/></button>
         <p>
           <a href="">Forgot Password</a>
         </p>
