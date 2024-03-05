@@ -125,9 +125,9 @@ export const registerCheck = async (req, res) => {
 
 export const checkUsername = async (req, res) => {
   try {
-    const { username } = req.body;
-    const usernameExists = await User.findOne({ username });
-    res.status(200).json({ usernameExists: !!usernameExists });
+    const { username } = req.params.username;
+    const usernameExists = await !!User.findOne({ username });
+    res.status(200).json({ usernameExists: usernameExists });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
