@@ -7,7 +7,7 @@ const profileSchema = new mongoose.Schema({
   friendRequests: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
   firstName: { type: String, default: "" },
   lastName: { type: String, default: "" },
-  birthDate: { type: Date, default: "" },
+  birthDate: { type: Date, default: null },
   phone: { type: String, default: "" },
   street: { type: String, default: "" },
   houseNumber: { type: String, default: "" },

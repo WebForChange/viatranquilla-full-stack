@@ -13,6 +13,8 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import oAuth from "./src/routes/oAuth.js"
 import oAuthRoutes from "./src/routes/oAuthRoute.js"
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
 
 const app = express();
 const httpServer = createServer(app);

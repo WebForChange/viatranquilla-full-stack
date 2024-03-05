@@ -8,6 +8,7 @@ export default function ProfileForm() {
     const { user } = useContext(AuthContext);
     const username = user.username;
     const { id } = useParams();
+    const [file, setFile] = useState(null);
 
     // user.id is the id of the logged in user from login state user.id
 
@@ -15,7 +16,7 @@ export default function ProfileForm() {
         id: user.id,
         firstName: '',
         lastName: '',
-        birthDate: '',
+        birthDate: null,
         phone: '',
         street: '',
         houseNumber: '',
@@ -23,24 +24,54 @@ export default function ProfileForm() {
         city: '',
         country: '',
         state: '',
-        profilePicture: '',
+        profilePicture: null,
         bio: ''
     });
 
-    function handleChange(event) {
+   
+    function handleChange(name, value) {
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            [name]: value instanceof Date ? value : null,
+        }));
+    }
+
+    function handleFileChange(event) {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+
+        // Update profilePicture in the state
         setUserData({
-        ...userData, [event.target.id]: event.target.value 
+            ...userData,
+            profilePicture: selectedFile, // Set to null or an empty string if no file is selected
         });
     }
+        
 
     // post api missing
     async function handleSubmit(event) {
         event.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:3000/users/edit/${username}`, userData, {
+            
+            const formData = new FormData();
+            formData.append('id', userData.id);
+            formData.append('firstName', userData.firstName);
+            formData.append('lastName', userData.lastName);
+            formData.append('birthDate', userData.birthDate);
+            formData.append('phone', userData.phone);
+            formData.append('street', userData.street);
+            formData.append('houseNumber', userData.houseNumber);
+            formData.append('zip', userData.zip);
+            formData.append('city', userData.city);
+            formData.append('country', userData.country);
+            formData.append('state', userData.state);
+            formData.append('profilePicture', file);
+            formData.append('bio', userData.bio);
+
+            const response = await axios.put(`http://localhost:3000/users/edit/${username}`, formData, {
                 withCredentials: true,  // Include this if you are using cookies for authentication
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                     'Access-Control-Allow-Origin': 'http://localhost:5173',
                 },
                 body: JSON.stringify(userData)
@@ -48,7 +79,7 @@ export default function ProfileForm() {
             console.log(response.data);
             console.log(response);
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
     }
 
@@ -98,7 +129,7 @@ export default function ProfileForm() {
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="profilepicture">Profile Picture</label>
-                    <input type="file" id="profilePicture" value={userData.profilePicture} onChange={handleChange}/>
+                    <input type="file" id="profilePicture" onChange={handleFileChange}/>
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="bio">Bio</label>
