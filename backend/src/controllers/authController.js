@@ -54,6 +54,9 @@ const register = async (req, res) => {
       }
     );
 
+    const decodedToken = jwt.decode(token);
+    console.log("Token Expiration Time:", new Date(decodedToken.exp * 1000));
+
     res.status(201).json({ id: newUser._id, username, token });
   } catch (error) {
     res.status(500).json({ errorCode: error.code, message: error.message });
@@ -68,7 +71,7 @@ const login = async (req, res) => {
     if (!user) throw new ErrorResponse("Email does not exist", 404);
 
     const match = await bcrypt.compare(password, user.password);
-    if (!user) throw new ErrorResponse("Email or Pasword is incorrect", 401);
+    if (!match) throw new ErrorResponse("Email or Pasword is incorrect", 401);
 
     const token = jwt.sign(
       { userId: user._id, username: user.username },
@@ -78,12 +81,14 @@ const login = async (req, res) => {
       }
     );
 
+
     const userId = user._id.toString();
     res.cookie("token", token, { maxAge: 3600000 });
     res.json({
       userId: userId,
       username: user.username,
       status: "The login was successful.",
+      token: token,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

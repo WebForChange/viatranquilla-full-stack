@@ -46,11 +46,20 @@ export default function LoginForm() {
       if (data.token) {
         setLoggedIn(true);
         checkLoggedIn();
+        const token = data.token;
+        localStorage.setItem("token", token);
+        localStorage.getItem("token", token);
+        
+       
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+
+
+
 
   return (
     <div className="text-eggshell-600 w-full h-screen p-4">
