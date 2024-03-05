@@ -15,7 +15,7 @@ export const createTrip = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    Prfile.findOneAndUpdate(
+    Profile.findOneAndUpdate(
       { username: username },
       { $push: { createdTrips: newTrip._id } }
     );
