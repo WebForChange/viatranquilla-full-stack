@@ -11,8 +11,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import oAuth from "./src/routes/oAuth.js"
-import oAuthRoutes from "./src/routes/oAuthRoute.js"
+import oAuth from "./src/utils/oAuth.js"
+import oAuthRequest from "./src/utils/oAuthRequest.js"
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -88,7 +88,7 @@ app.use("/users", userRoutes);
 app.use("/trips", tripRoutes);
 app.use("/preferences", preferencesRoutes);
 app.use("/oauth", oAuth);
-app.use("/request", oAuthRoutes);
+app.use("/request", oAuthRequest);
 
 app.use(errorHandler);
 
