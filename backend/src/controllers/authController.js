@@ -6,7 +6,7 @@ import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { sendConfirmationEmail } from "../utils/EmailService.js";
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -63,7 +63,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -80,7 +80,6 @@ const login = async (req, res) => {
         expiresIn: "1h",
       }
     );
-
 
     const userId = user._id.toString();
     res.cookie("token", token, { maxAge: 3600000 });
@@ -100,7 +99,7 @@ export const authUser = asyncHandler(async (req, res, next) => {
   res.json(user);
 });
 
-const logout = asyncHandler(async (req, res, next) => {
+export const logout = asyncHandler(async (req, res, next) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: false, // set to true in production. HTTPS not setup on local server
@@ -111,7 +110,7 @@ const logout = asyncHandler(async (req, res, next) => {
   });
 });
 
-const registerCheck = async (req, res) => {
+export const registerCheck = async (req, res) => {
   try {
     const { email, username } = req.body;
     const emailTaken = await User.findOne({ email });
@@ -124,4 +123,12 @@ const registerCheck = async (req, res) => {
   }
 };
 
-export { register, login, logout, registerCheck };
+export const checkUsername = async (req, res) => {
+  try {
+    const { username } = req.body;
+    const usernameExists = await User.findOne({ username });
+    res.status(200).json({ usernameExists: !!usernameExists });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
