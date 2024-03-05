@@ -3,6 +3,7 @@ import authRoutes from "./src/routes/authRoutes.js";
 import userRoutes from "./src/routes/userRoutes.js";
 import tripRoutes from "./src/routes/tripRoutes.js";
 import chatRoutes from "./src/routes/chatRoutes.js";
+import preferencesRoutes from "./src/routes/preferencesRoutes.js";
 import { errorHandler } from "./src/middlewares/ErrorHandler.js";
 import "./src/db/server.js";
 import "dotenv/config";
@@ -10,6 +11,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import oAuth from "./src/routes/oAuth.js"
+import oAuthRoutes from "./src/routes/oAuthRoute.js"
 
 const app = express();
 const httpServer = createServer(app);
@@ -24,6 +27,8 @@ const users = {};
 const PORT = process.env.PORT || 3000;
 
 
+app.use(express.json());
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -31,7 +36,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use(express.json());
+
 
 
 io.on("connection", (socket) => {
@@ -79,6 +84,9 @@ app.use("/messages", chatRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/trips", tripRoutes);
+app.use("/preferences", preferencesRoutes);
+app.use("/oauth", oAuth);
+app.use("/request", oAuthRoutes);
 
 app.use(errorHandler);
 

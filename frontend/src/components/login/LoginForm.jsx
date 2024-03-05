@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import googleButton from "../../assets/btn_google.png"
 
 export default function LoginForm() {
   const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
@@ -61,6 +62,18 @@ export default function LoginForm() {
 
 
 
+
+  function navigate(url){
+    window.location.href = url
+  }
+
+  async function auth(){
+    const response = await fetch('http://127.0.0.1:3000/request',{method:'post'});
+    const data = await response.json();
+    navigate(data.url);
+  }
+
+  
   return (
     <div className="text-eggshell-600 w-full h-screen p-4">
       <form
@@ -96,6 +109,7 @@ export default function LoginForm() {
         >
           Log in
         </button>
+        <button type="button" onClick={() => auth()}><img src={googleButton} alt="google sign in"/></button>
         <p>
           <a href="">Forgot Password</a>
         </p>

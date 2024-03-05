@@ -6,7 +6,9 @@ const verifyToken = asyncHandler(async (req, res, next) => {
   const token = req.cookies.token;
   console.log("Token:", token);
 
-  if (!token) throw new ErrorResponse("Please login", 204);
+  if (!token) {
+    res.status(401).send("Login token not found."); //throw new ErrorResponse("Please login", 204);
+  }
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   req.userId = decoded.userId;

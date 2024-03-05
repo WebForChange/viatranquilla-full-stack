@@ -10,9 +10,11 @@ router
   .route("/edit/:username")
   .get(userController.getProfileDataByUsername)
   .put(userController.updateProfile);
+
 router.route("/:username").get(userController.getProfileDataByUsername);
-router.route("/:id/trips").get(tripController.getTripDataByUser);
+router.route("/:username/trips").get(tripController.getTripDataByUser);
 router.route("/:username/friends").get(userController.getFriends);
+
 router
   .route("/:username/add-friend")
   .post(verifyToken, userController.addFriend);
