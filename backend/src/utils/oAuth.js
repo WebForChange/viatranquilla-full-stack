@@ -50,6 +50,7 @@ router.get('/', async function(req,res,next) {
         const user = oAuth2Client.credentials;
 
         await getUserData(user.access_token);
+
         const ticket = await oAuth2Client.verifyIdToken({idToken: user.id_token, audience: process.env.CLIENT_ID});
         const payload = ticket.getPayload();
 
@@ -58,11 +59,31 @@ router.get('/', async function(req,res,next) {
         const password = payload['at_hash'];
 
         const hashedPassword = await bcrypt.hash(password, 12);
+
         const newUser = await User.create({
             username,
             email,
             password: hashedPassword
           });
+
+          const newProfile = await Profile.create({
+            username: username,
+            firstName: "",
+            lastName: "",
+            birthDate: "",
+            phone: "",
+            street: "",
+            houseNumber: "",
+            zip: "",
+            city: "",
+            country: "",
+            state: "",
+            profilePicture: "",
+            bio: "",
+            createdTrips: [],
+            joinedTrips: [],
+          });
+
           await sendPassEmail(email, username, password)
 
     } catch(error) {
