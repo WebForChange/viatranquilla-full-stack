@@ -9,14 +9,16 @@ function Usertrips({ tripDataByUser}) {
         My Trips
       </h1>
       <div className="flex flex-col md:flex-row md:flex-wrap gap-8 justify-start items-center mt-12">
-      <ul>
-          {tripDataByUser.map((trip) => (
+        {!tripDataByUser ? <h1>No Data...</h1> :
+        <ul>
+        {tripDataByUser.map((trip) => (
             <TripCard 
               key={trip.id} 
               value={trip}
             />
           ))}
         </ul>
+        }
       </div>
     </div>
   );

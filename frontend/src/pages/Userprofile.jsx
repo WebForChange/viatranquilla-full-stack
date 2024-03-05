@@ -19,7 +19,10 @@ function Userprofile() {
     <div className="flex flex-col w-full h-auto p-12">
         <Profileheader />
         <About />
-        <Usertrips tripDataByUser={tripDataByUser} />
+        {!tripDataByUser ? 
+          <h1>No Data...</h1>
+        : 
+          <Usertrips tripDataByUser={tripDataByUser} />}
 
     </div>
   );

@@ -4,6 +4,7 @@ function TripCard({ trip }) {
 
   return (
     <div>
+    {!trip ? <h1>No Data...</h1> :
       <div className="card w-80 md:w-1/36 glass">
         <figure>
           <img src="https://picsum.photos/400/300" alt="trip picture" />
@@ -15,6 +16,7 @@ function TripCard({ trip }) {
           <div className="card-actions justify-end"></div>
         </div>
       </div>
+    }
     </div>
   );
 }
