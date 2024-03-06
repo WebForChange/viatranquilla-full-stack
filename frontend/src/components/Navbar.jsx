@@ -1,11 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/viatranquilla-logo.png";
 import React, { useContext } from "react";
+import axios from "axios";
 import { AuthContext } from "../contexts/AuthProvider";
 
 function Navbar() {
   const { user } = useContext(AuthContext);
   const username = user.username;
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:3000/auth/logout");
+      console.log(data);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -50,8 +62,7 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <a>Logout</a>
-                {/* onClick: request get auth/logout and reroute to landing page*/}
+                <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>
           </div>

@@ -81,11 +81,16 @@ export const login = async (req, res) => {
     );
 
     const userId = user._id.toString();
-    res.cookie("token", token, { maxAge: 3600000 });
+    res.cookie("token", token, {
+      maxAge: 3600000,
+      httpOnly: true,
+      secure: false, // should be true in production when using HTTPS
+      path: "/",
+    });
     res.json({
       userId: userId,
       username: user.username,
-      status: "The login was successful.",
+      message: "login successful",
       token: token,
     });
   } catch (error) {
@@ -93,20 +98,16 @@ export const login = async (req, res) => {
   }
 };
 
-export const authUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.userId);
-  res.json(user);
-});
-
 export const logout = asyncHandler(async (req, res, next) => {
   res
     .clearCookie("token", {
       httpOnly: true,
       secure: false, // set to true in production. HTTPS not setup on local server
+      path: "/",
     })
     .status(200)
     .json({
-      message: "Logged out successfully. Client should now delete token.",
+      message: "Logout successful.",
     });
 });
 
@@ -132,3 +133,8 @@ export const checkUsername = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const authUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.userId);
+  res.json(user);
+});

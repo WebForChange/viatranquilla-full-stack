@@ -11,13 +11,12 @@ function Footer() {
       <div className="flex flex-col sm:flex-row justify-center space-y-8 sm:space-y-0 sm:space-x-8 items-center h-full mb-4">
         <div className="flex flex-col items-center lg:items-start ">
           <Link to={"/"}>Home</Link>
-          <Link to={"/dashboard"}>Dashboard</Link>
         </div>
 
         {loggedIn ? (
           <div className="flex flex-col items-center lg:items-start ">
             <Link to={"/user/" + username}>Your profile</Link>
-            <Link to={"/dashboard"}>Your Dashboard</Link>
+            <Link to={"/dashboard"}>Dashboard</Link>
           </div>
         ) : (
           <div className="flex flex-col items-center lg:items-start ">
