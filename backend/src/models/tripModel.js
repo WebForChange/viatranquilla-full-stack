@@ -18,6 +18,10 @@ const tripSchema = new Schema(
       },
     },
     image: { link: { type: String, default: "" } },
+    locations: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Location" }],
+      default: [],
+    },
     checkpoints: {
       type: [{ type: Schema.Types.ObjectId, ref: "Location" }],
       default: [],
