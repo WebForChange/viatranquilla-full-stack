@@ -89,7 +89,7 @@ router.get('/', async function(req,res,next) {
     } catch(error) {
         res.status(500).json({ message: error.message });
     }
-    res.redirect(303, 'http://localhost:5173/');
+    res.redirect(303, 'http://localhost:5173/login');
 })
 
 export default router;
