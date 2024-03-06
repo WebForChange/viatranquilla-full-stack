@@ -22,3 +22,21 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #5a5959;
 }
+
+.sent {
+    background-color: #4caf50; /* Change the background color for sent messages */
+    color: #fff; /* Change the text color for sent messages */
+    padding: 8px;
+    margin: 5px;
+    border-radius: 5px;
+    align-self: flex-end;
+  }
+  
+  .received {
+    background-color: #ddd; /* Change the background color for received messages */
+    color: #333; /* Change the text color for received messages */
+    padding: 8px;
+    margin: 5px;
+    border-radius: 5px;
+    align-self: flex-start;
+  }

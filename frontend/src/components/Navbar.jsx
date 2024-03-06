@@ -7,13 +7,16 @@ function Navbar() {
   const { user } = useContext(AuthContext);
   const username = user.username;
 
-
   return (
     <div>
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
-            <img src={logo} alt="via tranquilla logo" className="sm:w-96 w-3/4" />
+            <img
+              src={logo}
+              alt="via tranquilla logo"
+              className="sm:w-96 w-3/4"
+            />
           </a>
         </div>
         <div className="flex-none gap-2 ">
@@ -47,10 +50,8 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <a>Your Trips</a>
-              </li>
-              <li>
                 <a>Logout</a>
+                {/* onClick: request get auth/logout and reroute to landing page*/}
               </li>
             </ul>
           </div>

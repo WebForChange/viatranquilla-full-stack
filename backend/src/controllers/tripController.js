@@ -115,7 +115,13 @@ export const getTripDataByUser = asyncHandler(async (req, res, next) => {
 
   if (!profile) res.status(404).json({ message: "User Profile not found" });
 
-  const trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
+  try {
+    const trips = [
+      ...new Set([...profile.createdTrips, ...profile.joinedTrips]),
+    ];
+  } catch (error) {
+    res.status(404).json({ message: "This user has no trips!" });
+  }
 
   if (!trips || trips.length === 0)
     res.status(404).json({ message: "This user has no trips!" });

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import googleButton from "../../assets/btn_google.png"
+import { Link, useNavigate } from "react-router-dom";
+import googleButton from "../../assets/btn_google.png";
 
 export default function LoginForm() {
   const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
@@ -12,6 +12,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setPostLogin({
@@ -50,21 +51,13 @@ export default function LoginForm() {
         const token = data.token;
         localStorage.setItem("token", token);
         localStorage.getItem("token", token);
-        
-       
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-
-
-
-
-
-
-  
   return (
     <div className="text-eggshell-600 w-full h-screen p-4">
       <form
