@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 export default function Tripform() {
+    const modes = ["car", "train", "bus", "plane", "ship", "bike"];
     const [page, setPage] = useState(1);
+    const [roundTrip, setRoundTrip] = useState(true);
+    const [multiStops, setMultiStops] = useState(false);
     
     const [connection, setConnection] = useState({
         from: {
-            adress: "",
+            city: "",
+            address: "",
             geolocation: {
                 long: "",
                 lat: "",
             },
         },
         to: {
-            adress: "",
+            city: "",
+            address: "",
             geolocation: {
                 long: "",
                 lat: "",
@@ -32,6 +37,7 @@ export default function Tripform() {
                 lat: "",
             },
         },
+        type: "",
         suggestedBy: "",
     });
     const [invitation, setInvitation] = useState({
@@ -62,7 +68,7 @@ export default function Tripform() {
         creator: "",
         // participants: [],
         // checkpoints: [],
-        // connections: [],
+        connections: []
     });
 
     async function checkUsername(username) {
@@ -100,6 +106,15 @@ export default function Tripform() {
             setPage(page - 1);
         }
     }
+    const handleRoundtrip = (e) => {
+        setRoundTrip(e.target.checked);
+    }
+    const handleMultiStops = (e) => {
+        setMultiStops(e.target.checked);
+    }
+    const handleConnection = (e) => {
+        setConnection({ ...connection, [e.target.name]: e.target.value });
+    }
 
     return (
         <div>
@@ -108,7 +123,7 @@ export default function Tripform() {
                 <h2>Basic Information</h2>
                 <div>
                     <label htmlFor="image">Image:</label>
-                    <input type="text" name="image" id="image" value={trip.image.link} onChange={handleUpload} />
+                    <input type="file" name="image" id="image" value={trip.image.link} onChange={handleUpload} />
                     <label htmlFor="title">Title:</label>
                     <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} />
                     <label htmlFor="description">Description:</label>
@@ -123,11 +138,65 @@ export default function Tripform() {
             </div>}
 
             {page === 2 && <div>
-                <h2>Where does your Trip Start?</h2>
-                <label htmlFor="city">City:</label>
-                <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} />
-                <label htmlFor="address">Address:</label>
-                <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} />
+                <div>
+                    <h2>Where does your Trip Start?</h2>
+                    <label htmlFor="city">City:</label>
+                    <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} />
+                    <label htmlFor="address">Pickup Address:</label>
+                    <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} />
+                </div>
+                <div>
+                    <label htmlFor="return">Multiple Stops:</label>
+                    <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} />
+                </div>
+                <div>
+                    {!multiStops ? <h2>Whats your Destination?</h2> : <h2>Whats your first Stop during the Trip?</h2>}
+                    {multiStops && <div>
+                        {trip.connections.length === 0 ?
+                        <h2>Add Details</h2> : <ul>
+                            {trips.connections.map((connection) => (
+                            <li>{connection.to.city}</li>
+                        ))} </ul>}
+                        <div>
+                            <div>
+                                <h2>From</h2>
+                                <label htmlFor="fromCity">City:</label>
+                                <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} />
+                                <label htmlFor="fromAddress">Address:</label>
+                                <input type="text" name="fromAddress" id="fromAddress" value={connection.from.address} onChange={handleConnection} />
+                                <label htmlFor="startDateTime">Start Date:</label>
+                                <input type="date" name="startDateTime" id="startDateTime" value={connection.startDateTime} onChange={handleConnection} />
+                                <label htmlFor="mode">Mode:</label>
+                                <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
+                                    {modes.map(mode => (
+                                    <option key={mode} value={mode}>{mode}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <h2>To</h2>
+                                <label htmlFor="toCity">City:</label>
+                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} />
+                                <label htmlFor="toAddress">Address:</label>
+                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} />
+                                <label htmlFor="endDateTime">End Date:</label>
+                                <input type="date" name="endDateTime" id="endDateTime" value={connection.endDateTime} onChange={handleConnection} />
+                            </div>
+                        </div>
+                        {/* Button to save Stop */}
+                        </div>}
+                    {!multiStops && <div>
+                        {/* Input for single Destination */}
+                        </div>}
+                </div>
+                <div>
+                    <h2>Return</h2>
+                    <label htmlFor="return">Same as Start:</label>
+                    <input type="checkbox" name="return" id="return" checked={roundTrip} onChange={handleRoundtrip} />
+                    {!roundTrip && <div>
+                        {/* return city and adress here */}
+                        </div>}
+                </div>
             </div>}
 
             {page === 3 && <div>
