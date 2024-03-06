@@ -17,6 +17,7 @@
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
+    "pusher": "^5.2.0",
     "pusher-js": "^8.4.0-rc2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,7 +25,7 @@
     "react-modal": "^3.16.1",
     "react-router": "^6.22.1",
     "react-router-dom": "^6.22.1",
-    "pusher": "^5.2.0"
+    "react-toastify": "^10.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

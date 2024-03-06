@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <BrowserRouter>
             <App />
-            <ToastContainer/>
           </BrowserRouter>
+          <ToastContainer />
 
         </DataContextProvider>
       </AuthProvider>

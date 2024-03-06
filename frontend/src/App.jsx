@@ -10,6 +10,7 @@ import ProfileForm from "./components/profile/ProfileForm";
 import Footer from "./Footer";
 import NotFound from "./components/shared/NotFound";
 import { useParams } from "react-router-dom";
+import OAuthMessage from "./components/shared/OAuthMessage";
 
 export default function App() {
   const { username } = useParams();
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/tripdetails" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/oauthmessage" element={<OAuthMessage />} />
         <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />
