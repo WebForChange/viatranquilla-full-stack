@@ -51,6 +51,7 @@ function Navbar() {
               </li>
               <li>
                 <a>Logout</a>
+                {/* onClick: request get auth/logout and reroute to landing page*/}
               </li>
             </ul>
           </div>

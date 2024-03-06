@@ -99,14 +99,15 @@ export const authUser = asyncHandler(async (req, res, next) => {
 });
 
 export const logout = asyncHandler(async (req, res, next) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: false, // set to true in production. HTTPS not setup on local server
-  });
-  res.status(200).send({
-    status: "success",
-    message: "Logged out successfully. Client should now delete token.",
-  });
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: false, // set to true in production. HTTPS not setup on local server
+    })
+    .status(200)
+    .json({
+      message: "Logged out successfully. Client should now delete token.",
+    });
 });
 
 export const registerCheck = async (req, res) => {
