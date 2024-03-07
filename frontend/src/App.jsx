@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import NotFound from "./components/shared/NotFound";
 import { useParams } from "react-router-dom";
 import OAuthMessage from "./components/shared/OAuthMessage";
+import OAuthDuplicateError from "./components/shared/DuplicateError";
 
 export default function App() {
   const { username } = useParams();
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/oauthmessage" element={<OAuthMessage />} />
+        <Route path="/duplicateerror" element={<OAuthDuplicateError />} />
         <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />
