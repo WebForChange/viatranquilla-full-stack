@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
-export default function OAuthDuplicateError() {
+export default function OAuthDuplicateError(error) {
+    if (error === 303) {
+        toast.error('Registration failed!')
+    }
   return (
     <div className="flex justify-center items-center h-screen w-full  text-burnt_sienna-400 bg-301 bg-contain">
+    <ToastContainer />
       <div className=" ">
         <div className="flex flex-col items-center justify-center space-y-8 px-8">
         <p className="text-sunset-300 text-xl lg:text-6xl font-bold text-center pb-15">

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { showFailedAlert, showSuccessAlert } from "../shared/toastUtils";
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
   const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
@@ -39,17 +40,13 @@ export default function LoginForm() {
       console.log(data);
       if (data.error === "email") {
         setMailError(true);
-        showFailedAlert()
       } else {
         setMailError(false);
-        showSuccessAlert()
       }
       if (data.error === "password") {
         setPasswordError(true);
-        showFailedAlert()
       } else {
         setPasswordError(false);
-        showSuccessAlert()
       }
       if (data.token) {
         setLoggedIn(true);
@@ -58,6 +55,7 @@ export default function LoginForm() {
         localStorage.setItem("token", token);
         localStorage.getItem("token", token);
         navigate("/dashboard");
+        toast.success('You have successfully logged in!')
       }
     } catch (error) {
       console.error(error);
@@ -103,18 +101,6 @@ export default function LoginForm() {
           <a href="">Forgot Password</a>
         </p>
       </form>
-      <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition: Zoom/>
     </div>
   );
 }
