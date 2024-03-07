@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import googleButton from "../../assets/btn_google.png"
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { showFailedAlert, showSuccessAlert } from "../shared/toastUtils";
 
 export default function LoginForm() {
   const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
@@ -12,6 +14,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setPostLogin({
@@ -36,13 +39,17 @@ export default function LoginForm() {
       console.log(data);
       if (data.error === "email") {
         setMailError(true);
+        showFailedAlert()
       } else {
         setMailError(false);
+        showSuccessAlert()
       }
       if (data.error === "password") {
         setPasswordError(true);
+        showFailedAlert()
       } else {
         setPasswordError(false);
+        showSuccessAlert()
       }
       if (data.token) {
         setLoggedIn(true);
@@ -50,30 +57,13 @@ export default function LoginForm() {
         const token = data.token;
         localStorage.setItem("token", token);
         localStorage.getItem("token", token);
-        
-       
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-
-
-
-
-
-  function navigate(url){
-    window.location.href = url
-  }
-
-  async function auth(){
-    const response = await fetch('http://127.0.0.1:3000/request',{method:'post'});
-    const data = await response.json();
-    navigate(data.url);
-  }
-
-  
   return (
     <div className="text-eggshell-600 w-full h-screen p-4">
       <form
@@ -109,11 +99,22 @@ export default function LoginForm() {
         >
           Log in
         </button>
-        <button type="button" onClick={() => auth()}><img src={googleButton} alt="google sign in"/></button>
         <p>
           <a href="">Forgot Password</a>
         </p>
       </form>
+      <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition: Zoom/>
     </div>
   );
 }

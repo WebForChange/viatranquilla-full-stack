@@ -6,13 +6,16 @@ import ErrorResponse from "../utils/ErrorResponse.js";
 // Creates a new trip
 export const createTrip = asyncHandler(async (req, res, next) => {
   const username = req.username;
+  let newTrip = null;
 
   try {
-    const newTrip = new Trip(req.body);
+    newTrip = new Trip(req.body);
     await newTrip.save();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+
+  if (!newTrip) res.status(500).json({ message: "Trip could not be created" });
 
   try {
     Profile.findOneAndUpdate(
@@ -112,7 +115,13 @@ export const getTripDataByUser = asyncHandler(async (req, res, next) => {
 
   if (!profile) res.status(404).json({ message: "User Profile not found" });
 
-  const trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
+  try {
+    const trips = [
+      ...new Set([...profile.createdTrips, ...profile.joinedTrips]),
+    ];
+  } catch (error) {
+    res.status(404).json({ message: "This user has no trips!" });
+  }
 
   if (!trips || trips.length === 0)
     res.status(404).json({ message: "This user has no trips!" });

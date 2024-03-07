@@ -4,6 +4,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './contexts/AuthProvider.jsx'
 import DataContextProvider from './contexts/DataContextProvider.jsx'
+import 'react-toastify/dist/ReactToastify.css';
 
 import './index.css'
 

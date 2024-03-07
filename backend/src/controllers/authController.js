@@ -6,7 +6,7 @@ import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { sendConfirmationEmail } from "../utils/EmailService.js";
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -19,7 +19,6 @@ const register = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
-
     const newUser = await User.create({
       username,
       email,
@@ -63,7 +62,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -81,13 +80,17 @@ const login = async (req, res) => {
       }
     );
 
-
     const userId = user._id.toString();
-    res.cookie("token", token, { maxAge: 3600000 });
+    res.cookie("token", token, {
+      maxAge: 3600000,
+      httpOnly: true,
+      secure: false, // should be true in production when using HTTPS
+      path: "/",
+    });
     res.json({
       userId: userId,
       username: user.username,
-      status: "The login was successful.",
+      message: "login successful",
       token: token,
     });
   } catch (error) {
@@ -95,23 +98,20 @@ const login = async (req, res) => {
   }
 };
 
-export const authUser = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.userId);
-  res.json(user);
+export const logout = asyncHandler(async (req, res, next) => {
+  res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: false, // set to true in production. HTTPS not setup on local server
+      path: "/",
+    })
+    .status(200)
+    .json({
+      message: "Logout successful.",
+    });
 });
 
-const logout = asyncHandler(async (req, res, next) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: false, // set to true in production. HTTPS not setup on local server
-  });
-  res.status(200).send({
-    status: "success",
-    message: "Logged out successfully. Client should now delete token.",
-  });
-});
-
-const registerCheck = async (req, res) => {
+export const registerCheck = async (req, res) => {
   try {
     const { email, username } = req.body;
     const emailTaken = await User.findOne({ email });
@@ -124,4 +124,17 @@ const registerCheck = async (req, res) => {
   }
 };
 
-export { register, login, logout, registerCheck };
+export const checkUsername = async (req, res) => {
+  try {
+    const { username } = req.params.username;
+    const usernameExists = await !!User.findOne({ username });
+    res.status(200).json({ usernameExists: usernameExists });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const authUser = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.userId);
+  res.json(user);
+});

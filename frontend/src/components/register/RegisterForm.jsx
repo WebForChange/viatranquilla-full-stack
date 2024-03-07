@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import googleButton from "../../assets/btn_google.png"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { showSuccessAlert } from '../shared/toastUtils';
 
 export default function RegisterForm() {
     const [registerData, setRegisterData] = useState({
@@ -62,6 +65,7 @@ export default function RegisterForm() {
                         password: '',
                         password2: ''
                     });
+                    navigate("/dashboard");
                 } 
             } catch (error) {
                 console.error(error);
@@ -77,9 +81,9 @@ export default function RegisterForm() {
         const response = await fetch('http://127.0.0.1:3000/request',{method:'post'});
         const data = await response.json();
         navigate(data.url);
-      }
-
-
+        showSuccessAlert()
+        }
+        
     return (
         <div className='text-eggshell-600 w-full h-screen p-4'>
 
@@ -106,9 +110,20 @@ export default function RegisterForm() {
                     <input type="password" id="password2" className='p-1 rounded text-delft_blue-100' value={registerData.password2} onChange={handleChange}/>
                 </div>
                 <button type="submit" className='btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500'>Register</button>
-                <button type="button" onClick={() => auth()}><img src={googleButton} alt="google sign in"/></button>
+                <button type="button" onClick={()=>auth()}><img src={googleButton} alt="google sign in"/></button>
             </form>
-            
+            <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition: Zoom/>
         </div>
     )
 }
