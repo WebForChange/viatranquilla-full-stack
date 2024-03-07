@@ -9,6 +9,6 @@ router.post("/login", authController.login);
 router.post("/register-check", authController.registerCheck);
 router.get("/check-username/:username", authController.checkUsername);
 router.get("/me", verifyToken, authController.authUser);
-router.get("/logout", verifyToken, authController.logout);
+router.get("/logout", authController.logout);
 
 export default router;
