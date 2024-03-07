@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './contexts/AuthProvider.jsx'
 import DataContextProvider from './contexts/DataContextProvider.jsx'
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 import './index.css'
 
@@ -17,10 +18,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           <BrowserRouter>
             <App />
+            <ToastContainer />
           </BrowserRouter>
 
         </DataContextProvider>
       </AuthProvider>
+      <ToastContainer />
   </React.StrictMode>,
 
 )
