@@ -9,6 +9,7 @@ import Register from "./components/register/Register";
 import ProfileForm from "./components/profile/ProfileForm";
 import Footer from "./Footer";
 import NotFound from "./components/shared/NotFound";
+import Tripform from "./components/tripcomp/TripForm";
 import { useParams } from "react-router-dom";
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/tripdetails" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/newtrip" element={<Tripform />} />
         <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />

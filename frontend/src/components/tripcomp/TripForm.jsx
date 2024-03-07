@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Tripform() {
@@ -79,7 +79,7 @@ export default function Tripform() {
         setTrip({ ...trip, [e.target.name]: e.target.value });
     }
     const handleUpload = (e) => {
-        setTrip({ ...trip, image: { link: e.target.value } });
+
     }
     const handleInvitation = (e) => {
         setInvitation({ ...invitation, [e.target.name]: e.target.value });
@@ -96,15 +96,25 @@ export default function Tripform() {
             console.log("Username does not exist");
         }
     }
-    const handlePageUp = () => {
-        if (page < 3) {
-            setPage(page + 1);
-        }
-    }
-    const handlePageDown = () => {
-        if (page > 1) {
-            setPage(page - 1);
-        }
+    const handlePageUp = (e) => {
+        e.preventDefault();
+        setPage(prevPage => {
+            if (prevPage < 3) {
+                return prevPage + 1;
+            } else {
+                return prevPage;
+            }
+        });
+    };
+    const handlePageDown = (e) => {
+        e.preventDefault();
+        setPage(prevPage => {
+            if (prevPage > 1) {
+                return prevPage - 1;
+            } else {
+                return prevPage;
+            }
+        });
     }
     const handleRoundtrip = (e) => {
         setRoundTrip(e.target.checked);
@@ -113,8 +123,33 @@ export default function Tripform() {
         setMultiStops(e.target.checked);
     }
     const handleConnection = (e) => {
-        setConnection({ ...connection, [e.target.name]: e.target.value });
+        if (e.target.name === "fromCity") {
+            setConnection({ ...connection, from: { ...connection.from, city: e.target.value } });
+        } else if (e.target.name === "fromAddress") {
+            setConnection({ ...connection, from: { ...connection.from, address: e.target.value } });
+        } else if (e.target.name === "toCity") {
+            setConnection({ ...connection, to: { ...connection.to, city: e.target.value } });
+        } else if (e.target.name === "toAddress") {
+            setConnection({ ...connection, to: { ...connection.to, address: e.target.value } });
+        } else if (e.target.name === "startDateTime") {
+            setConnection({ ...connection, startDateTime: e.target.value });
+        } else if (e.target.name === "endDateTime") {
+            setConnection({ ...connection, endDateTime: e.target.value });
+        } else if (e.target.name === "mode") {
+            setConnection({ ...connection, mode: e.target.value });
+        }
     }
+    const saveConnection = (e) => {
+        e.preventDefault();
+        const updatedConnections = [...trip.connections];
+        updatedConnections.push(connection);
+        setTrip({ ...trip, connections: updatedConnections });
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(trip);
+    }
+
 
     return (
         <div>
@@ -122,8 +157,8 @@ export default function Tripform() {
             {page === 1 && <div>
                 <h2>Basic Information</h2>
                 <div>
-                    <label htmlFor="image">Image:</label>
-                    <input type="file" name="image" id="image" value={trip.image.link} onChange={handleUpload} />
+{/*                 <label htmlFor="image">Image:</label>
+                    <input type="file" name="image" id="image" value={trip.image.link} onChange={handleUpload} /> */}
                     <label htmlFor="title">Title:</label>
                     <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} />
                     <label htmlFor="description">Description:</label>
@@ -154,8 +189,13 @@ export default function Tripform() {
                     {multiStops && <div>
                         {trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
-                            {trips.connections.map((connection) => (
-                            <li>{connection.to.city}</li>
+                            {trip.connections.map((connection) => (
+                            <li><div>
+                                <p>From</p>
+                                <p>{connection.from.city}</p>
+                                <p>To</p>
+                                <p>{connection.to.city}</p>
+                                </div></li>
                         ))} </ul>}
                         <div>
                             <div>
@@ -183,7 +223,7 @@ export default function Tripform() {
                                 <input type="date" name="endDateTime" id="endDateTime" value={connection.endDateTime} onChange={handleConnection} />
                             </div>
                         </div>
-                        {/* Button to save Stop */}
+                        <button onClick={saveConnection}>Save</button>
                         </div>}
                     {!multiStops && <div>
                         {/* Input for single Destination */}
