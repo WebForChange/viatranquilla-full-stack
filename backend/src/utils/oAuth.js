@@ -86,10 +86,14 @@ router.get('/', async function(req,res,next) {
 
           await sendPassEmail(email, username, password)
 
-    } catch(error) {
-        res.status(500).json({ message: error.message });
-    }
-    res.redirect(303, 'http://localhost:5173/oauthmessage');
-})
+          res.redirect(303, 'http://localhost:5173/oauthmessage');
+        } catch(error) {
+          if (error.code === 11000) {
+            res.redirect(303, 'http://localhost:5173/duplicateerror');
+          } else {
+            res.redirect(303, 'http://localhost:5173/NotFound');
+          }
+        }
+      });
 
 export default router;
