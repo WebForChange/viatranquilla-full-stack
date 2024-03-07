@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Tripform() {
-    const modes = ["car", "train", "bus", "plane", "ship", "bike"];
+    const modes = ["car", "train", "bus", "plane", "ship", "bike", "teleport"];
     const [page, setPage] = useState(1);
     const [roundTrip, setRoundTrip] = useState(true);
     const [multiStops, setMultiStops] = useState(false);
@@ -76,6 +76,17 @@ export default function Tripform() {
         return res.data;
     }
     const handleChange = (e) => {
+        if (e.target.name === "city") {
+            setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, city: e.target.value } });
+        } else if (e.target.name === "address") {
+            setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, address: e.target.value } });
+        } else if (e.target.name === "long") {
+            setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, geolocation: { ...trip.pickupAdress.geolocation, long: e.target.value } } });
+        } else if (e.target.name === "lat") {
+            setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, geolocation: { ...trip.pickupAdress.geolocation, lat: e.target.value } } });
+        } else if (e.target.name === "link") {
+            setTrip({ ...trip, image: { link: e.target.value } });
+        } else
         setTrip({ ...trip, [e.target.name]: e.target.value });
     }
     const handleUpload = (e) => {
@@ -162,7 +173,7 @@ export default function Tripform() {
                     <label htmlFor="title">Title:</label>
                     <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} />
                     <label htmlFor="description">Description:</label>
-                    <input type="text" name="description" id="description" value={trip.description} onChange={handleChange} />
+                    <textarea name="description" id="description" value={trip.description} onChange={handleChange} />
                 </div>
                 <div>
                     <label htmlFor="startDate">Start Date:</label>
@@ -190,7 +201,7 @@ export default function Tripform() {
                         {trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
                             {trip.connections.map((connection) => (
-                            <li><div>
+                            <li><div className='bg-white'>
                                 <p>From</p>
                                 <p>{connection.from.city}</p>
                                 <p>To</p>
