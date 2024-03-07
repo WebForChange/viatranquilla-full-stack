@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthProvider';
 import axios from 'axios';
 
 export default function Tripform() {
+    const { user } = useContext(AuthContext);
+    console.log("tripform",user.username);
     const modes = ["car", "train", "bus", "plane", "ship", "bike", "teleport"];
     const [page, setPage] = useState(1);
     const [roundTrip, setRoundTrip] = useState(true);
@@ -74,7 +77,7 @@ export default function Tripform() {
             link: "",
         },
         publishedDate: "",
-        creator: "",
+        creator: user.username,
         // participants: [],
         // checkpoints: [],
         connections: []

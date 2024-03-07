@@ -18,6 +18,8 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState({});
   const [token, setToken] = useState("");
   console.log("AuthContext running");
+  console.log("logged in: ", loggedIn);
+  console.log("user: ", user);
 
   const checkLoggedIn = async () => {
     console.log("checkLoggedIn running");
