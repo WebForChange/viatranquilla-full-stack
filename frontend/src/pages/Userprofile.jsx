@@ -23,7 +23,6 @@ function Userprofile() {
           <h1>No Data...</h1>
         : 
           <Usertrips tripDataByUser={tripDataByUser} />}
-
     </div>
   );
 }

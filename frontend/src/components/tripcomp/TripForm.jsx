@@ -61,6 +61,15 @@ export default function Tripform() {
                 lat: "",
             },
         },
+        dropOff: {
+            city: "",
+            address: "",
+            geolocation: {
+                long: "",
+                lat: "",
+            },
+        },
+        roundtrip: true,
         image: {
             link: "",
         },
@@ -84,13 +93,20 @@ export default function Tripform() {
             setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, geolocation: { ...trip.pickupAdress.geolocation, long: e.target.value } } });
         } else if (e.target.name === "lat") {
             setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, geolocation: { ...trip.pickupAdress.geolocation, lat: e.target.value } } });
+        } else if (e.target.name === "dropOffCity") {
+            setTrip({ ...trip, dropOff: { ...trip.dropOff, city: e.target.value } });
+        } else if (e.target.name === "dropOffAddress") {
+            setTrip({ ...trip, dropOff: { ...trip.dropOff, address: e.target.value } });
+        } else if (e.target.name === "dropOffLong") {
+            setTrip({ ...trip, dropOff: { ...trip.dropOff, geolocation: { ...trip.dropOff.geolocation, long: e.target.value } } });
+        } else if (e.target.name === "dropOffLat") {
+            setTrip({ ...trip, dropOff: { ...trip.dropOff, geolocation: { ...trip.dropOff.geolocation, lat: e.target.value } } });
         } else if (e.target.name === "link") {
             setTrip({ ...trip, image: { link: e.target.value } });
         } else
         setTrip({ ...trip, [e.target.name]: e.target.value });
     }
     const handleUpload = (e) => {
-
     }
     const handleInvitation = (e) => {
         setInvitation({ ...invitation, [e.target.name]: e.target.value });
@@ -129,6 +145,7 @@ export default function Tripform() {
     }
     const handleRoundtrip = (e) => {
         setRoundTrip(e.target.checked);
+        setTrip({ ...trip, roundtrip: e.target.checked });
     }
     const handleMultiStops = (e) => {
         setMultiStops(e.target.checked);
@@ -160,6 +177,26 @@ export default function Tripform() {
         e.preventDefault();
         console.log(trip);
     }
+    const handleDelete = (e, index) => {
+        e.preventDefault();
+        const updatedConnections = [...trip.connections];
+        updatedConnections.splice(index, 1);
+        setTrip({ ...trip, connections: updatedConnections });
+    }
+    const handleSingleTrip = (e) => {
+        e.preventDefault();
+        setConnection(prevConnection => ({
+            ...prevConnection,
+            from: {
+                ...prevConnection.from,
+                city: trip.pickupAdress.city,
+                address: trip.pickupAdress.address,
+            },
+            startDateTime: trip.startDate,
+            endDateTime: trip.endDate,
+        }));
+        saveConnection(e);
+    }
 
 
     return (
@@ -186,7 +223,7 @@ export default function Tripform() {
             {page === 2 && <div>
                 <div>
                     <h2>Where does your Trip Start?</h2>
-                    <label htmlFor="city">City:</label>
+                    <label htmlFor="city">Pickup City:</label>
                     <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} />
                     <label htmlFor="address">Pickup Address:</label>
                     <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} />
@@ -196,16 +233,26 @@ export default function Tripform() {
                     <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} />
                 </div>
                 <div>
-                    {!multiStops ? <h2>Whats your Destination?</h2> : <h2>Whats your first Stop during the Trip?</h2>}
+                    {!multiStops ? <h2>Whats your Destination?</h2> : <h2>Whats your first Connection during the Trip?</h2>}
                     {multiStops && <div>
                         {trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
-                            {trip.connections.map((connection) => (
-                            <li><div className='bg-white'>
-                                <p>From</p>
-                                <p>{connection.from.city}</p>
-                                <p>To</p>
-                                <p>{connection.to.city}</p>
+                            {trip.connections.map((connection, index) => (
+                            <li key={index}><div className='bg-white'>
+                                <div id='from'>
+                                <p>City:</p><p>{connection.from.city}</p>
+                                <p>Address:</p><p>{connection.from.address}</p>
+                                </div>
+                                <div id='mode'>
+                                <p>Mode:</p><p>{connection.mode}</p>
+                                </div>
+                                <div id='to'>
+                                <p>City:</p><p>{connection.to.city}</p>
+                                <p>Address:</p><p>{connection.to.address}</p>
+                                </div>
+                                <div>
+                                    <button onClick={(e) => handleDelete(e, index)}>Delete</button>
+                                </div>
                                 </div></li>
                         ))} </ul>}
                         <div>
@@ -234,20 +281,60 @@ export default function Tripform() {
                                 <input type="date" name="endDateTime" id="endDateTime" value={connection.endDateTime} onChange={handleConnection} />
                             </div>
                         </div>
-                        <button onClick={saveConnection}>Save</button>
+                        <button onClick={saveConnection}>Save Connection</button>
                         </div>}
                     {!multiStops && <div>
-                        {/* Input for single Destination */}
+                        <div>
+                        {!trip.connections.length === 0 ?
+                        <h2>Add Details</h2> : <ul>
+                            {trip.connections.map((connection, index) => (
+                            <li key={index}><div className='bg-white'>
+                                <div id='from'>
+                                <p>City:</p><p>{connection.from.city}</p>
+                                <p>Address:</p><p>{connection.from.address}</p>
+                                </div>
+                                <div id='mode'>
+                                <p>Mode:</p><p>{connection.mode}</p>
+                                </div>
+                                <div id='to'>
+                                <p>City:</p><p>{connection.to.city}</p>
+                                <p>Address:</p><p>{connection.to.address}</p>
+                                </div>
+                                <div>
+                                    <button onClick={(e) => handleDelete(e, index)}>Delete</button>
+                                </div>
+                                </div></li>
+                        ))} </ul>}
+                        </div>
+                        <div>
+                        <h2>To</h2>
+                                <label htmlFor="toCity">City:</label>
+                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} />
+                                <label htmlFor="toAddress">Address:</label>
+                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} />
+                                <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
+                                    {modes.map(mode => (
+                                    <option key={mode} value={mode}>{mode}</option>
+                                    ))}
+                                </select>
+                                {trip.connections.length === 0 &&
+                                <div><button onClick={handleSingleTrip}>Save</button></div>
+                                }
+                        </div>
                         </div>}
                 </div>
-                <div>
+{/*                 <div>
                     <h2>Return</h2>
                     <label htmlFor="return">Same as Start:</label>
                     <input type="checkbox" name="return" id="return" checked={roundTrip} onChange={handleRoundtrip} />
                     {!roundTrip && <div>
-                        {/* return city and adress here */}
-                        </div>}
-                </div>
+                        <h2>Drop off</h2>
+                        <label htmlFor="city">City:</label>
+                        <input type="text" name="dropOffCity" id="dropOffCity" value={trip.dropOff.city} onChange={handleChange} />
+                        <label htmlFor="address">Pickup Address:</label>
+                        <input type="text" name="dropOffAddress" id="dropOffAddress" value={trip.dropOff.address} onChange={handleChange} />
+                    </div>}
+                </div> */}
             </div>}
 
             {page === 3 && <div>
@@ -257,7 +344,7 @@ export default function Tripform() {
                     <label htmlFor="invitationMessage">Message:</label>
                     <input type="text" name="invitationMessage" id="invitationMessage" value={invitation.message} onChange={handleInvitation} />
                     <div>
-                        {!invitation.invitants ? <h2>No Data...</h2> :
+                        {!invitation.invitants ? <h2>No Invites</h2> :
                             <ul>
                                 {invitation.invitants.map((invitant) => (
                                     <li>{invitant}</li>
@@ -272,7 +359,7 @@ export default function Tripform() {
             <div>
                 <button onClick={handlePageDown}>Previous</button>
                 <button onClick={handlePageUp}>Next</button>
-                {page === 3 && <button onClick={handleSubmit} >Submit</button>}
+                {page === 3 && <button onClick={handleSubmit}>Submit</button>}
             </div>
         </form>
         </div>
