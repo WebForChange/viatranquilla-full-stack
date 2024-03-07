@@ -3,19 +3,21 @@ import logo from "../assets/viatranquilla-logo.png";
 import React, { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthProvider";
+import { toast } from 'react-toastify';
 
 function Navbar() {
-  const { user } = useContext(AuthContext);
+  const { user, loggedIn, setLoggedIn } = useContext(AuthContext);
   const username = user.username;
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const { data } = await axios.get("http://localhost:3000/auth/logout");
+      const { data } = await axios.post("http://localhost:3000/auth/logout",{},{ withCredentials: true });
       console.log(data);
-      navigate("/");
+      setLoggedIn(false);
+      navigate("/login");
     } catch (error) {
-      console.error(error);
+      toast.error('Error logging out');
     }
   };
 
@@ -24,46 +26,39 @@ function Navbar() {
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
-            <img
-              src={logo}
-              alt="via tranquilla logo"
-              className="sm:w-96 w-3/4"
-            />
+            <img src={logo} alt="via tranquilla logo" className="sm:w-96 w-3/4" />
           </a>
         </div>
         <div className="flex-none gap-2 ">
           <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto bg-black bg-opacity-5 text-white shadow-lg shadow-slate_gray-100 rounded-full h-10"
-            />
+            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-black bg-opacity-5 text-white shadow-lg shadow-slate_gray-100 rounded-full h-10" />
           </div>
           <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Useravatar and menu"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                />
+                <img alt="Useravatar and menu" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
               </div>
             </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate_gray-100 text-delft_blue-800 rounded-box w-52"
-            >
-              <li>
-                <Link to={"/user/" + username} className="justify-between">
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
+            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate_gray-100 text-delft_blue-800 rounded-box w-52" >
+              {loggedIn ? (
+                <>
+                  <li>
+                    <Link to={"/user/" + username} className="justify-between"> Profile </Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                  <li>
+                    <Link to="/register">Register</Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

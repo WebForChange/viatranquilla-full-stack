@@ -65,6 +65,7 @@ export default function RegisterForm() {
                         password: '',
                         password2: ''
                     });
+                    navigate("/dashboard");
                 } 
             } catch (error) {
                 console.error(error);

@@ -12,6 +12,7 @@ import NotFound from "./components/shared/NotFound";
 import { useParams } from "react-router-dom";
 import OAuthMessage from "./components/shared/OAuthMessage";
 import OAuthDuplicateError from "./components/shared/DuplicateError";
+import { ToastContainer } from 'react-toastify';
 
 export default function App() {
   const { username } = useParams();
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }
