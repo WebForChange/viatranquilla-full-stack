@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import googleButton from "../../assets/btn_google.png";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { showFailedAlert, showSuccessAlert } from "../shared/toastUtils";
 
 export default function LoginForm() {
   const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
@@ -37,13 +39,17 @@ export default function LoginForm() {
       console.log(data);
       if (data.error === "email") {
         setMailError(true);
+        showFailedAlert()
       } else {
         setMailError(false);
+        showSuccessAlert()
       }
       if (data.error === "password") {
         setPasswordError(true);
+        showFailedAlert()
       } else {
         setPasswordError(false);
+        showSuccessAlert()
       }
       if (data.token) {
         setLoggedIn(true);
@@ -97,6 +103,18 @@ export default function LoginForm() {
           <a href="">Forgot Password</a>
         </p>
       </form>
+      <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition: Zoom/>
     </div>
   );
 }

@@ -15,20 +15,20 @@ async function getUserData(access_token) {
 
 async function testOpen(id_token) {
     const response = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${id_token}`)
-    console.log('response',response)
+    // console.log('response',response)
     const data = await response.json()
-    console.log('Opend ID data',data)
+    // console.log('Opend ID data',data)
 }
 
 async function getKeys() {
     const response = await fetch(`https://accounts.google.com/.well-known/openid-configuration`)
-    console.log('response',response)
+    // console.log('response',response)
     const data = await response.json()
-    console.log('Discovery Doc',data)
+    // console.log('Discovery Doc',data)
 
     const jwtCerts = await fetch(data.jwks_uri)
     const jwtData = await jwtCerts.json()
-    console.log('Certs',jwtData)
+    // console.log('Certs',jwtData)
 
     return jwtData
 }
@@ -89,7 +89,7 @@ router.get('/', async function(req,res,next) {
     } catch(error) {
         res.status(500).json({ message: error.message });
     }
-    res.redirect(303, 'http://localhost:5173/');
+    res.redirect(303, 'http://localhost:5173/oauthmessage');
 })
 
 export default router;
