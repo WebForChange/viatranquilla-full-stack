@@ -84,10 +84,14 @@ export default function DataContextProvider({ children }) {
     }
   }
 
-  async function addFriend(data) {
+  async function addFriend(friendUsername) {
     try {
-      const response = await axios.post(`http://localhost:3000/friends`, data);
-      setProfileData(response.data);
+      const response = await axios.post(
+        `http://localhost:3000/${friendUsername}/add-friend`
+      );
+      console.log("Profile Data: ", profileData);
+      console.log("Response Data: ", response.data);
+      //setProfileData(response.data); // Set friends = response.friends
     } catch (error) {
       console.error(error);
     }
@@ -108,6 +112,7 @@ export default function DataContextProvider({ children }) {
         getTripDataByID,
         getTripDataByUser,
         getTripDataByQuery,
+        addFriend,
       }}
     >
       {children}

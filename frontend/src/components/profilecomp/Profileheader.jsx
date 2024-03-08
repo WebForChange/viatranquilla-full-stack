@@ -28,7 +28,8 @@ function ProfileHeader() {
   };
 
   const handleAddFriend = () => {
-    console.log("Add friend");
+    console.log(`Add friend ${username}`);
+    addFriend(username);
   };
 
   return (
