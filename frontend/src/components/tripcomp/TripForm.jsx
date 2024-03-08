@@ -27,8 +27,8 @@ export default function Tripform() {
                 lat: "",
             },
         },
-        startDateTime: "",
-        endDateTime: "",
+        startDate: "",
+        endDate: "",
         mode: "",
     });
     const [checkpoint, setCheckpoint] = useState({
@@ -146,10 +146,10 @@ export default function Tripform() {
             setConnection({ ...connection, to: { ...connection.to, city: e.target.value } });
         } else if (e.target.name === "toAddress") {
             setConnection({ ...connection, to: { ...connection.to, address: e.target.value } });
-        } else if (e.target.name === "startDateTime") {
-            setConnection({ ...connection, startDateTime: e.target.value });
-        } else if (e.target.name === "endDateTime") {
-            setConnection({ ...connection, endDateTime: e.target.value });
+        } else if (e.target.name === "startDate") {
+            setConnection({ ...connection, startDate: e.target.value });
+        } else if (e.target.name === "endDate") {
+            setConnection({ ...connection, endDate: e.target.value });
         } else if (e.target.name === "mode") {
             setConnection({ ...connection, mode: e.target.value });
         }
@@ -179,8 +179,8 @@ export default function Tripform() {
                 city: trip.pickupAdress.city,
                 address: trip.pickupAdress.address,
             },
-            startDateTime: trip.startDate,
-            endDateTime: trip.endDate,
+            startDate: trip.startDate,
+            endDate: trip.endDate,
         }));
         saveConnection(e);
     }
@@ -249,8 +249,8 @@ export default function Tripform() {
                                 <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} />
                                 <label htmlFor="fromAddress">Address:</label>
                                 <input type="text" name="fromAddress" id="fromAddress" value={connection.from.address} onChange={handleConnection} />
-                                <label htmlFor="startDateTime">Start Date:</label>
-                                <input type="date" name="startDateTime" id="startDateTime" value={connection.startDateTime} onChange={handleConnection} />
+                                <label htmlFor="startDate">Start Date:</label>
+                                <input type="date" name="startDate" id="startDate" value={connection.startDate} onChange={handleConnection} />
                                 <label htmlFor="mode">Mode:</label>
                                 <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
                                     {modes.map(mode => (
@@ -264,8 +264,8 @@ export default function Tripform() {
                                 <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} />
                                 <label htmlFor="toAddress">Address:</label>
                                 <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} />
-                                <label htmlFor="endDateTime">End Date:</label>
-                                <input type="date" name="endDateTime" id="endDateTime" value={connection.endDateTime} onChange={handleConnection} />
+                                <label htmlFor="endDate">End Date:</label>
+                                <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} />
                             </div>
                         </div>
                         <button onClick={saveConnection}>Save Connection</button>
