@@ -5,7 +5,7 @@ export default function Search() {
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [selectedUserIndex, setSelectedUserIndex] = useState(-1); // Track the index of the selected user in the list
+    const [selectedUserIndex, setSelectedUserIndex] = useState(-1);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function Search() {
     const handleSearch = (e) => {
         setSearch(e.target.value);
         setShowSuggestions(true);
-        setSelectedUserIndex(-1); // Reset selected user index when search input changes
+        setSelectedUserIndex(-1);
     };
 
     const handleSelectUser = (username) => {
