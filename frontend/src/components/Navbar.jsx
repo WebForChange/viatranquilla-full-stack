@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/AuthProvider";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
+import Search from "./shared/Search";
 
 function Navbar() {
   const { user, loggedIn, setLoggedIn } = useContext(AuthContext);
@@ -33,7 +34,7 @@ function Navbar() {
         </div>
         <div className="flex-none gap-2 ">
           <div className="form-control">
-            <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto bg-black bg-opacity-5 text-white shadow-lg shadow-slate_gray-100 rounded-full h-10" />
+            <Search />
           </div>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" >
