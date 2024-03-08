@@ -28,7 +28,9 @@ export default function Tripform() {
             },
         },
         startDate: "",
+        startDatetime: "",
         endDate: "",
+        endDatetime: "",
         mode: "",
     });
     const [checkpoint, setCheckpoint] = useState({
