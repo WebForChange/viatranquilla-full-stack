@@ -17,19 +17,14 @@ function Navbar() {
       console.log(data);
       setLoggedIn(false);
       navigate("/login");
-      toastLogout()
+      toast.success('You are logged out!')
     } catch (error) {
       toast.error('Error logging out');
     }
   };
 
-  const toastLogout = () => {
-    toast.success('You are logged out')
-  }
-
   return (
     <div>
-      <ToastContainer />
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">

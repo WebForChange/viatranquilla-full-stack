@@ -14,12 +14,26 @@ import { useParams } from "react-router-dom";
 import OAuthMessage from "./components/shared/OAuthMessage";
 import OAuthDuplicateError from "./components/shared/DuplicateError";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   const { username } = useParams();
   return (
     <div className="">
       <Navbar />
+      <ToastContainer
+      position="top-center"
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable={false}
+      pauseOnHover={false}
+      theme="light"
+      transition: Flip
+      autoClose={5000}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user/:username" element={<Userprofile />} />
@@ -35,7 +49,6 @@ export default function App() {
         <Route path="*" element={<NotFound error="Page not found" />} />
       </Routes>
       <Footer />
-      <ToastContainer />
     </div>
   );
 }

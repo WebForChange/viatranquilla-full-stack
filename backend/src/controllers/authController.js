@@ -83,8 +83,8 @@ export const login = async (req, res) => {
     const userId = user._id.toString();
     res.cookie("token", token, {
       maxAge: 3600000,
-      httpOnly: true,
-      secure: false, // should be true in production when using HTTPS
+      // httpOnly: true,
+      // secure: false, // should be true in production when using HTTPS
       path: "/",
     });
     res.json({
