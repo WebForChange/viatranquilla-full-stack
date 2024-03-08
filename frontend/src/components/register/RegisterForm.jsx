@@ -65,7 +65,10 @@ export default function RegisterForm() {
                         password: '',
                         password2: ''
                     });
-                    navigate("/dashboard");
+                    showSuccessAlert()
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 2500)
                 } 
             } catch (error) {
                 console.error(error);
@@ -81,7 +84,6 @@ export default function RegisterForm() {
         const response = await fetch('http://127.0.0.1:3000/request',{method:'post'});
         const data = await response.json();
         navigate(data.url);
-        showSuccessAlert()
         }
         
     return (
