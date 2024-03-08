@@ -5,7 +5,7 @@ export const DataContext = createContext();
 export default function DataContextProvider({ children }) {
   const [profileData, setProfileData] = useState({});
   const [allUser, setAllList] = useState([]);
-  const [tripDataFull, setTripDataFull] = useState([]);
+  const [myTripData, setMyTripData] = useState([]);
   const [tripDataByID, setTripDataByID] = useState([]);
   const [tripDataByUser, setTripDataByUser] = useState([]);
   const [tripDataByQuery, setTripDataByQuery] = useState([]);
@@ -43,10 +43,10 @@ export default function DataContextProvider({ children }) {
     }
   }
   // Get a full list of all stored trips - route is not implemented yet so it is not defined here and will not work :(
-  async function getTripDataFull() {
+  async function getMyTripData() {
     try {
-      const response = await axios.get(`http://localhost:3000/trip`);
-      setTripDataFull(response.data);
+      const response = await axios.get(`http://localhost:3000/trips`);
+      setMyTripData(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -102,13 +102,13 @@ export default function DataContextProvider({ children }) {
       value={{
         profileData,
         allUser,
-        tripDataFull,
+        myTripData,
         tripDataByID,
         tripDataByUser,
         tripDataByQuery,
         getAllUser,
         getProfileDataByID,
-        getTripDataFull,
+        getMyTripData,
         getTripDataByID,
         getTripDataByUser,
         getTripDataByQuery,
