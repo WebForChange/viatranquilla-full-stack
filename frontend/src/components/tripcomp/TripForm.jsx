@@ -64,14 +64,6 @@ export default function Tripform() {
                 lat: "",
             },
         },
-        dropOff: {
-            city: "",
-            address: "",
-            geolocation: {
-                long: "",
-                lat: "",
-            },
-        },
         roundtrip: true,
         image: {
             link: "",
@@ -96,14 +88,6 @@ export default function Tripform() {
             setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, geolocation: { ...trip.pickupAdress.geolocation, long: e.target.value } } });
         } else if (e.target.name === "lat") {
             setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, geolocation: { ...trip.pickupAdress.geolocation, lat: e.target.value } } });
-        } else if (e.target.name === "dropOffCity") {
-            setTrip({ ...trip, dropOff: { ...trip.dropOff, city: e.target.value } });
-        } else if (e.target.name === "dropOffAddress") {
-            setTrip({ ...trip, dropOff: { ...trip.dropOff, address: e.target.value } });
-        } else if (e.target.name === "dropOffLong") {
-            setTrip({ ...trip, dropOff: { ...trip.dropOff, geolocation: { ...trip.dropOff.geolocation, long: e.target.value } } });
-        } else if (e.target.name === "dropOffLat") {
-            setTrip({ ...trip, dropOff: { ...trip.dropOff, geolocation: { ...trip.dropOff.geolocation, lat: e.target.value } } });
         } else if (e.target.name === "link") {
             setTrip({ ...trip, image: { link: e.target.value } });
         } else
@@ -326,18 +310,6 @@ export default function Tripform() {
                         </div>
                         </div>}
                 </div>
-{/*                 <div>
-                    <h2>Return</h2>
-                    <label htmlFor="return">Same as Start:</label>
-                    <input type="checkbox" name="return" id="return" checked={roundTrip} onChange={handleRoundtrip} />
-                    {!roundTrip && <div>
-                        <h2>Drop off</h2>
-                        <label htmlFor="city">City:</label>
-                        <input type="text" name="dropOffCity" id="dropOffCity" value={trip.dropOff.city} onChange={handleChange} />
-                        <label htmlFor="address">Pickup Address:</label>
-                        <input type="text" name="dropOffAddress" id="dropOffAddress" value={trip.dropOff.address} onChange={handleChange} />
-                    </div>}
-                </div> */}
             </div>}
 
             {page === 3 && <div>
