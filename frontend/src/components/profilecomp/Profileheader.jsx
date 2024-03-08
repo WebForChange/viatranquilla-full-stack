@@ -7,7 +7,8 @@ import ChatModal from "../rtc/ChatModal"; // Import the ChatModal component
 Modal.setAppElement("#root");
 
 function ProfileHeader() {
-  const { getProfileDataByID, profileData } = useContext(DataContext);
+  const { getProfileDataByID, profileData, addFriend } =
+    useContext(DataContext);
   const { user } = useContext(AuthContext);
   const { username } = useParams();
 
@@ -24,6 +25,10 @@ function ProfileHeader() {
 
   const handleCloseChatModal = () => {
     setShowChatModal(false);
+  };
+
+  const handleAddFriend = () => {
+    console.log("Add friend");
   };
 
   return (
@@ -44,7 +49,10 @@ function ProfileHeader() {
             {profileData.username}
           </h1>
           <div className="flex justify-center w-full space-x-4">
-            <button className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400">
+            <button
+              onClick={handleAddFriend}
+              className="bg-transparent text-white font-bold py-2 px-4 rounded-full mb-4 border-2 border-solid border-sunset-400 h-12 hover:bg-sunset-400"
+            >
               Add friend
             </button>
             <button
@@ -53,7 +61,12 @@ function ProfileHeader() {
             >
               Message
             </button>
-            {showChatModal && <ChatModal userId={profileData._id} onClose={handleCloseChatModal} />}
+            {showChatModal && (
+              <ChatModal
+                userId={profileData._id}
+                onClose={handleCloseChatModal}
+              />
+            )}
           </div>
         </div>
       </div>
