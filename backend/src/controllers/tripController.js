@@ -6,24 +6,28 @@ import ErrorResponse from "../utils/ErrorResponse.js";
 // Creates a new trip
 export const createTrip = asyncHandler(async (req, res, next) => {
   const username = req.username;
+  if (!username) return res.status(401).json({ message: "Username not found" });
+  req.body.creator = username;
+
   let newTrip = null;
 
   try {
     newTrip = new Trip(req.body);
     await newTrip.save();
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 
-  if (!newTrip) res.status(500).json({ message: "Trip could not be created" });
+  if (!newTrip)
+    return res.status(500).json({ message: "Trip could not be created" });
 
   try {
-    Profile.findOneAndUpdate(
+    await Profile.findOneAndUpdate(
       { username: username },
       { $push: { createdTrips: newTrip._id } }
     );
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 
   res.status(201).json(newTrip);

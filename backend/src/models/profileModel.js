@@ -34,7 +34,7 @@ const profileSchema = new mongoose.Schema({
     earlyBird: { type: Boolean, default: false },
     mtBeachCity: { type: String, default: "" },
     cookEatOut: { type: String, default: "" },
-    blala: { type: String, default: "" },
+    blabla: { type: String, default: "" },
   },
 });
 
