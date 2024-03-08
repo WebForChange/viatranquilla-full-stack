@@ -4,8 +4,8 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './contexts/AuthProvider.jsx'
 import DataContextProvider from './contexts/DataContextProvider.jsx'
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import './index.css'
 
@@ -23,7 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
         </DataContextProvider>
       </AuthProvider>
-      <ToastContainer />
   </React.StrictMode>,
 
 )
