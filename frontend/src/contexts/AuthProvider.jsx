@@ -30,7 +30,7 @@ export default function AuthProvider({ children }) {
       if (response.data) {
         console.log("CheckLoggedIn response.data is true");
         console.log(token);
-        setToken(localStorage.getItem("token"));
+        // setToken(localStorage.getItem("token"));
         setLoggedIn(true);
         setUser(response.data);
       } else {
@@ -50,6 +50,8 @@ export default function AuthProvider({ children }) {
     const token = Cookies.get("token");
     if (token) {
       checkLoggedIn();
+    } else {
+      console.log("NoToken!!!!");
     }
   }, []);
 
@@ -60,7 +62,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, loggedIn, setLoggedIn, checkLoggedIn, token }}
+      value={{ user, setUser, loggedIn, setLoggedIn, checkLoggedIn }}
     >
       {children}
     </AuthContext.Provider>
