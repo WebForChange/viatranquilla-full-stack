@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-export default function MyVehicles({username}) {
+export default function MyVehicles() {
+    const { user } = useContext(AuthContext);
     const [vehicles, setVehicles] = useState([]);
     async function getVehicles() {
         try {
-            const res = await axios.get(`http://localhost:3000/vehicles/${username}`);
+            const res = await axios.get(`http://localhost:3000/vehicles/${user.username}`);
             setVehicles(res.data);
         } catch (error) {
             console.log(error);
