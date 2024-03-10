@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { Link, link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -25,8 +27,8 @@ export default function MyVehicles() {
                 console.log(error);
             });
     }
-    function editVehicle(id) {
-        console.log(id);
+    function editVehicle(vehicle) {
+        console.log(vehicle);
     }
     return (
         <div>
@@ -44,7 +46,7 @@ export default function MyVehicles() {
                                 <p>{vehicle.color}</p>
                                 <p>{vehicle.seats}</p>
                                 <button onClick={() => deleteVehicle(vehicle.id)}>Delete</button>
-                                <button onClick={() => editVehicle(vehicle.id)}>Edit</button>
+                                <button onClick={() => editVehicle(vehicle)}>Edit</button>
                             </div>
                         </div>
                     );
