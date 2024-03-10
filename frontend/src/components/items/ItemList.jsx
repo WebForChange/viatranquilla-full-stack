@@ -1,12 +1,16 @@
 import ItemCard from "./ItemCard";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function ItemList({ user }) {
+export default function ItemList({ username }) {
     const [items, setItems] = useState(null);
     async function getItems() {
-        const res = await fetch(`http://localhost:3000//items/${user}`);
-        const data = await res.json();
-        setItems(data);
+        try {
+            const res = await axios.get(`http://localhost:300/items/${username}`);
+            setItems(res.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
     useEffect(() => {
         getItems();
