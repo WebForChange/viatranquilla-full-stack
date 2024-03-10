@@ -12,7 +12,7 @@ function Dashboard() {
         <DashboardTrips />
       </div>
       <div>
-        <ItemList user={user} />
+        <ItemList user={user.username} />
       </div>
       <div>
         <p>Vehicle</p>
