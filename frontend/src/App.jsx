@@ -10,6 +10,7 @@ import ProfileForm from "./components/forms/ProfileForm";
 import Footer from "./Footer";
 import NotFound from "./components/shared/NotFound";
 import Tripform from "./components/forms/TripForm";
+import CarForm from "./components/forms/CarForm";
 import { useParams } from "react-router-dom";
 import OAuthMessage from "./components/shared/OAuthMessage";
 import OAuthDuplicateError from "./components/shared/DuplicateError";
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/newtrip" element={<Tripform />} />
+        <Route path="/edit-vehicle/:id" element={<CarForm />} />
         <Route path="/oauthmessage" element={<OAuthMessage />} />
         <Route path="/duplicateerror" element={<OAuthDuplicateError />} />
         <Route path="*" element={<NotFound error="Page not found" />} />

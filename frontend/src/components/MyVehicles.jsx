@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import { Link, link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 
-export default function MyVehicles() {
-    const { user } = useContext(AuthContext);
+export default function MyVehicles( {username} ) {
+    const navigate = useNavigate();
     const [vehicles, setVehicles] = useState([]);
     async function getVehicles() {
         try {
-            const res = await axios.get(`http://localhost:3000/vehicles/${user.username}`);
+            const res = await axios.get(`http://localhost:3000/vehicles/${username}`);
             setVehicles(res.data);
         } catch (error) {
             console.log(error);
@@ -28,7 +27,7 @@ export default function MyVehicles() {
             });
     }
     function editVehicle(vehicle) {
-        console.log(vehicle);
+        navigate(`/edit-vehicle/${vehicle.id}`, { state: { vehicle } });
     }
     return (
         <div>

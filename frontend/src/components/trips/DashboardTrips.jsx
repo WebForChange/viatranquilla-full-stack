@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import TripCard from "./TripCard";
+import TripCard from "../TripCard";
 import { Link } from "react-router-dom";
-import { DataContext } from "../contexts/DataContextProvider";
+import { DataContext } from "../../contexts/DataContextProvider";
 
 export default function DashboardTrips() {
     const { getMyTripData, user, myTripData } = useContext(DataContext);
