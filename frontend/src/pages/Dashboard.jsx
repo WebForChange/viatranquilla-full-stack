@@ -1,9 +1,11 @@
 import DashboardTrips from "../components/trips/DashboardTrips";
 import ItemList from "../components/items/ItemList";
+import MyVehicles from "../components/MyVehicles";
 import { useContext } from "react";
 import { DataContext } from "../contexts/DataContextProvider";
 
 function Dashboard() {
+
   const { user } = useContext(DataContext);
 
   return (
@@ -15,7 +17,7 @@ function Dashboard() {
         <ItemList user={user.username} />
       </div>
       <div>
-        <p>Vehicle</p>
+        <MyVehicles user={user.username} />
       </div>
     </div>
   );

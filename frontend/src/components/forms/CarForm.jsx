@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../contexts/AuthProvider";
 
-export default function CarForm( {data}) {
+export default function CarForm({data}) {
     const { user } = useContext(AuthContext);
     const [edit, setEdit] = useState(false);
     const seats = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
