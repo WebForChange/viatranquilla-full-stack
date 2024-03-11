@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import Profileheader from "../components/profilecomp/Profileheader";
 import About from "../components/profilecomp/About";
 import Usertrips from "../components/profilecomp/Usertrips";
@@ -10,15 +10,16 @@ function Userprofile() {
   const { tripDataByUser, getTripDataByUser } = useContext(DataContext);
 
   useEffect(() => {
-    getTripDataByUser(username);
-  }, []);
+    console.log("Userprofile: tripDataByUser: ", tripDataByUser);
+    if (!tripDataByUser) getTripDataByUser(username);
+  }, [username, tripDataByUser]);
 
   return (
     <div className="flex flex-col w-full h-auto p-12">
       <Profileheader />
       <About />
       {!tripDataByUser ? (
-        <h1>No Data...</h1>
+        <h1>No trips to display</h1>
       ) : (
         <Usertrips tripDataByUser={tripDataByUser} />
       )}

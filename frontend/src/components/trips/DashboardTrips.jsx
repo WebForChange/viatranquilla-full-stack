@@ -9,7 +9,6 @@ export default function DashboardTrips() {
   const { user } = useContext(AuthContext);
   useEffect(() => {
     getMyTripData();
-    console.log("DashboardTrips: myTripData: ", myTripData);
   }, [user]);
 
   return (
