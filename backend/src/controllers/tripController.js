@@ -88,7 +88,6 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
 
   try {
     profile = await Profile.findOne({ username: username });
-    console.log("profile: ", profile);
     console.log("profile.createdTrips: ", profile.createdTrips);
     console.log("profile.joinedTrips: ", profile.joinedTrips);
     trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
@@ -98,6 +97,8 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
       .status(500)
       .json({ message: "Error fetching trips from database." });
   }
+
+  trips = await Trip.find({ _id: { $in: trips } });
 
   if (!trips)
     return res
@@ -128,22 +129,33 @@ export const getInvitedTrips = asyncHandler(async (req, res, next) => {
 export const getTripDataByUser = asyncHandler(async (req, res, next) => {
   const username = req.params.username;
 
-  if (!username) res.status(404).json({ message: "Username not found" });
+  if (!username) return res.status(404).json({ message: "Username not found" });
 
-  const profile = await Profile.find({ username: username });
+  const profile = await Profile.findOne({ username: username });
 
-  if (!profile) res.status(404).json({ message: "User Profile not found" });
+  if (!profile)
+    return res.status(404).json({ message: "User Profile not found" });
+
+  let trips = null;
 
   try {
-    const trips = [
-      ...new Set([...profile.createdTrips, ...profile.joinedTrips]),
-    ];
+    console.log("tripController: profile: ", profile);
+    console.log("tripController: profile.createdTrips: ", profile.createdTrips);
+    trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
   } catch (error) {
-    res.status(404).json({ message: "This user has no trips!" });
+    res.status(404).json({
+      message: "Error fetching trips from database!",
+      error: error.message,
+    });
   }
 
-  if (!trips || trips.length === 0)
-    res.status(404).json({ message: "This user has no trips!" });
+  trips = await Trip.find({ _id: { $in: trips } });
+
+  if (!trips) {
+    res
+      .status(500)
+      .json({ message: "Couldn't fetch user trips from database" });
+  }
 
   res.json(trips);
 });

@@ -1,23 +1,26 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
-import axios from 'axios';
+import axios from "axios";
 
-export default function Friendlist({username}) {
-    const [friends, setFriends] = useState([]);
-    console.log("friendlist",username);
+export default function Friendlist({ username }) {
+  const [friends, setFriends] = useState([]);
+  // console.log("friendlist",username);
 
-    async function getFriends() {
-        try {
-            const response = await axios.get(`http://localhost:3000/users/${username}/friends`);
-            console.log("friendlist response",response.data);
-            setFriends(response.data);
-        } catch (error) {
-            console.error(error);
-        }
+  async function getFriends() {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/users/${username}/friends`
+      );
+      // console.log("friendlist response",response.data);
+      setFriends(response.data);
+    } catch (error) {
+      console.error(error);
     }
-    useEffect(() => {
-        getFriends();
-    }, [username]);
+  }
+  useEffect(() => {
+    getFriends();
+  }, [username]);
+
 
 
     return (

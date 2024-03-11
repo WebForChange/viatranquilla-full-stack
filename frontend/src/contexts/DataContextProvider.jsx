@@ -49,6 +49,7 @@ export default function DataContextProvider({ children }) {
         withCredentials: true,
       });
       setMyTripData(response.data);
+      console.log("DataContext: MyTripData: ", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -89,9 +90,11 @@ export default function DataContextProvider({ children }) {
   async function addFriend(friendUsername) {
     try {
       const response = await axios.post(
-        `http://localhost:3000/user/${friendUsername}/add-friend`, {
+        `http://localhost:3000/user/${friendUsername}/add-friend`,
+        {
           withCredentials: true,
-        });
+        }
+      );
       console.log("Profile Data: ", profileData);
       console.log("Response Data: ", response.data);
     } catch (error) {
