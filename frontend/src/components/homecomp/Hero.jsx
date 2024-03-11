@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   const { loggedIn, user } = useContext(AuthContext);
@@ -18,7 +19,7 @@ function Hero() {
               Welcome to Via Tranquilla. Plan your trips and share your experiences with other travellers.
             </p>
             <button className="w-24 h-12 rounded-lg bg-cambridge_blue-200 border-none hover:bg-cambridge_blue-400 text-eggshell-500">
-              Register
+              <Link to="/register">Register</Link>
             </button>
           </div>
         </div>
@@ -36,7 +37,7 @@ function Hero() {
               Welcome back to Via Tranquilla. Plan your trips and share your experiences with other travellers.
             </p>
             <button className="w-24 h-12 rounded-lg bg-cambridge_blue-200 border-none hover:bg-cambridge_blue-400 text-eggshell-500">
-              Plan Trips
+              <Link to="/dashboard">Plan Trips</Link>
             </button>
           </div>
         </div>
