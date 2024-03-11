@@ -14,7 +14,7 @@ export default function ItemList({ username }) {
     }
     useEffect(() => {
         getItems();
-    }, []);
+    }, [username]);
 
 
     return (
