@@ -7,16 +7,20 @@ import ErrorResponse from "../utils/ErrorResponse.js";
 export const createCar = asyncHandler(async (req, res, next) => {
     try {
         const { make, model, year, color, seats, image, creator } = req.body;
+        const username = req.params.username;
         let Car = null;
 
-        const newCar = await Profile.create({
+        const newCar = await Car.create({
             make: "",
             model: "",
             year: "",
             color: "",
             seats: "",
             image: "",
-            creator: "",
+            creator: username,
           });
+          res.status(201).json({ id: newCar._id, username });
+    } catch (error) {
+        res.status(500).json({ errorCode: error.code, message: error.message });
     }
-}
+});
