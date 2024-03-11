@@ -7,7 +7,7 @@ export default function DataContextProvider({ children }) {
   const [allUser, setAllList] = useState([]);
   const [myTripData, setMyTripData] = useState([]);
   const [tripDataByID, setTripDataByID] = useState([]);
-  const [tripDataByUser, setTripDataByUser] = useState([]);
+  const [tripDataByUser, setTripDataByUser] = useState(null);
   const [tripDataByQuery, setTripDataByQuery] = useState([]);
 
   // Get profile data by Username. Do not send sensitive non display data like password - route is not implemented yet so it is not defined here and will not work :(
@@ -49,7 +49,7 @@ export default function DataContextProvider({ children }) {
         withCredentials: true,
       });
       setMyTripData(response.data);
-      console.log("DataContext: MyTripData: ", response.data);
+      //   console.log("DataContext: MyTripData: ", response.data);
     } catch (error) {
       console.error(error);
     }
@@ -71,7 +71,7 @@ export default function DataContextProvider({ children }) {
         `http://localhost:3000/users/${username}/trips`
       );
       setTripDataByUser(response.data);
-      console.log(response.data);
+      //   console.log(response.data);
     } catch (error) {
       console.error(error);
     }

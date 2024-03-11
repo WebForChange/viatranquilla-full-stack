@@ -4,15 +4,14 @@ import About from "../components/profilecomp/About";
 import Usertrips from "../components/profilecomp/Usertrips";
 import { DataContext } from "../contexts/DataContextProvider";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthProvider";
 
 function Userprofile() {
   const { username } = useParams();
   const { tripDataByUser, getTripDataByUser } = useContext(DataContext);
 
   useEffect(() => {
-    console.log("profile: username: ", username);
-    getTripDataByUser(username);
+    console.log("Userprofile: tripDataByUser: ", tripDataByUser);
+    if (!tripDataByUser) getTripDataByUser(username);
   }, [username, tripDataByUser]);
 
   return (
