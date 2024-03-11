@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { showFailedAlert, showSuccessAlert } from "../shared/toastUtils";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export default function LoginForm() {
   const { loggedIn, setLoggedIn, checkLoggedIn } = useContext(AuthContext);
@@ -37,7 +37,7 @@ export default function LoginForm() {
           withCredentials: true,
         }
       );
-      console.log(data);
+      //   console.log(data);
       if (data.error === "email") {
         setMailError(true);
       } else {
@@ -55,7 +55,7 @@ export default function LoginForm() {
         localStorage.setItem("token", token);
         localStorage.getItem("token", token);
         navigate("/dashboard");
-        toast.success('You have successfully logged in!')
+        toast.success("You have successfully logged in!");
       }
     } catch (error) {
       console.error(error);

@@ -98,6 +98,8 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
       .json({ message: "Error fetching trips from database." });
   }
 
+  trips = await Trip.find({ _id: { $in: trips } });
+
   if (!trips)
     return res
       .status(500)

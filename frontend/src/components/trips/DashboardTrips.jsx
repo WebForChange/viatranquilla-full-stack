@@ -31,9 +31,9 @@ export default function DashboardTrips() {
           //   myTripData.map((trip) => <p>{trip}</p>)
           myTripData
             //   .filter((trip) => trip.creator === user.username)
-            //   .sort(
-            //     (a, b) => new Date(a.publishedDate) - new Date(b.publishedDate)
-            //   )
+            .sort(
+              (a, b) => new Date(a.publishedDate) - new Date(b.publishedDate)
+            )
             .map((trip) => <TripCard key={trip._id} trip={trip} />)
         )}
       </div>
