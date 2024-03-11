@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../contexts/AuthProvider";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function ItemForm() {
     const { item: populated } = useParams();
@@ -47,15 +48,17 @@ export default function ItemForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3000/items", item);
-            console.log(res);
+            const res = await axios.post("http://localhost:3000/items/item", item, {
+                withCredentials: true
+            });
         } catch (error) {
             console.log(error);
         }
     };
     return (
         <div>
-            <form action="">
+            <div><p>Hello</p></div>
+            <form>
                 <label htmlFor="name">Name</label>
                 <input
                     type="text"

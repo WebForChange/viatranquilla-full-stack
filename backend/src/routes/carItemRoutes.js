@@ -18,7 +18,7 @@ router
     .get(verifyToken, carItemController.getItemsByUsername)
 
 router
-    .route("/items")
+    .route("/item")
     .post(verifyToken, carItemController.createItem)
 
 router
