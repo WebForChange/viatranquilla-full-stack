@@ -14,8 +14,8 @@ export default function DashboardTrips() {
   return (
     <div className="p-8">
       <Link to="/newtrip">
-        <button className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-          Create-new-Trip-Button
+        <button className="w-340 h-12 px-5 rounded-lg bg-cambridge_blue-200 border-none hover:bg-cambridge_blue-400 text-eggshell-500">
+            Create new Trip
         </button>
       </Link>
       <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">

@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { DataContext } from "../../contexts/DataContextProvider";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 export default function ProfileForm() {
   const { user } = useContext(AuthContext);
@@ -99,6 +100,7 @@ export default function ProfileForm() {
       console.log(response);
 
       navigate(`/user/${username}`);
+      toast.success("You successfully edit your Profile!");
     } catch (error) {
       console.log(error.message);
     }

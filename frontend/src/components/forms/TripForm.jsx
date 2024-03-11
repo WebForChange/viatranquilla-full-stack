@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 import axios from 'axios';
+import { toast } from "react-toastify";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
 export default function Tripform() {
     const { user } = useContext(AuthContext);
@@ -9,6 +11,8 @@ export default function Tripform() {
     const [page, setPage] = useState(1);
     const [roundTrip, setRoundTrip] = useState(true);
     const [multiStops, setMultiStops] = useState(false);
+
+    const navigate = useNavigate();
     
     const [connection, setConnection] = useState({
         from: {
@@ -164,7 +168,9 @@ export default function Tripform() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        toast.success("You successfully created a Trip!");
         console.log(trip);
+        navigate("/dashboard");
     }
     const handleDelete = (e, index) => {
         e.preventDefault();

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { DataContext } from "../../contexts/DataContextProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Modal from "react-modal";
+import { toast } from "react-toastify";
 import ChatModal from "../rtc/ChatModal"; // Import the ChatModal component
 Modal.setAppElement("#root");
 
@@ -30,6 +31,7 @@ function ProfileHeader() {
   const handleAddFriend = () => {
     console.log(`Add friend ${username}`);
     addFriend(username);
+    toast.success("Your friend request has been sent!");
   };
 
   return (
