@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
 
 const carSchema = new mongoose.Schema({
-  make: { type: String, required: true, default: "" },
-  model: { type: String, required: true, default: "" },
-  year: { type: Number, required: true, default: "" },
-  color: { type: String, required: true, default: "" },
-  seats: { type: Number, required: true, default: "" },
-  image: { link: { type: String, default: "" } },
-  creator: { type: Schema.Types.ObjectId, ref: "User" },
-});
+    make: { type: String, required: true, default: "New Car" },
+    model: { type: String, required: true, default: "New Model" },
+    year: { type: Number, required: true, default: 2020 },
+    color: { type: String, required: true, default: "black" },
+    seats: { type: Number, required: true, default: 4 },
+    image: { type: String, default: "" },
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    });
 
-const Car = mongoose.model("Car", carSchema);
-
-export default Car;
+export default mongoose.model("Car", carSchema);
