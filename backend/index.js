@@ -15,6 +15,7 @@ import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import pusherInstance from "./src/middlewares/pusher.js";
 import { createServer } from "http";
+import carItemRoutes from "./src/routes/carItemRoutes.js"
 
 const app = express();
 const httpServer = createServer(app);
@@ -38,6 +39,8 @@ app.use("/trips", tripRoutes);
 app.use("/preferences", preferencesRoutes);
 app.use("/oauth", oAuth);
 app.use("/request", oAuthRequest);
+app.use("/vehicles", carItemRoutes)
+app.use("/items", carItemRoutes)
 
 app.use(errorHandler);
 
