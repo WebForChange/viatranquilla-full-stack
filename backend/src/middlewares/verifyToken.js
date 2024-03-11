@@ -7,7 +7,7 @@ const verifyToken = asyncHandler(async (req, res, next) => {
   console.log("Token:", token);
 
   if (!token) {
-    res.status(401).send("Login token not found."); //throw new ErrorResponse("Please login", 204);
+    return res.status(401).send("Login token not found.");
   }
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);

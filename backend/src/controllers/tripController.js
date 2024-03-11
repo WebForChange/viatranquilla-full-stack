@@ -6,24 +6,28 @@ import ErrorResponse from "../utils/ErrorResponse.js";
 // Creates a new trip
 export const createTrip = asyncHandler(async (req, res, next) => {
   const username = req.username;
+  if (!username) return res.status(401).json({ message: "Username not found" });
+  req.body.creator = username;
+
   let newTrip = null;
 
   try {
     newTrip = new Trip(req.body);
     await newTrip.save();
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 
-  if (!newTrip) res.status(500).json({ message: "Trip could not be created" });
+  if (!newTrip)
+    return res.status(500).json({ message: "Trip could not be created" });
 
   try {
-    Profile.findOneAndUpdate(
+    await Profile.findOneAndUpdate(
       { username: username },
       { $push: { createdTrips: newTrip._id } }
     );
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 
   res.status(201).json(newTrip);
@@ -70,22 +74,37 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
   res.json(getTripDataByID);
 });
 
-// Returns the logged in user's trips
-// For dashboard, ...
-// Currently returns all created and joined trips regardless of date
+// Currently returns user's created and joined trips regardless of date
 export const getUserTrips = asyncHandler(async (req, res, next) => {
   const username = req.username;
 
   if (!username)
-    throw new ErrorResponse(`Couldn't retrieve username from token`, 500);
+    return res
+      .status(401)
+      .json({ message: `Couldn't retrieve username from token` });
 
-  const user = await Profile.find({ username: username });
-  const trips = [...new Set([...user.createdTrips, ...user.joinedTrips])];
+  let profile = null;
+  let trips = null;
 
-  if (!trips || trips.length === 0)
-    throw new ErrorResponse(`This user has no trips!`, 404);
+  try {
+    profile = await Profile.findOne({ username: username });
+    console.log("profile: ", profile);
+    console.log("profile.createdTrips: ", profile.createdTrips);
+    console.log("profile.joinedTrips: ", profile.joinedTrips);
+    trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
+  } catch (error) {
+    console.log(error.message);
+    return res
+      .status(500)
+      .json({ message: "Error fetching trips from database." });
+  }
 
-  res.json(trips);
+  if (!trips)
+    return res
+      .status(500)
+      .json({ message: "Error fetching trips from database." });
+
+  res.status(200).json(trips);
 });
 
 // Returns the trips which the logged in user is invited to

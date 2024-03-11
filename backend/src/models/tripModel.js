@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const tripSchema = new Schema(
   {
     title: { type: String, required: true, default: "New Trip" },
+    creator: { type: String, required: true },
     startDate: { type: Date },
     endDate: { type: Date },
     state: { type: String, default: "active" },
@@ -31,7 +32,6 @@ const tripSchema = new Schema(
       default: [],
     },
     publishedDate: { type: Date },
-    creator: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );
