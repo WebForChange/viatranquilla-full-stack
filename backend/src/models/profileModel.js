@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 
 const profileSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true },
-  friends: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
-  friendRequests: [{ type: Schema.Types.ObjectId, ref: "Profile" }],
   firstName: { type: String, default: "" },
   lastName: { type: String, default: "" },
   birthDate: { type: Date, default: null },
@@ -17,6 +15,14 @@ const profileSchema = new mongoose.Schema({
   state: { type: String, default: "" },
   profilePicture: { type: String, default: "" },
   bio: { type: String, default: "" },
+  friends: {
+    type: [{ type: String }],
+    default: [],
+  },
+  friendRequests: {
+    type: [{ type: String }],
+    default: [],
+  },
   createdTrips: {
     type: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
     default: [],
