@@ -29,7 +29,7 @@ export default function Friendlist({username}) {
             :
             <ul>
                 {friends.map((friend, index) => {
-                    return <li key={index}>{username}</li>
+                    return <li key={index}>{friend}</li>
                 })}
             </ul>
             }
