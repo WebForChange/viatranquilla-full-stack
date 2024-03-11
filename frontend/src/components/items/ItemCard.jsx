@@ -1,5 +1,6 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+
 export default function ItemCard({ item }) {
     async function deleteItem() {
             try {

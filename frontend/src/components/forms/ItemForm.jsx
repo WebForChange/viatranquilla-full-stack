@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
+import { useParams } from "react-router-dom";
 
-export default function ItemForm({populated}) {
+export default function ItemForm() {
+    const { item: populated } = useParams();
     const { user } = useContext(AuthContext);
     const categories = [
         "Accessories",
@@ -31,13 +32,11 @@ export default function ItemForm({populated}) {
         visibilty: true,
         creator: user.username,
     });
-
     useEffect(() => {
-        if(populated){
-            setItem(populated)
+        if (populated) {
+            setItem(populated);
         }
-    }
-    , [populated])
+    }, [populated]);
 
     const handleChange = (e) => {
         setItem({ ...item, [e.target.name]: e.target.value });
