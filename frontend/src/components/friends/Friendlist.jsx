@@ -8,18 +8,20 @@ export default function Friendlist({username}) {
 
     async function getFriends() {
         try {
-            const friends = await axios.get(`http://localhost:3000/users/${username}/friends`);
-            setFriends(data);
+            const response = await axios.get(`http://localhost:3000/users/${username}/friends`);
+            console.log("friendlist response",response.data);
+            setFriends(response.data);
         } catch (error) {
             console.error(error);
         }
     }
     useEffect(() => {
         getFriends();
-    }, []);
+    }, [username]);
+
 
     return (
-        <div id="parent">
+        <div>
             <h2>Deine Freunde</h2>
             {friends.length === 0 
             ?
@@ -27,7 +29,7 @@ export default function Friendlist({username}) {
             :
             <ul>
                 {friends.map((friend, index) => {
-                    return <li key={index}>{friend}</li>
+                    return <li key={index}>{username}</li>
                 })}
             </ul>
             }

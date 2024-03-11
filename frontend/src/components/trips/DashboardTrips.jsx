@@ -8,7 +8,7 @@ export default function DashboardTrips() {
     const { trips } = myTripData;
     useEffect(() => {
         getMyTripData();
-    }, []);
+    }, [user]);
 
     return (
         <div className="p-8">
