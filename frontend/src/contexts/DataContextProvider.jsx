@@ -89,7 +89,7 @@ export default function DataContextProvider({ children }) {
   async function addFriend(friendUsername) {
     try {
       const response = await axios.post(
-        `http://localhost:3000/${friendUsername}/add-friend`
+        `http://localhost:3000/user/${friendUsername}/add-friend`
       );
       console.log("Profile Data: ", profileData);
       console.log("Response Data: ", response.data);
