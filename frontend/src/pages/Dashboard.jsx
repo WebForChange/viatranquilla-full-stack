@@ -2,11 +2,10 @@ import DashboardTrips from "../components/trips/DashboardTrips";
 import ItemList from "../components/items/ItemList";
 import MyVehicles from "../components/MyVehicles";
 import { useContext } from "react";
-import { DataContext } from "../contexts/DataContextProvider";
+import { AuthContext } from "../contexts/AuthProvider";
 
 function Dashboard() {
-
-  const { user } = useContext(DataContext);
+const { user } = useContext(AuthContext);
 
   return (
     <div>
@@ -14,10 +13,10 @@ function Dashboard() {
         <DashboardTrips />
       </div>
       <div>
-        <ItemList user={user.username} />
+        <ItemList username={user.username} />
       </div>
       <div>
-        <MyVehicles user={user.username} />
+        <MyVehicles username={user.username} />
       </div>
     </div>
   );

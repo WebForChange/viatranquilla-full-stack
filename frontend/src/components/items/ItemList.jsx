@@ -19,7 +19,8 @@ export default function ItemList({ username }) {
 
     return (
         <div>
-            {!items ? <h1>No Data...</h1> :
+            {!items ? <h1>No Items...</h1> 
+            :
                 items.map((item) => {
                     return (
                         <ItemCard key={item.id} item={item} />
