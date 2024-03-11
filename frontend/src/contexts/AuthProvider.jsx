@@ -17,9 +17,9 @@ export default function AuthProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [token, setToken] = useState("");
-  console.log("AuthContext running");
-  console.log("logged in: ", loggedIn);
-  console.log("user: ", user);
+  //   console.log("AuthContext running");
+  //   console.log("logged in: ", loggedIn);
+  //   console.log("user: ", user);
 
   const checkLoggedIn = async () => {
     console.log("checkLoggedIn running");
@@ -28,13 +28,13 @@ export default function AuthProvider({ children }) {
         withCredentials: true,
       });
       if (response.data) {
-        console.log("CheckLoggedIn response.data is true");
-        console.log(token);
+        // console.log("CheckLoggedIn response.data is true");
+        // console.log(token);
         // setToken(localStorage.getItem("token"));
         setLoggedIn(true);
         setUser(response.data);
       } else {
-        console.log("checkLoggedIn.response.data is false");
+        // console.log("checkLoggedIn.response.data is false");
         setLoggedIn(false);
         setUser({});
       }
@@ -46,7 +46,7 @@ export default function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log("useEffect running in AuthProvider.jsx");
+    // console.log("useEffect running in AuthProvider.jsx");
     const token = Cookies.get("token");
     if (token) {
       checkLoggedIn();
@@ -56,8 +56,8 @@ export default function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    console.log("Debug useEffect running in AuthProvider.jsx");
-    console.log(user, loggedIn);
+    // console.log("Debug useEffect running in AuthProvider.jsx");
+    // console.log(user, loggedIn);
   }, [loggedIn]);
 
   return (
