@@ -35,13 +35,11 @@ const profileSchema = new mongoose.Schema({
     type: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
     default: [],
   },
-  travelPreferences: {
-    planning: { type: String, default: "" },
-    earlyBird: { type: Boolean, default: false },
-    mtBeachCity: { type: String, default: "" },
-    cookEatOut: { type: String, default: "" },
-    blabla: { type: String, default: "" },
-  },
+  planning: { type: String, default: "" },
+  earlyBird: { type: String, default: "" },
+  mtBeachCity: { type: String, default: "" },
+  cookEatOut: { type: String, default: "" },
+  blabla: { type: String, default: "" },
 });
 
 const Profile = mongoose.model("Profile", profileSchema);
