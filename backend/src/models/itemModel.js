@@ -10,4 +10,4 @@ const itemSchema = new mongoose.Schema({
     creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     });
 
-const itemModel = mongoose.model("Item", itemSchema);
+export default mongoose.model("Item", itemSchema);

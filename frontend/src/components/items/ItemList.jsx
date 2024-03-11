@@ -6,7 +6,7 @@ export default function ItemList({ username }) {
     const [items, setItems] = useState(null);
     async function getItems() {
         try {
-            const res = await axios.get(`http://localhost:300/items/${username}`);
+            const res = await axios.get(`http://localhost:3000/items/${username}`);
             setItems(res.data);
         } catch (error) {
             console.log(error);
