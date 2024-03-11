@@ -54,7 +54,7 @@ export const register = async (req, res) => {
     );
 
     const decodedToken = jwt.decode(token);
-    console.log("Token Expiration Time:", new Date(decodedToken.exp * 1000));
+    // console.log("Token Expiration Time:", new Date(decodedToken.exp * 1000));
 
     res.status(201).json({ id: newUser._id, username, token });
   } catch (error) {
