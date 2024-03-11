@@ -45,7 +45,9 @@ export default function DataContextProvider({ children }) {
   // Get a full list of all stored trips - route is not implemented yet so it is not defined here and will not work :(
   async function getMyTripData() {
     try {
-      const response = await axios.get(`http://localhost:3000/trips`);
+      const response = await axios.get("http://localhost:3000/trips", {
+        withCredentials: true,
+      });
       setMyTripData(response.data);
     } catch (error) {
       console.error(error);
