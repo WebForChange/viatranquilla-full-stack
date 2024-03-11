@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Search() {
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [selectedUserIndex, setSelectedUserIndex] = useState(-1); // Track the index of the selected user in the list
+    const [selectedUserIndex, setSelectedUserIndex] = useState(-1);
     const navigate = useNavigate();
+    const searchRef = useRef(null);
 
     useEffect(() => {
         fetchUsers();
+
+        // Add event listener to detect clicks outside search suggestions
+        document.addEventListener("mousedown", handleClickOutside);
+
+        // Cleanup event listener on component unmount
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, []);
 
     const fetchUsers = async () => {
@@ -25,7 +34,7 @@ export default function Search() {
     const handleSearch = (e) => {
         setSearch(e.target.value);
         setShowSuggestions(true);
-        setSelectedUserIndex(-1); // Reset selected user index when search input changes
+        setSelectedUserIndex(-1);
     };
 
     const handleSelectUser = (username) => {
@@ -48,13 +57,19 @@ export default function Search() {
         }
     };
 
+    const handleClickOutside = (e) => {
+        if (searchRef.current && !searchRef.current.contains(e.target)) {
+            setShowSuggestions(false);
+        }
+    };
+
     const filteredUsers = users.filter((user) =>
         user.username.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
         <>
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} ref={searchRef}>
                 <input
                     type="text"
                     placeholder="Search for users"
