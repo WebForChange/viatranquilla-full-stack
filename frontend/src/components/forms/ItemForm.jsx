@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function ItemForm() {
+    const { item: populated } = useParams();
     const { user } = useContext(AuthContext);
     const categories = [
         "Accessories",
@@ -31,6 +32,11 @@ export default function ItemForm() {
         visibilty: true,
         creator: user.username,
     });
+    useEffect(() => {
+        if (populated) {
+            setItem(populated);
+        }
+    }, [populated]);
 
     const handleChange = (e) => {
         setItem({ ...item, [e.target.name]: e.target.value });
@@ -90,7 +96,7 @@ export default function ItemForm() {
                     name="image"
                     onChange={handleUpload}
                 />
-                <button onClick={handleSubmit}>Submit</button>
+                {populated ? <button onClick={handleUpdate}>Update</button> : <button onClick={handleSubmit}>Submit</button>}
             </form>
         </div>
     )
