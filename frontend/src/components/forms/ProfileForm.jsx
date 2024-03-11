@@ -30,11 +30,11 @@ export default function ProfileForm() {
     bio: "",
   });
 
-  function handleChange(name, value) {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      [name]: value instanceof Date ? value : null,
-    }));
+  function handleChange(event) {
+    setUserData({
+      ...userData,
+      [event.target.id]: event.target.value,
+    });
   }
 
   function handleFileChange(event) {
