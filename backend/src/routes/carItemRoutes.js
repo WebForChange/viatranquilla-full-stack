@@ -18,6 +18,10 @@ router
     .get(verifyToken, carItemController.getItemsByUsername)
 
 router
+    .route("/items")
+    .post(verifyToken, carItemController.createItem)
+
+router
     .route("/vehicles")
     .post(verifyToken, carItemController.createCar)
 

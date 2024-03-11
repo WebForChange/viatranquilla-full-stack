@@ -4,14 +4,10 @@ import { useContext } from "react";
 
 function About() {
   const { profileData } = useContext(DataContext);
-
-  // Birthdate is a string, we need to convert it to a date object
+ // create age from birthdate
   const birthDate = profileData.birthDate ? new Date(profileData.birthDate) : new Date();
-
-  // Get the current year
   const currentYear = new Date().getFullYear();
-
-  // Calculate the age of the user based on the birthdate and the current year and month and day of the birthdate and current date to check if the birthday has already passed  
+  const birthyear = birthDate.getFullYear();
   const age = currentYear - birthDate.getFullYear() - (new Date() < new Date(currentYear, birthDate.getMonth(), birthDate.getDate()) ? 1 : 0);
 
 

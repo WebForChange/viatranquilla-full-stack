@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { DataContext } from "../../contexts/DataContextProvider";
@@ -29,6 +29,22 @@ export default function ProfileForm() {
     profilePicture: null,
     bio: "",
   });
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/users/${username}`
+        );
+        console.log("response.data: ", response.data);
+        setUserData(response.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    fetchUserData();
+  }, [username]);
+
 
   function handleChange(event) {
     setUserData({

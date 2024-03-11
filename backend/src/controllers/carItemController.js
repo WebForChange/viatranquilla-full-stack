@@ -93,3 +93,23 @@ export const getItemsByUsername = asyncHandler(async (req,res,next) => {
         res.status(500).json({ errorCode: error.code, message: error.message })
     }
 })
+
+export const createItem = asyncHandler(async (req,res,next) => {
+    const { name, description, image, quantity, category, visibility, creator } = req.body;
+
+    try {
+        const newItem = await Item.create({
+            name,
+            description,
+            image,
+            quantity,
+            category,
+            visibility,
+            creator
+        });
+
+        res.status(201).json({ item: newItem })
+    } catch (error) {
+        res.status(500).json({ errorCode: error.code, message: error.message })
+    }
+})

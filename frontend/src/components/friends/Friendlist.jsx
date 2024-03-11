@@ -21,18 +21,21 @@ export default function Friendlist({ username }) {
     getFriends();
   }, [username]);
 
-  return (
-    <div>
-      <h2>Deine Freunde</h2>
-      {friends.length === 0 ? (
-        <p>Du hast noch keine Freunde.</p>
-      ) : (
-        <ul>
-          {friends.map((friend, index) => {
-            return <li key={index}>{username}</li>;
-          })}
-        </ul>
-      )}
-    </div>
-  );
+
+
+    return (
+        <div>
+            <h2>Deine Freunde</h2>
+            {friends.length === 0 
+            ?
+            <p>Du hast noch keine Freunde.</p> 
+            :
+            <ul>
+                {friends.map((friend, index) => {
+                    return <li key={index}>{friend}</li>
+                })}
+            </ul>
+            }
+        </div>
+    );
 }
