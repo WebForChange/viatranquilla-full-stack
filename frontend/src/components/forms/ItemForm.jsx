@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 export default function ItemForm() {
     const { user } = useContext(AuthContext);
@@ -40,8 +41,8 @@ export default function ItemForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // await createItem(item);
-            console.log("Item created");
+            const res = await axios.post("http://localhost:3000/items", item);
+            console.log(res);
         } catch (error) {
             console.log(error);
         }
