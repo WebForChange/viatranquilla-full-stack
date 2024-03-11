@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import axios from "axios";
 export const DataContext = createContext();
 
@@ -71,6 +71,7 @@ export default function DataContextProvider({ children }) {
         `http://localhost:3000/users/${username}/trips`
       );
       setTripDataByUser(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
