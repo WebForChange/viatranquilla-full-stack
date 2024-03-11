@@ -49,6 +49,7 @@ export default function DataContextProvider({ children }) {
         withCredentials: true,
       });
       setMyTripData(response.data);
+      console.log("DataContext: MyTripData: ", response.data);
     } catch (error) {
       console.error(error);
     }

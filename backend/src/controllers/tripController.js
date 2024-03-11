@@ -88,7 +88,6 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
 
   try {
     profile = await Profile.findOne({ username: username });
-    console.log("profile: ", profile);
     console.log("profile.createdTrips: ", profile.createdTrips);
     console.log("profile.joinedTrips: ", profile.joinedTrips);
     trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
