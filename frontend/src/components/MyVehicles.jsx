@@ -17,7 +17,7 @@ export default function MyVehicles( {username} ) {
     }
     useEffect(() => {
         getVehicles();
-    }, []);
+    }, [username]);
     function deleteVehicle(id) {
         axios.delete(`http://localhost:3000/vehicles/${id}`)
             .then(() => {
