@@ -20,7 +20,7 @@ export default function ItemList({ username }) {
 
 
     return (
-        <div>
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-8 my-12 justify-center">
             {!items ? <h1>No Items...</h1> 
             :
                 items.map((item) => {

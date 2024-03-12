@@ -22,7 +22,10 @@ function Dashboard() {
         <DashboardTrips />
       </div>
       <div>
-        <ItemList username={user.username} />
+        <h2 className="mx-8 text-center text-3xl lg:text-3xl font-bold mb-4 text-sunset-400">Your Items</h2>
+        <div>
+          <ItemList username={user.username} />
+        </div>
       </div>
       <div>
         <MyVehicles username={user.username} />

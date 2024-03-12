@@ -48,6 +48,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/newtrip" element={<Tripform />} />
         <Route path="/newitem" element={<ItemForm />} />
+        <Route path="/items/edit/:_id" element={<ItemForm />} />
         <Route path="/edit-vehicle/" element={<CarForm />} />
         <Route path="/oauthmessage" element={<OAuthMessage />} />
         <Route path="/duplicateerror" element={<OAuthDuplicateError />} />
