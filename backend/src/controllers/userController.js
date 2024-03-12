@@ -69,10 +69,32 @@ export const getFriends = asyncHandler(async (req, res, next) => {
     username: username,
   });
 
-  if (!profile)
-    throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
+  if (!profile) {
+    console.log(`Profile ${username} does not exist!`);
+    return res
+      .status(404)
+      .json({ message: `Profile ${username} does not exist!` });
+  }
 
-  res.json(profile.friends);
+  let friends = [];
+  try {
+    for (let i = 0; i < profile.friends.length; i++) {
+      let friendProfile = await Profile.findOne({
+        username: profile.friends[i],
+      });
+      friends.push({
+        username: profile.friends[i],
+        profilePicture: friendProfile.profilePicture,
+      });
+    }
+  } catch (error) {
+    console.log("UserController: error building friendlist: ", error);
+    return res.status(500).json({
+      message: "UserController: error building friendlist: " + error.message,
+    });
+  }
+
+  res.status(200).json(friends);
 });
 
 export const addFriend = asyncHandler(async (req, res, next) => {

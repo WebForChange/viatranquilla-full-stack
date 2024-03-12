@@ -21,6 +21,7 @@ router
   .route("/:username/trips")
   .get(tripController.getTripDataByUser)
   .delete(tripController.deleteTrips);
+
 router.route("/:username/friends").get(userController.getFriends);
 
 router
