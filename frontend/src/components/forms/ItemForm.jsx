@@ -42,7 +42,7 @@ export default function ItemForm() {
     const handleChange = (e) => {
         setItem({ ...item, [e.target.name]: e.target.value });
     };
-    const handleUpload = async (e) => {
+    const handleUpdate = async (e) => {
         setItem({ ...item, image: url  });
     };
     const handleSubmit = async (e) => {
@@ -97,7 +97,7 @@ export default function ItemForm() {
                 <input
                     type="file"
                     name="image"
-                    onChange={handleUpload}
+                    onChange={handleUpdate}
                 />
                 {populated ? <button onClick={handleUpdate}>Update</button> : <button onClick={handleSubmit}>Submit</button>}
             </form>
