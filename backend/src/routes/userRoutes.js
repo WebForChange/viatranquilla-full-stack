@@ -17,7 +17,10 @@ router
   );
 
 router.route("/:username").get(userController.getProfileDataByUsername);
-router.route("/:username/trips").get(tripController.getTripDataByUser);
+router
+  .route("/:username/trips")
+  .get(tripController.getTripDataByUser)
+  .delete(tripController.deleteTrips);
 router.route("/:username/friends").get(userController.getFriends);
 
 router

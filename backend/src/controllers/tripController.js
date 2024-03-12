@@ -68,6 +68,33 @@ export const updateTrip = asyncHandler(async (req, res, next) => {
   res.status(200).json(updatedTrip);
 });
 
+// Delete all trips created by a user
+export const deleteTrips = asyncHandler(async (req, res, next) => {
+  const { username } = req.params;
+
+  const profile = await Profile.findOne({ username });
+  const trips = profile.createdTrips;
+
+  try {
+    await Trip.deleteMany({ _id: { $in: trips } });
+  } catch (error) {
+    console.log("tripController: error deleting Trips: ", error.message);
+    return res.status(500).json({ message: error.message });
+  }
+
+  try {
+    await Profile.findOneAndUpdate(
+      { username: username },
+      { createdTrips: [] }
+    );
+  } catch (error) {
+    console.log("error deleting trips from profile: ", error.message);
+    return res.status(500).json({ message: error.message });
+  }
+
+  res.status(200).json({ message: `Trips deleted!` });
+});
+
 // Deletes a trip
 export const deleteTrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
