@@ -1,7 +1,8 @@
 import React from "react";
 
 
-function Header() {
+function Header({trip}) {
+  console.log("Trip in header", trip);
   return (
     <div className="hero h-[300px] lg:h-[400px] xl:h-[550px] shadow-xl shadow-delft_blue-100 mb-12">
       <img
