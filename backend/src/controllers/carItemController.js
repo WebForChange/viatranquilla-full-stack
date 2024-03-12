@@ -53,11 +53,10 @@ export const updateCar = asyncHandler(async (req,res,next) => {
 })
 
 export const getVehicleByUsername = asyncHandler(async (req,res,next) => {
-    const username = req.username;
-    req.body.creator = username;
+    const username = req.params.username;
 
     try {
-        const vehicles = await Car.findOne({ username: username });
+        const vehicles = await Car.find({ creator: username });
 
         res.status(200).json(vehicles)
     } catch (error) {
@@ -66,10 +65,17 @@ export const getVehicleByUsername = asyncHandler(async (req,res,next) => {
 })
 
 export const deleteVehicle = asyncHandler(async (req,res,next) => {
-    const { id } = req.params;
+    const carId = req.params.id;
 
     try {
-        await Car.findByIdAndDelete(id);
+        const car = await Car.findById(carId)
+
+        if (!car) {
+            return res.status(404).json({ message: "Car not found!" })
+        }
+
+        await car.deleteOne()
+
         res.status(200).json({ message: "Car deleted!" })
     } catch (error) {
         res.status(500).json({ errorCode: error.code, message: error.message })
@@ -81,7 +87,7 @@ export const getItemsByUsername = asyncHandler(async (req,res,next) => {
     req.body.creator = username;
 
     try {
-        const items = await Item.findOne({ username: username })
+        const items = await Item.find({ creator: username })
 
         res.status(200).json(items)
     } catch (error) {
@@ -112,10 +118,17 @@ export const createItem = asyncHandler(async (req,res,next) => {
 })
 
 export const deleteItem = asyncHandler(async (req,res,next) => {
-    const { id } = req.params;
+    const itemId = req.params.id;
 
     try {
-        await Item.findByIdAndDelete(id);
+        const item = await Car.findById(itemId)
+
+        if (!item) {
+            return res.status(404).json({ message: "Item not found!" })
+        }
+
+        await item.deleteOne()
+
         res.status(200).json({ message: "Item deleted!" })
     } catch (error) {
         res.status(500).json({ errorCode: error.code, message: error.message })
@@ -133,7 +146,7 @@ export const updateItem = asyncHandler(async (req,res,next) => {
             return res.status(404).json({ message: "Item not found!" })
         }
 
-        item.name = name;
+        item.make = name;
         item.description = description;
         item.image = image;
         item.quantity = quantity;
