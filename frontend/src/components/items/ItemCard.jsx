@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, onDelete }) {
     async function deleteItem() {
         try {
             const res = await axios.delete(`http://localhost:3000/items/${item._id}`, {
