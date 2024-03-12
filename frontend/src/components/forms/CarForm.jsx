@@ -57,8 +57,8 @@ export default function CarForm() {
     }
 
     return (
-        <div>
-            <form action="">
+        <div className="text-eggshell-600 w-full h-screen p-4">
+            <form action="" className="flex flex-col gap-4 justify-between items-center">
                 <label htmlFor="make">Make</label>
                 <input
                     type="text"
@@ -99,16 +99,16 @@ export default function CarForm() {
                         </option>
                     ))}
                 </select>
-                <label htmlFor="image">Image</label>
+                {/* <label htmlFor="image">Image</label>
                 <input
                     type="file"
                     name="image"
                     onChange={handleUpload}
-                />
+                /> */}
                 {!edit ? (
-                    <button onClick={handleSubmit}>Add Car</button>
+                    <button onClick={handleSubmit} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Add Car</button>
                 ) : (
-                    <button onClick={handleSubmit}>Edit Car</button>
+                    <button onClick={handleSubmit} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Edit Car</button>
                 )}
             </form>
         </div>
