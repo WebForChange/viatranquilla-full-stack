@@ -33,7 +33,7 @@ export default function ProfileForm() {
     earlyBird: "",
     mtBeachCity: "",
     cookEatOut: "",
-    blabla: "",
+    blabla: ""
   });
 
   useEffect(() => {
