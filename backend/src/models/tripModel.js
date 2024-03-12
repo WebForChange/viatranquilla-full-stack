@@ -5,6 +5,7 @@ const tripSchema = new Schema(
   {
     title: { type: String, required: true, default: "New Trip" },
     creator: { type: String, required: true },
+    roundtrip: { type: Boolean, default: false },
     startDate: { type: Date },
     endDate: { type: Date },
     state: { type: String, default: "active" },

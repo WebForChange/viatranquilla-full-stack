@@ -1,13 +1,25 @@
 import Trip from "../models/tripModel.js";
+import Connection from "../models/connectionModel.js";
 import Profile from "../models/profileModel.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ErrorResponse from "../utils/ErrorResponse.js";
+import { connections } from "mongoose";
 
 // Creates a new trip
 export const createTrip = asyncHandler(async (req, res, next) => {
   const username = req.username;
   if (!username) return res.status(401).json({ message: "Username not found" });
   req.body.creator = username;
+  //   console.log("req.body: ", req.body);
+
+  try {
+    req.body.connections = req.body.connections.map((connection) => {
+      return new Connection(connection);
+    });
+  } catch (error) {
+    console.log("error creating connections: ", error.message);
+    return res.status(500).json({ message: error.message });
+  }
 
   let newTrip = null;
 
@@ -15,11 +27,14 @@ export const createTrip = asyncHandler(async (req, res, next) => {
     newTrip = new Trip(req.body);
     await newTrip.save();
   } catch (error) {
+    console.log("error saving new trip: ", error.message);
     return res.status(500).json({ message: error.message });
   }
 
-  if (!newTrip)
+  if (!newTrip) {
+    console.log("TripController: Created trip is null or undefined");
     return res.status(500).json({ message: "Trip could not be created" });
+  }
 
   try {
     await Profile.findOneAndUpdate(
@@ -27,6 +42,10 @@ export const createTrip = asyncHandler(async (req, res, next) => {
       { $push: { createdTrips: newTrip._id } }
     );
   } catch (error) {
+    console.log(
+      "error adding new trip to profile created trips: ",
+      error.message
+    );
     return res.status(500).json({ message: error.message });
   }
 
@@ -52,6 +71,8 @@ export const updateTrip = asyncHandler(async (req, res, next) => {
 // Deletes a trip
 export const deleteTrip = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
+
+  //TODO: Remove trip from User's trip lists
 
   try {
     await Trip.findByIdAndDelete(id);
@@ -88,11 +109,8 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
 
   try {
     profile = await Profile.findOne({ username: username });
-    console.log("profile.createdTrips: ", profile.createdTrips);
-    console.log("profile.joinedTrips: ", profile.joinedTrips);
     trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
   } catch (error) {
-    console.log(error.message);
     return res
       .status(500)
       .json({ message: "Error fetching trips from database." });
@@ -109,7 +127,6 @@ export const getUserTrips = asyncHandler(async (req, res, next) => {
 });
 
 // Returns the trips which the logged in user is invited to
-// For dashboard, ...
 export const getInvitedTrips = asyncHandler(async (req, res, next) => {
   const username = req.username;
 
@@ -139,8 +156,6 @@ export const getTripDataByUser = asyncHandler(async (req, res, next) => {
   let trips = null;
 
   try {
-    console.log("tripController: profile: ", profile);
-    console.log("tripController: profile.createdTrips: ", profile.createdTrips);
     trips = [...new Set([...profile.createdTrips, ...profile.joinedTrips])];
   } catch (error) {
     res.status(404).json({
