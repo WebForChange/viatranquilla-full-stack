@@ -21,12 +21,12 @@ function Dashboard() {
       <div>
         <DashboardTrips />
       </div>
-      {/* <div>
+      <div>
         <ItemList username={user.username} />
       </div>
       <div>
         <MyVehicles username={user.username} />
-      </div> */}
+      </div>
     </div>
   );
 }

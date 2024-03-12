@@ -39,8 +39,8 @@ app.use("/trips", tripRoutes);
 app.use("/preferences", preferencesRoutes);
 app.use("/oauth", oAuth);
 app.use("/request", oAuthRequest);
-app.use("/vehicles", carItemRoutes)
-app.use("/items", carItemRoutes)
+app.use("/", carItemRoutes)
+app.use("/", carItemRoutes)
 
 app.use(errorHandler);
 
