@@ -252,7 +252,7 @@ export default function Tripform() {
                         {trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
                             {trip.connections.map((connection, index) => (
-                            <li key={index}><div className='bg-white'>
+                            <li key={index}><div className='bg-white text-delft_blue-100 flex gap-5 mb-3'>
                                 <div id='from'>
                                 <p>City:</p><p>{connection.from.city}</p>
                                 <p>Address:</p><p>{connection.from.address}</p>
@@ -264,7 +264,7 @@ export default function Tripform() {
                                 <p>City:</p><p>{connection.to.city}</p>
                                 <p>Address:</p><p>{connection.to.address}</p>
                                 </div>
-                                <div>
+                                <div className='ml-5 flex align-middle'>
                                     <button onClick={(e) => handleDelete(e, index)}>Delete</button>
                                 </div>
                                 </div></li>
@@ -295,7 +295,7 @@ export default function Tripform() {
                                 <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                             </div>
                         </div>
-                        <button onClick={saveConnection} className="mt-3 btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Save Connection</button>
+                        <button onClick={saveConnection} className="btn mt-3 bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Save Connection</button>
                         </div>}
                     {!multiStops && <div>
                         <div >
@@ -346,8 +346,8 @@ export default function Tripform() {
                     <input type="text" name="title" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="message">Message:</label>
                     <input type="text" name="message" id="invitationMessage" value={invitation.message} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
-                    <div className="flex flex-col gap-2">
-                        {!invitation.invitants ? <h2>No Invites</h2> :
+                    <div className="flex flex-col text-delft_blue-100 gap-2">
+                        {invitation.invitants &&
                             <ul>
                                 {invitation.invitants.map((invitant) => (
                                     <li>{invitant}</li>
@@ -356,13 +356,13 @@ export default function Tripform() {
                         }
                         <label htmlFor="invitant">Invitant:</label>
                         <input type="text" name="invitant" id="invitant" value={invitation.invitant} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
-                        <button onClick={handleAddInvitant} className="btn bg-cambridge_blue-200 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Add</button>
+                        <button onClick={handleAddInvitant} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Add</button>
                     </div>
             </div>}
-            <div className='flex gap-3'>
+            <div className='flex gap-3 mt-5'>
                 <button onClick={handlePageDown} className="btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Previous</button>
                 <button onClick={handlePageUp} className="btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Next</button>
-                {page === 3 && <button onClick={handleSubmit} className="btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500">Submit</button>}
+                {page === 3 && <button onClick={handleSubmit} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Submit</button>}
             </div>
         </form>
         </div>
