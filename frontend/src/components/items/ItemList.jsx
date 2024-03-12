@@ -18,14 +18,13 @@ export default function ItemList({ username }) {
         getItems();
     }, [username]);
 
-
     return (
         <div className="flex flex-col md:flex-row md:flex-wrap gap-8 my-12 justify-center">
             {!items ? <h1>No Items...</h1> 
             :
                 items.map((item) => {
                     return (
-                        <ItemCard key={item.id} item={item} />
+                        <ItemCard key={item.id} item={item} onDelete={handleDelete} />
                     );
                 })
             }
