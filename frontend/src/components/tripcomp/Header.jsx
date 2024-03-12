@@ -2,7 +2,10 @@ import React from "react";
 
 
 function Header({trip}) {
-  console.log("Trip in header", trip);
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
   return (
     <div className="hero h-[300px] lg:h-[400px] xl:h-[550px] shadow-xl shadow-delft_blue-100 mb-12">
       <img
@@ -20,8 +23,8 @@ function Header({trip}) {
               {trip.description}
             </p>
             <div>
-              <p>{trip.startDate}</p>
-              <p>{trip.endDate}</p>
+              <p>{formatDate(trip.startDate)}</p>
+              <p>{formatDate(trip.endDate)}</p>
             </div>
           </div>
         </div>

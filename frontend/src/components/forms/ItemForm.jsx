@@ -4,8 +4,24 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function ItemForm() {
-    const { item: populated } = useParams();
+    const { _id } = useParams();
     const { user } = useContext(AuthContext);
+    async function getItemById() {
+        try {
+            const res = await axios.get(`http://localhost:3000/items/${_id}`);
+            setItem(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        if (_id) {
+            getItemById();
+            console.log(_id);
+        }
+    }
+    , [_id]);
+
     const categories = [
         "Accessories",
         "Books",
@@ -33,11 +49,6 @@ export default function ItemForm() {
         visibilty: true,
         creator: user.username,
     });
-    useEffect(() => {
-        if (populated) {
-            setItem(populated);
-        }
-    }, [populated]);
 
     const handleChange = (e) => {
         setItem({ ...item, [e.target.name]: e.target.value });
@@ -104,7 +115,7 @@ export default function ItemForm() {
                     name="image"
                     onChange={handleUpdate}
                 /> */}
-                {populated ? <button onClick={handleUpdate} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Update</button> : <button onClick={handleSubmit} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Submit</button>}
+                {_id ? <button onClick={handleUpdate} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Update</button> : <button onClick={handleSubmit} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Submit</button>}
             </form>
         </div>
     )

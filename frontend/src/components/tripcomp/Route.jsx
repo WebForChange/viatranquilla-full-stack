@@ -2,6 +2,10 @@ import React from "react";
 import * as Unicons from "@iconscout/react-unicons";
 
 function Route({trip}) {
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
   return (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-4 text-sunset-400">Route</h2>
@@ -14,7 +18,7 @@ function Route({trip}) {
               <Unicons.UilCarSideview color={"#55BBA5"} size={28} />
             </div>
             <div className="collapse-content text-eggshell-600">
-              <p>{trip.startDate}</p>
+              <p>{formatDate(trip.startDate)}</p>
             </div>
           </div>
           <div className="collapse collapse-arrow bg-slate_gray-100">
