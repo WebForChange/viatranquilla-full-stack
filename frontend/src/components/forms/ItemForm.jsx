@@ -8,7 +8,7 @@ export default function ItemForm() {
     const { user } = useContext(AuthContext);
     async function getItemById() {
         try {
-            const res = await axios.get(`http://localhost:3000/items/${_id}`);
+            const res = await axios.get(`http://localhost:3000/items/id/${_id}`);
             setItem(res.data);
         } catch (error) {
             console.log(error);
