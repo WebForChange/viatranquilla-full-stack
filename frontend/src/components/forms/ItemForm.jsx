@@ -9,8 +9,7 @@ export default function ItemForm() {
     async function getItemById() {
         try {
             const res = await axios.get(`http://localhost:3000/items/${_id}`);
-            setPopulated(res.data);
-            console.log(red.data);
+            setItem(res.data);
         } catch (error) {
             console.log(error);
         }
