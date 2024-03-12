@@ -262,7 +262,7 @@ export default function Tripform() {
                                 </div></li>
                         ))} </ul>}
                         <div>
-                            <div>
+                            <div className='mt-3 flex flex-col'>
                                 <h2>From</h2>
                                 <label htmlFor="fromCity">City:</label>
                                 <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
@@ -277,7 +277,7 @@ export default function Tripform() {
                                     ))}
                                 </select>
                             </div>
-                            <div>
+                            <div className='mt-3 flex flex-col'>
                                 <h2>To</h2>
                                 <label htmlFor="toCity">City:</label>
                                 <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
@@ -287,7 +287,7 @@ export default function Tripform() {
                                 <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                             </div>
                         </div>
-                        <button onClick={saveConnection}>Save Connection</button>
+                        <button onClick={saveConnection} className="mt-3 btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Save Connection</button>
                         </div>}
                     {!multiStops && <div>
                         <div >
@@ -307,7 +307,7 @@ export default function Tripform() {
                                 <p>Address:</p><p>{connection.to.address}</p>
                                 </div>
                                 <div>
-                                    <button onClick={(e) => handleDelete(e, index)}>Delete</button>
+                                    <button onClick={(e) => handleDelete(e, index)} >Delete</button>
                                 </div>
                                 </div></li>
                         ))} </ul>}
@@ -325,7 +325,7 @@ export default function Tripform() {
                                     ))}
                                 </select>
                                 {trip.connections.length === 0 &&
-                                <div><button onClick={handleSingleTrip} className="btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500">Save</button></div>
+                                <div><button onClick={handleSingleTrip} className="mt-3 btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Save</button></div>
                                 }
                         </div>
                         </div>}
