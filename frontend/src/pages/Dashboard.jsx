@@ -6,25 +6,27 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 
 function Dashboard() {
-const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
-    <div>
+    <div className="my-8">
       <div>
-        <h1>Welcome {user.username}!</h1>
+        <h1 className="mx-8 text-3xl lg:text-5xl font-bold mb-4 text-sunset-400">
+          Welcome {user.username}!
+        </h1>
       </div>
       <div>
-        <Friendlist username={user.username}/>
+        <Friendlist username={user.username} />
       </div>
       <div>
         <DashboardTrips />
       </div>
-      <div>
+      {/* <div>
         <ItemList username={user.username} />
       </div>
       <div>
         <MyVehicles username={user.username} />
-      </div>
+      </div> */}
     </div>
   );
 }
