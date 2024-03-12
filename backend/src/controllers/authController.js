@@ -126,7 +126,7 @@ export const registerCheck = async (req, res) => {
 
 export const checkUsername = async (req, res) => {
   try {
-    const { username } = req.params.username;
+    const { username } = req.params;
     const usernameExists = await !!User.findOne({ username });
     res.status(200).json({ usernameExists: usernameExists });
   } catch (error) {

@@ -75,13 +75,15 @@ export default function Tripform() {
         },
         publishedDate: "",
         creator: user.username,
-        // participants: [],
+        participants: [],
         // checkpoints: [],
         connections: []
     });
 
     async function checkUsername(username) {
         const res = await axios.get(`http://localhost:3000/auth/check-username/${username}`);
+        console.log("CheckRunning");
+        console.log(res.data);
         return res.data;
     }
 
@@ -99,18 +101,25 @@ export default function Tripform() {
         } else
         setTrip({ ...trip, [e.target.name]: e.target.value });
     }
-    const handleUpload = (e) => {
-    }
+/*     const handleUpload = (e) => {
+    } */
     const handleInvitation = (e) => {
-        setInvitation({ ...invitation, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        if (name === "invitant") {
+            setInvitation({ ...invitation, [name]: value });
+        } else {
+            setInvitation({ ...invitation, [name]: value });
+        }
     }
     const addInvitant = (name) => {
-        setInvitation({ ...invitation, names: [...invitation.names, name] });
+        setInvitation(prevState => ({ ...prevState, invitants: [...prevState.invitants, name] }));
+        setTrip(prevTrip => ({ ...prevTrip, participants: [...prevTrip.participants, name] }));
     }
     const handleAddInvitant = (e) => {
         e.preventDefault();
-        checkUsername(invitation.invitant);
-        if (checkUsername(invitation.invitant)){
+        const usernameExists = checkUsername(invitation.invitant);
+        console.log(invitation);
+        if (usernameExists) {
             addInvitant(invitation.invitant);
         } else {
             console.log("Username does not exist");
@@ -173,7 +182,7 @@ export default function Tripform() {
             });
             toast.success("You successfully created a Trip!", {
                 position: "top-center"
-              });
+            });
             console.log(trip);
             navigate("/dashboard");
         } catch (error) {
@@ -333,10 +342,10 @@ export default function Tripform() {
 
             {page === 3 && <div className="flex flex-col">
                     <h2>Invitation</h2>
-                    <label htmlFor="invitationTitle">Title:</label>
-                    <input type="text" name="invitationTitle" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
-                    <label htmlFor="invitationMessage">Message:</label>
-                    <input type="text" name="invitationMessage" id="invitationMessage" value={invitation.message} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" name="title" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
+                    <label htmlFor="message">Message:</label>
+                    <input type="text" name="message" id="invitationMessage" value={invitation.message} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
                     <div className="flex flex-col gap-2">
                         {!invitation.invitants ? <h2>No Invites</h2> :
                             <ul>
@@ -346,7 +355,7 @@ export default function Tripform() {
                             </ul>
                         }
                         <label htmlFor="invitant">Invitant:</label>
-                        <input type="text" name="invitant" id="invitant" value={invitation.invitant} className="p-1 rounded text-delft_blue-100"/>
+                        <input type="text" name="invitant" id="invitant" value={invitation.invitant} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
                         <button onClick={handleAddInvitant} className="btn bg-cambridge_blue-200 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Add</button>
                     </div>
             </div>}
