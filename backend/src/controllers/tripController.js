@@ -14,7 +14,9 @@ export const createTrip = asyncHandler(async (req, res, next) => {
 
   try {
     req.body.connections = req.body.connections.map((connection) => {
-      return new Connection(connection);
+      const newConnection = new Connection(connection);
+      newConnection.save();
+      return newConnection;
     });
   } catch (error) {
     console.log("error creating connections: ", error.message);
@@ -114,12 +116,27 @@ export const deleteTrip = asyncHandler(async (req, res, next) => {
 export const getTripDataByID = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
-  const getTripDataByID = await Trip.findById(id);
+  const trip = await Trip.findById(id);
 
-  if (!getTripDataByID)
-    throw new ErrorResponse(`Trip ${id} does not exist!`, 404);
+  if (!trip) throw new ErrorResponse(`Trip ${id} does not exist!`, 404);
 
-  res.json(getTripDataByID);
+  // get profile pictures of participants
+  trip.participants = trip.participants.map((username) => {
+    const profile = Profile.findOne({ username: username });
+    return { username: username, profilePicture: profile.profilePicture };
+  });
+
+  try {
+    const connections = await Connection.find({
+      _id: { $in: trip.connections },
+    });
+    trip.connections = connections;
+  } catch (error) {
+    console.log("tripController: error fetching connections: ", error.message);
+    return res.status(500).json({ message: error.message });
+  }
+
+  res.status(200).json(trip);
 });
 
 // Currently returns user's created and joined trips regardless of date
