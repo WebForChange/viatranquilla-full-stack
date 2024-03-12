@@ -8,7 +8,8 @@ import Item from "../models/itemModel.js"
 export const createCar = asyncHandler(async (req, res, next) => {
     try {
         const { make, model, year, color, seats, image, creator } = req.body;
-        const username = req.params.username;
+        const username = req.username;
+        req.body.creator = username;
 
         const newCar = await Car.create({
             make,

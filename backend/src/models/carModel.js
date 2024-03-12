@@ -7,7 +7,7 @@ const carSchema = new mongoose.Schema({
     color: { type: String, required: true, default: "black" },
     seats: { type: Number, required: true, default: 4 },
     image: { type: String, default: "" },
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    creator: { type: String, required: true },
     });
 
 export default mongoose.model("Car", carSchema);
