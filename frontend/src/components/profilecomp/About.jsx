@@ -20,67 +20,72 @@ function About() {
 
   return (
     <div className="mt-8 flex flex-col lg:flex-row lg:justify-start items-center text-white">
-      <div className="flex flex-col ">
-        <div className="flex flex-col lg:w-2/3">
-          <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-sunset-400">
-            About me
-          </h1>
-          <p className="text-justify ">{profileData.bio}</p>
-          <h4 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Age
-          </h4>
-          <p>{age}</p>
-          <h4 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Location
-          </h4>
-          <p>{profileData.city}</p>
-          <p>{profileData.country}</p>
+      <div className="flex flex-col w-full">
+        <div className="flex flex-col lg:flex-row justify-start lg:space-x-14">
+          <div>
+            <h4 className="text-2xl lg:text-3xl font-bold mb-4 text-sunset-400">
+              Age
+            </h4>
+            <p className="text-xl font-semibold">{age}</p>
+          </div>
+          <div>
+            <h4 className="text-2xl lg:text-3xl font-bold mb-4 text-sunset-400">
+              Location
+            </h4>
+            <p className="text-xl font-semibold">{profileData.city}</p>
+            <p className="text-xl font-semibold">{profileData.country}</p>
+          </div>
+          <div className="">
+            <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-sunset-400">
+              About me
+            </h2>
+            <p className="text-justify mb-5 text-xl font-semibold">
+              {profileData.bio}
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col mt-12">
-          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Blabla Brummbrumm
-          </h3>
-          <p className="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            molestias!
-          </p>
-        </div>
-        <div className="flex flex-col mt-12">
-          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Spontan oder geplant?
-          </h3>
-          <p className="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            molestias!
-          </p>
-        </div>
-        <div className="flex flex-col mt-12">
-          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Frühaufsteher oder Nachteule?
-          </h3>
-          <p className="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            molestias!
-          </p>
-        </div>
-        <div className="flex flex-col mt-12">
-          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Strand, Berge oder Stadt?
-          </h3>
-          <p className="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            molestias!
-          </p>
-        </div>
-        <div className="flex flex-col mt-12">
-          <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-            Kochen oder Essen gehen?
-          </h3>
-          <p className="text-justify">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-            molestias!
-          </p>
+        <div className="flex flex-row flex-wrap justify-start">
+          <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
+            <h3 className="text-xl lg:text-2xl font-bold mb-4 text-sunset-400">
+              Blabla Brummbrumm
+            </h3>
+            <p className="text-justify text-xl font-semibold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
+          <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
+            <h3 className="text-xl lg:text-2xl font-bold mb-4 text-sunset-400">
+              Spontan oder geplant?
+            </h3>
+            <p className="text-justify text-xl font-semibold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
+          <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
+            <h3 className="text-xl lg:text-2xl font-bold mb-4 text-sunset-400">
+              Frühaufsteher oder Nachteule?
+            </h3>
+            <p className="text-justify text-xl font-semibold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
+          <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
+            <h3 className="text-xl lg:text-2xl font-bold mb-4 text-sunset-400">
+              Strand, Berge oder Stadt?
+            </h3>
+            <p className="text-justify text-xl font-semibold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
+          <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
+            <h3 className="text-xl lg:text-2xl font-bold mb-4 text-sunset-400">
+              Kochen oder Essen gehen?
+            </h3>
+            <p className="text-justify text-xl font-semibold">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+          </div>
         </div>
       </div>
     </div>
