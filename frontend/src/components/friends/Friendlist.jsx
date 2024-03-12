@@ -12,7 +12,7 @@ export default function Friendlist({ username }) {
         `http://localhost:3000/users/${username}/friends`
       );
       // console.log("friendlist response",response.data);
-      setFriends(response.data);
+      setFriends(response.data.map(({ username, profilePicture }) => username));
     } catch (error) {
       console.error(error);
     }
@@ -21,21 +21,18 @@ export default function Friendlist({ username }) {
     getFriends();
   }, [username]);
 
-
-
-    return (
-        <div>
-            <h2>Deine Freunde</h2>
-            {friends.length === 0 
-            ?
-            <p>Du hast noch keine Freunde.</p> 
-            :
-            <ul>
-                {friends.map((friend, index) => {
-                    return <li key={index}>{friend}</li>
-                })}
-            </ul>
-            }
-        </div>
-    );
+  return (
+    <div>
+      <h2>Deine Freunde</h2>
+      {friends.length === 0 ? (
+        <p>Du hast noch keine Freunde.</p>
+      ) : (
+        <ul>
+          {friends.map((friend, index) => {
+            return <li key={index}>{friend}</li>;
+          })}
+        </ul>
+      )}
+    </div>
+  );
 }
