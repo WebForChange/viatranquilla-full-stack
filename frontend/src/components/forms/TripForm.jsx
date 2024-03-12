@@ -9,7 +9,6 @@ export default function Tripform() {
     console.log("tripform",user.username);
     const modes = ["car", "train", "bus", "plane", "ship", "bike", "teleport"];
     const [page, setPage] = useState(1);
-    const [roundTrip, setRoundTrip] = useState(true);
     const [multiStops, setMultiStops] = useState(false);
 
     const navigate = useNavigate();
@@ -136,13 +135,11 @@ export default function Tripform() {
                 return prevPage;
             }
         });
-    }
-    const handleRoundtrip = (e) => {
-        setRoundTrip(e.target.checked);
-        setTrip({ ...trip, roundtrip: e.target.checked });
-    }
+    };
+
     const handleMultiStops = (e) => {
         setMultiStops(e.target.checked);
+        setTrip({ ...trip, roundtrip: !e.target.checked });
     }
     const handleConnection = (e) => {
         if (e.target.name === "fromCity") {
