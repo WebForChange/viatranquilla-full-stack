@@ -13,7 +13,7 @@ function Usertrips({ tripDataByUser }) {
         My Trips
       </h2>
       {tripDataByUser ? (
-        <ul className="flex flex-col md:flex-row md:flex-wrap gap-8 justify-start items-center mt-12">
+        <ul className="flex flex-col md:flex-row md:flex-wrap gap-8 justify-start items-start mt-12">
           {tripDataByUser.map((trip) => (
             <TripCard key={trip._id} trip={trip} />
           ))}

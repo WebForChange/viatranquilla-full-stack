@@ -43,26 +43,28 @@ function Navbar() {
 
   return (
     <div>
-      <div className="navbar bg-delft_blue-300">
-        <div className="flex-1">
+      <div className="navbar bg-delft_blue-300 p-1">
+        <div className="flex-1 ml-2">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
             <img
               src={icon}
               alt="via tranquilla logo"
-              className="sm:w-96 w-1/2 sm:hidden"
+              className="sm:hidden max-h-10"
             />
             <img
               src={logo}
               alt="via tranquilla logo"
-              className="hidden sm:block sm:w-96"
+              className="hidden sm:block max-h-10"
             />
           </a>
         </div>
+
         <div className="flex-none gap-2 ">
           <div className="form-control">
             <Search />
           </div>
-          <div className="dropdown dropdown-end">
+
+          <div className="dropdown dropdown-end mr-3">
             <div
               tabIndex={0}
               role="button"
