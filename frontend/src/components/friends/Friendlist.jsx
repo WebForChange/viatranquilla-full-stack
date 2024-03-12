@@ -18,7 +18,8 @@ export default function Friendlist({ username }) {
     }
   }
   useEffect(() => {
-    getFriends();
+    if (username) getFriends();
+    else console.log("no username");
   }, [username]);
 
   return (
@@ -27,7 +28,7 @@ export default function Friendlist({ username }) {
         Your Friends
       </h3>
 
-      <p className="text-white text-xl font-bold">
+      <div className="text-white text-xl font-bold">
         {friends.length === 0 ? (
           <p>Du hast noch keine Freunde.</p>
         ) : (
@@ -37,7 +38,7 @@ export default function Friendlist({ username }) {
             })}
           </ul>
         )}
-      </p>
+      </div>
     </div>
   );
 }
