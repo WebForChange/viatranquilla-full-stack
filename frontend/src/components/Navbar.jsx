@@ -46,6 +46,9 @@ function Navbar() {
               {loggedIn ? (
                 <>
                   <li>
+                    <Link to={"/dashboard/"} className="justify-between"> Dashboard </Link>
+                  </li>
+                  <li>
                     <Link to={"/user/" + username} className="justify-between"> Profile </Link>
                   </li>
                   <li>
