@@ -14,9 +14,15 @@ const ChatInput = ({ onSendMessage }) => {
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        className=" border-delft_blue-700 rounded p-1 w-3/4 placeholder-delft_blue-900"
         placeholder="Type your message..."
       />
-      <button className=" bg-slate_gray-600 rounded p-1 " onClick={handleSendMessage}>Send</button>
+      <button
+        className=" bg-delft_blue-500 rounded p-1 "
+        onClick={handleSendMessage}
+      >
+        Send
+      </button>
     </div>
   );
 };
