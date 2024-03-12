@@ -19,7 +19,7 @@ export default function ItemCard({ item, deleteItem }) {
                 <p className='text-sunset-700'>{item.description}</p>
                 <p className='text-sunset-700'>{item.quantity}</p>
                 <p className='text-sunset-700'>{item.category}</p>
-                <div className='flex gap-5'>
+                <div className='flex text-rose_taupe-700 gap-5'>
                     <button onClick={handleDelete}>Delete</button>
                     <Link to={handleEdit(item._id)}>Edit</Link>
                 </div>
