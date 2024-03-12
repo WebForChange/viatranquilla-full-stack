@@ -83,7 +83,7 @@ export const deleteVehicle = asyncHandler(async (req,res,next) => {
 })
 
 export const getItemsByUsername = asyncHandler(async (req,res,next) => {
-    const username = req.username;
+    const username = req.params.username;
     req.body.creator = username;
 
     try {
@@ -118,10 +118,10 @@ export const createItem = asyncHandler(async (req,res,next) => {
 })
 
 export const deleteItem = asyncHandler(async (req,res,next) => {
-    const itemId = req.params.id;
+    const {id} = req.params.id;
 
     try {
-        const item = await Car.findById(itemId)
+        const item = await Item.findById(id)
 
         if (!item) {
             return res.status(404).json({ message: "Item not found!" })

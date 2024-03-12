@@ -9,8 +9,12 @@ export default function MyVehicles( {username} ) {
     console.log("MyVehicles username: ", username);
     async function getVehicles() {
         try {
-            const res = await axios.get(`http://localhost:3000/vehicles/${username}`);
+            if (username) {
+            const res = await axios.get(`http://localhost:3000/vehicles/${username}`, username, {
+                withCredentials: true
+            });
             setVehicles(res.data);
+            }
         } catch (error) {
             console.log(error);
         }

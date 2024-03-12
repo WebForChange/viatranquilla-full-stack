@@ -4,15 +4,12 @@ import axios from 'axios';
 export default function ItemCard({ item }) {
     async function deleteItem() {
             try {
-                const res = await axios.delete(`http://localhost:3000/items/${item.id}`, {
-                    withCredentials: true,
-                });
+                const res = await axios.delete(`http://localhost:3000/items/${item.id}`);
             } catch (error) {
                 console.log(error);
             }
         }
-    function handleDelete(e) {
-        e.preventDefault();
+    function handleDelete() {
         deleteItem();
     }
 
@@ -31,7 +28,7 @@ export default function ItemCard({ item }) {
                 <p>{item.category}</p>
             </div>
             <div>
-                <button onClick={handleDelete(e)}></button>
+                <button onClick={handleDelete()}></button>
                 <button onClick={handleEdit()}></button>
             </div>
         </div>
