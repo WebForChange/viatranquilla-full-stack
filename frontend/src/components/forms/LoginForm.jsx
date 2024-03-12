@@ -55,7 +55,9 @@ export default function LoginForm() {
         localStorage.setItem("token", token);
         localStorage.getItem("token", token);
         navigate("/dashboard");
-        toast.success("You have successfully logged in!");
+        toast.success("You have successfully logged in!", {
+          position: "top-center"
+        });
       }
     } catch (error) {
       console.error(error);
