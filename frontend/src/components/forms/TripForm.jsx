@@ -168,8 +168,6 @@ export default function Tripform() {
         setTrip({ ...trip, connections: updatedConnections });
     }
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -208,37 +206,37 @@ export default function Tripform() {
 
 
     return (
-        <div>
-        <form action="">
+        <div className="text-eggshell-600 w-full h-screen p-4">
+        <form className="flex flex-col gap-4 justify-between items-center">
             {page === 1 && <div>
                 <h2>Basic Information</h2>
-                <div>
+                <div className="flex flex-col">
 {/*                 <label htmlFor="image">Image:</label>
                     <input type="file" name="image" id="image" value={trip.image.link} onChange={handleUpload} /> */}
                     <label htmlFor="title">Title:</label>
-                    <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} />
+                    <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="description">Description:</label>
-                    <textarea name="description" id="description" value={trip.description} onChange={handleChange} />
+                    <textarea name="description" id="description" value={trip.description} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                 </div>
-                <div>
+                <div className="flex flex-col">
                     <label htmlFor="startDate">Start Date:</label>
-                    <input type="date" name="startDate" id="startDate" value={trip.startDate} onChange={handleChange} />
+                    <input type="date" name="startDate" id="startDate" value={trip.startDate} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="endDate">End Date:</label>
-                    <input type="date" name="endDate" id="endDate" value={trip.endDate} onChange={handleChange} />
+                    <input type="date" name="endDate" id="endDate" value={trip.endDate} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                 </div>
             </div>}
 
             {page === 2 && <div>
-                <div>
+                <div className="flex flex-col">
                     <h2>Where does your Trip Start?</h2>
                     <label htmlFor="city">Pickup City:</label>
-                    <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} />
+                    <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="address">Pickup Address:</label>
-                    <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} />
+                    <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                 </div>
                 <div>
                     <label htmlFor="return">Multiple Stops:</label>
-                    <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} />
+                    <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} className="p-1 rounded text-delft_blue-100"/>
                 </div>
                 <div>
                     {!multiStops ? <h2>Whats your Destination?</h2> : <h2>Whats your first Connection during the Trip?</h2>}
@@ -267,11 +265,11 @@ export default function Tripform() {
                             <div>
                                 <h2>From</h2>
                                 <label htmlFor="fromCity">City:</label>
-                                <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} />
+                                <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                                 <label htmlFor="fromAddress">Address:</label>
-                                <input type="text" name="fromAddress" id="fromAddress" value={connection.from.address} onChange={handleConnection} />
+                                <input type="text" name="fromAddress" id="fromAddress" value={connection.from.address} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                                 <label htmlFor="startDate">Start Date:</label>
-                                <input type="date" name="startDate" id="startDate" value={connection.startDate} onChange={handleConnection} />
+                                <input type="date" name="startDate" id="startDate" value={connection.startDate} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                                 <label htmlFor="mode">Mode:</label>
                                 <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
                                     {modes.map(mode => (
@@ -282,17 +280,17 @@ export default function Tripform() {
                             <div>
                                 <h2>To</h2>
                                 <label htmlFor="toCity">City:</label>
-                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} />
+                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                                 <label htmlFor="toAddress">Address:</label>
-                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} />
+                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                                 <label htmlFor="endDate">End Date:</label>
-                                <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} />
+                                <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                             </div>
                         </div>
                         <button onClick={saveConnection}>Save Connection</button>
                         </div>}
                     {!multiStops && <div>
-                        <div>
+                        <div >
                         {!trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
                             {trip.connections.map((connection, index) => (
@@ -314,32 +312,33 @@ export default function Tripform() {
                                 </div></li>
                         ))} </ul>}
                         </div>
-                        <div>
+                        <div className="flex flex-col gap-1">
                         <h2>To</h2>
                                 <label htmlFor="toCity">City:</label>
-                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} />
+                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
                                 <label htmlFor="toAddress">Address:</label>
-                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} />
+                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <label htmlFor="mode">Mode:</label>
                                 <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
                                     {modes.map(mode => (
                                     <option key={mode} value={mode}>{mode}</option>
                                     ))}
                                 </select>
                                 {trip.connections.length === 0 &&
-                                <div><button onClick={handleSingleTrip}>Save</button></div>
+                                <div><button onClick={handleSingleTrip} className="btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500">Save</button></div>
                                 }
                         </div>
                         </div>}
                 </div>
             </div>}
 
-            {page === 3 && <div>
+            {page === 3 && <div className="flex flex-col">
                     <h2>Invitation</h2>
                     <label htmlFor="invitationTitle">Title:</label>
-                    <input type="text" name="invitationTitle" id="invitationTitle" value={invitation.title} onChange={handleInvitation} />
+                    <input type="text" name="invitationTitle" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="invitationMessage">Message:</label>
-                    <input type="text" name="invitationMessage" id="invitationMessage" value={invitation.message} onChange={handleInvitation} />
-                    <div>
+                    <input type="text" name="invitationMessage" id="invitationMessage" value={invitation.message} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
+                    <div className="flex flex-col gap-2">
                         {!invitation.invitants ? <h2>No Invites</h2> :
                             <ul>
                                 {invitation.invitants.map((invitant) => (
@@ -348,14 +347,14 @@ export default function Tripform() {
                             </ul>
                         }
                         <label htmlFor="invitant">Invitant:</label>
-                        <input type="text" name="invitant" id="invitant" value={invitation.invitant} />
-                        <button onClick={handleAddInvitant}>Add</button>
+                        <input type="text" name="invitant" id="invitant" value={invitation.invitant} className="p-1 rounded text-delft_blue-100"/>
+                        <button onClick={handleAddInvitant} className="btn bg-cambridge_blue-200 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Add</button>
                     </div>
             </div>}
-            <div>
-                <button onClick={handlePageDown}>Previous</button>
-                <button onClick={handlePageUp}>Next</button>
-                {page === 3 && <button onClick={handleSubmit}>Submit</button>}
+            <div className='flex gap-3'>
+                <button onClick={handlePageDown} className="btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Previous</button>
+                <button onClick={handlePageUp} className="btn bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Next</button>
+                {page === 3 && <button onClick={handleSubmit} className="btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500">Submit</button>}
             </div>
         </form>
         </div>
