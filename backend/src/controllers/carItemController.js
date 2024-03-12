@@ -161,3 +161,17 @@ export const updateItem = asyncHandler(async (req,res,next) => {
         res.status(500).json({ errorCode: error.code, message: error.message })
     }
 })
+
+export const getItemById = asyncHandler(async (req,res,next) => {
+
+    try {
+        const item = await Item.findById(req.params.id)
+        if (!item) {
+            return res.status(404).json({ message: "No items!" })
+        }
+        res.json(item)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ message: "Kaput!" })
+    }
+})

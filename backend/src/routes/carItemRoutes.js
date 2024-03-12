@@ -18,6 +18,10 @@ router
     .delete(verifyToken, carItemController.deleteItem)
 
 router
+    .route("/items/id/:id")
+    .get(verifyToken, carItemController.getItemById)
+
+router
     .route("/items/edit/:item")
     .put(verifyToken, carItemController.updateItem)
 
