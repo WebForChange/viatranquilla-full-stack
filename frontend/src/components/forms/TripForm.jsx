@@ -294,7 +294,7 @@ export default function Tripform() {
                         {!trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
                             {trip.connections.map((connection, index) => (
-                            <li key={index}><div className='bg-white'>
+                            <li key={index}><div className=' bg-white text-delft_blue-100 flex gap-4 p-3'>
                                 <div id='from'>
                                 <p>City:</p><p>{connection.from.city}</p>
                                 <p>Address:</p><p>{connection.from.address}</p>
@@ -306,7 +306,7 @@ export default function Tripform() {
                                 <p>City:</p><p>{connection.to.city}</p>
                                 <p>Address:</p><p>{connection.to.address}</p>
                                 </div>
-                                <div>
+                                <div className='flex justify-center'>
                                     <button onClick={(e) => handleDelete(e, index)} >Delete</button>
                                 </div>
                                 </div></li>
