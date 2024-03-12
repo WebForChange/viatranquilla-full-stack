@@ -5,7 +5,7 @@ import * as carItemController from "../controllers/carItemController.js";
 const router = express.Router();
 
 router
-    .route("/verhicles/:username")
+    .route("/vehicles/:username")
     .get(verifyToken, carItemController.getVehicleByUsername)
 
 router
@@ -38,7 +38,7 @@ router
     .post(verifyToken, carItemController.createItem)
 
 router
-    .route("/vehicles")
+    .route("/items/vehicles")
     .post(verifyToken, carItemController.createCar)
 
 export default router;
