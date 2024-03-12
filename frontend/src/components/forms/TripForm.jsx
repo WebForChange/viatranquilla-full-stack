@@ -85,6 +85,7 @@ export default function Tripform() {
         const res = await axios.get(`http://localhost:3000/auth/check-username/${username}`);
         return res.data;
     }
+
     const handleChange = (e) => {
         if (e.target.name === "city") {
             setTrip({ ...trip, pickupAdress: { ...trip.pickupAdress, city: e.target.value } });
@@ -166,12 +167,24 @@ export default function Tripform() {
         updatedConnections.push(connection);
         setTrip({ ...trip, connections: updatedConnections });
     }
-    const handleSubmit = (e) => {
+
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        toast.success("You successfully created a Trip!");
-        console.log(trip);
-        navigate("/dashboard");
-    }
+        try {
+            const res = await axios.post("http://localhost:3000/trips/", trip, {
+                withCredentials: true
+            });
+            toast.success("You successfully created a Trip!");
+            console.log(trip);
+            navigate("/dashboard");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
     const handleDelete = (e, index) => {
         e.preventDefault();
         const updatedConnections = [...trip.connections];
