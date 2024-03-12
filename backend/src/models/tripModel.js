@@ -3,17 +3,18 @@ const Schema = mongoose.Schema;
 
 const tripSchema = new Schema(
   {
-    title: { type: String, required: true, default: "New Trip" },
+    title: { type: String, default: "New Trip" },
     creator: { type: String, required: true },
-    roundtrip: { type: Boolean, default: false },
+    roundtrip: { type: Boolean, default: true },
     startDate: { type: Date },
     endDate: { type: Date },
     state: { type: String, default: "active" },
-    participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    participants: { type: [{ type: String }], default: [] },
     description: { type: String, default: "" },
     invitation: { type: String, default: "" },
     pickupAdress: {
-      address: { type: String, default: "" },
+      city: { type: String, default: null },
+      address: { type: String, default: null },
       geolocation: {
         long: { type: Number },
         lat: { type: Number },

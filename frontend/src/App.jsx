@@ -43,6 +43,7 @@ export default function App() {
         <Route path="/user/edit/:id" element={<ProfileForm />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tripdetails" element={<TripDetails />} />
+        <Route path="/tripdetails/:_id" element={<TripDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/newtrip" element={<Tripform />} />
