@@ -59,7 +59,7 @@ export default function ItemForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3000/items/item", item, {
+            const res = await axios.post("http://localhost:3000/item", item, {
                 withCredentials: true
             });
         } catch (error) {
