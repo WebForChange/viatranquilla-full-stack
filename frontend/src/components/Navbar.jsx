@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/viatranquilla-logo.png";
+import icon from "../assets/icon.png";
 import React, { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthProvider";
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Search from "./shared/Search";
 
 function Navbar() {
@@ -14,13 +15,17 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const { data } = await axios.post("http://localhost:3000/auth/logout",{},{ withCredentials: true });
+      const { data } = await axios.post(
+        "http://localhost:3000/auth/logout",
+        {},
+        { withCredentials: true }
+      );
       console.log(data);
       setLoggedIn(false);
       navigate("/login");
-      toast.success('You are logged out!')
+      toast.success("You are logged out!");
     } catch (error) {
-      toast.error('Error logging out');
+      toast.error("Error logging out");
     }
   };
 
@@ -29,7 +34,16 @@ function Navbar() {
       <div className="navbar bg-delft_blue-300">
         <div className="flex-1">
           <a href="/" className="text-3xl text-cambridge_blue-600 font-bold">
-            <img src={logo} alt="via tranquilla logo" className="sm:w-96 w-3/4" />
+            <img
+              src={icon}
+              alt="via tranquilla logo"
+              className="sm:w-96 w-1/2 sm:hidden"
+            />
+            <img
+              src={logo}
+              alt="via tranquilla logo"
+              className="hidden sm:block sm:w-96"
+            />
           </a>
         </div>
         <div className="flex-none gap-2 ">
@@ -37,12 +51,22 @@ function Navbar() {
             <Search />
           </div>
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" >
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
               <div className="w-10 rounded-full">
-                <img alt="Useravatar and menu" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img
+                  alt="Useravatar and menu"
+                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                />
               </div>
             </div>
-            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate_gray-100 text-delft_blue-800 rounded-box w-52" >
+            <ul
+              tabIndex={0}
+              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate_gray-100 text-delft_blue-800 rounded-box w-52"
+            >
               {loggedIn ? (
                 <>
                   <li>
