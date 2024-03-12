@@ -11,14 +11,17 @@ router
 router
     .route("/vehicles/:id")
     .delete(verifyToken, carItemController.deleteVehicle)
+
+router
+    .route("/vehicles/:id")
     .put(verifyToken, carItemController.updateCar)
 
 router
-    .route("/items/:username")
+    .route("/item/:username")
     .get(verifyToken, carItemController.getItemsByUsername)
 
 router
-    .route("/items/item")
+    .route("/item")
     .post(verifyToken, carItemController.createItem)
 
 router
