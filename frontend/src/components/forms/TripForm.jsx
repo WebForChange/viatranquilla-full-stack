@@ -215,9 +215,10 @@ export default function Tripform() {
 
     return (
         <div className="text-eggshell-600 w-full h-screen p-4">
+            <h1 className="mx-8 text-center text-3xl lg:text-4xl font-bold mb-4 text-sunset-400">Create a Trip</h1>
         <form className="flex flex-col gap-4 justify-between items-center">
             {page === 1 && <div>
-                <h2>Basic Information</h2>
+                <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Basic Information</h2>
                 <div className="flex flex-col">
 {/*                 <label htmlFor="image">Image:</label>
                     <input type="file" name="image" id="image" value={trip.image.link} onChange={handleUpload} /> */}
@@ -236,7 +237,7 @@ export default function Tripform() {
 
             {page === 2 && <div>
                 <div className="flex flex-col">
-                    <h2>Where does your Trip Start?</h2>
+                    <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Where does your Trip Start?</h2>
                     <label htmlFor="city">Pickup City:</label>
                     <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="address">Pickup Address:</label>
@@ -247,7 +248,7 @@ export default function Tripform() {
                     <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} className="p-1 rounded text-delft_blue-100"/>
                 </div>
                 <div>
-                    {!multiStops ? <h2>Whats your Destination?</h2> : <h2>Whats your first Connection during the Trip?</h2>}
+                    {!multiStops ? <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Whats your Destination?</h2> : <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Whats your first Connection during the Trip?</h2>}
                     {multiStops && <div>
                         {trip.connections.length === 0 ?
                         <h2>Add Details</h2> : <ul>
@@ -341,7 +342,7 @@ export default function Tripform() {
             </div>}
 
             {page === 3 && <div className="flex flex-col">
-                    <h2>Invitation</h2>
+                    <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Invitation</h2>
                     <label htmlFor="title">Title:</label>
                     <input type="text" name="title" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
                     <label htmlFor="message">Message:</label>
