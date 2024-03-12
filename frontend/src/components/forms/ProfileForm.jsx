@@ -29,6 +29,11 @@ export default function ProfileForm() {
     state: "",
     profilePicture: null,
     bio: "",
+    planning: "",
+    earlyBird: "",
+    mtBeachCity: "",
+    cookEatOut: "",
+    blabla: "",
   });
 
   useEffect(() => {
@@ -83,6 +88,11 @@ export default function ProfileForm() {
       formData.append("state", userData.state);
       formData.append("profilePicture", file);
       formData.append("bio", userData.bio);
+      formData.append("planning", userData.planning);
+      formData.append("earlyBird", userData.earlyBird);
+      formData.append("mtBeachCity", userData.mtBeachCity);
+      formData.append("cookEatOut", userData.cookEatOut);
+      formData.append("blabla", userData.blabla);
 
       const response = await axios.put(
         `http://localhost:3000/users/edit/${username}`,
@@ -224,6 +234,61 @@ export default function ProfileForm() {
             rows="10"
             cols="30"
             value={userData.bio}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="planning">Planning or not so much planning?</label>
+          <textarea
+            id="planning"
+            className="rounded p-2 text-delft_blue-100"
+            rows="10"
+            cols="30"
+            value={userData.planning}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="earlybird">Are you a early bird or do you like to sleep in?</label>
+          <textarea
+            id="earlyBird"
+            className="rounded p-2 text-delft_blue-100"
+            rows="10"
+            cols="30"
+            value={userData.earlyBird}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="mtbeachcity">Mountain, Beach, or City?</label>
+          <textarea
+            id="mtBeachCity"
+            className="rounded p-2 text-delft_blue-100"
+            rows="10"
+            cols="30"
+            value={userData.mtBeachCity}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="cookeatout">Cook or Eat Out?</label>
+          <textarea
+            id="cookEatOut"
+            className="rounded p-2 text-delft_blue-100"
+            rows="10"
+            cols="30"
+            value={userData.cookEatOut}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="blabla">Tell us about your Communication</label>
+          <textarea
+            id="blabla"
+            className="rounded p-2 text-delft_blue-100"
+            rows="10"
+            cols="30"
+            value={userData.blabla}
             onChange={handleChange}
           ></textarea>
         </div>
