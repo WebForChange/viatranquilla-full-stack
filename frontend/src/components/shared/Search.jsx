@@ -96,11 +96,11 @@ export default function Search() {
         >
           <ul
             style={{
-              backgroundColor: "black",
               color: "white",
               padding: "0.5rem",
               borderRadius: "0.5rem",
             }}
+            className="bg-delft_blue-300 bg-opacity-90"
           >
             {filteredUsers.map((user, index) => (
               <li key={user.id}>
