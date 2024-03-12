@@ -14,15 +14,14 @@ function Header({trip}) {
         <div className="justify-between items-start text-neutral-content flex flex-col p-4 lg:p-8">
           <div className="max-w-md text-eggshell-800 flex flex-col">
             <h1 className="mb-5 text-3xl lg:text-5xl font-bold">
-              Trip to Paris
+              {trip.title}
             </h1>
             <p className="mb-5 font-semibold">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi.
+              {trip.description}
             </p>
             <div>
-              <p>Start: 23.05.2024</p>
-              <p>End: 30.05.2024</p>
+              <p>{trip.startDate}</p>
+              <p>{trip.endDate}</p>
             </div>
           </div>
         </div>
