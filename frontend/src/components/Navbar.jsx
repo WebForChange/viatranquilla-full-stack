@@ -70,10 +70,10 @@ function Navbar() {
               {loggedIn ? (
                 <>
                   <li>
-                    <Link to={"/user/" + username} className="justify-between">
-                      {" "}
-                      Profile{" "}
-                    </Link>
+                    <Link to={"/dashboard/"} className="justify-between"> Dashboard </Link>
+                  </li>
+                  <li>
+                    <Link to={"/user/" + username} className="justify-between"> Profile </Link>
                   </li>
                   <li>
                     <button onClick={handleLogout}>Logout</button>
