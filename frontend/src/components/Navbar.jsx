@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/viatranquilla-logo.png";
 import icon from "../assets/icon.png";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthProvider";
 import { DataContext } from "../contexts/DataContextProvider";
@@ -12,7 +12,7 @@ import avatar from "../assets/avatar.png";
 
 function Navbar() {
   const { user, loggedIn, setLoggedIn } = useContext(AuthContext);
-  const { profileData } = useContext(DataContext);
+  const { profileData, getProfileDataByID } = useContext(DataContext);
   const username = user.username;
   const navigate = useNavigate();
 
@@ -27,12 +27,19 @@ function Navbar() {
       setLoggedIn(false);
       navigate("/login");
       toast.success("You are logged out!", {
-        position: "top-center"
+        position: "top-center",
       });
     } catch (error) {
       toast.error("Error logging out");
     }
   };
+
+  useEffect(() => {
+    if (!profileData.profilePicture && loggedIn) {
+      console.log("Navbar useEffect: Fetching profile data");
+      getProfileDataByID(user.username);
+    }
+  }, [profileData, loggedIn]);
 
   return (
     <div>
@@ -64,7 +71,11 @@ function Navbar() {
               <div className="w-10 rounded-full">
                 <img
                   alt="Useravatar and menu"
-                  src={loggedIn ? profileData.profilePicture : avatar}
+                  src={
+                    loggedIn && profileData.profilePicture
+                      ? profileData.profilePicture
+                      : avatar
+                  }
                   //   className="object-scale-down w-2 h-2" TODO: Fix size of avatar to not be cropped
                 />
               </div>
