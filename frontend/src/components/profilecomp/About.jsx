@@ -48,10 +48,10 @@ function About() {
         <div className="flex flex-row flex-wrap justify-start">
           <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
             <h3 className="text-xl lg:text-2xl font-bold mb-4 text-sunset-400">
-              Blabla Brummbrumm
+              Communication style
             </h3>
             <p className="text-justify text-xl font-semibold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              {profileData.blabla}
             </p>
           </div>
           <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
@@ -59,7 +59,7 @@ function About() {
               Spontan oder geplant?
             </h3>
             <p className="text-justify text-xl font-semibold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              {profileData.planning}
             </p>
           </div>
           <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
@@ -67,7 +67,7 @@ function About() {
               Frühaufsteher oder Nachteule?
             </h3>
             <p className="text-justify text-xl font-semibold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              {profileData.earlyBird}
             </p>
           </div>
           <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
@@ -75,7 +75,7 @@ function About() {
               Strand, Berge oder Stadt?
             </h3>
             <p className="text-justify text-xl font-semibold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              {profileData.mtBeachCity}
             </p>
           </div>
           <div className="flex flex-col mt-6 mr-7 sm:w-3/7">
@@ -83,7 +83,7 @@ function About() {
               Kochen oder Essen gehen?
             </h3>
             <p className="text-justify text-xl font-semibold">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              {profileData.cookEatOut}
             </p>
           </div>
         </div>

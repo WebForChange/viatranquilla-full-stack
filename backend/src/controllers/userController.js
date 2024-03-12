@@ -33,6 +33,11 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
       throw new ErrorResponse(`Profile ${username} does not exist!`, 404);
 
     profile.bio = req.body.bio;
+    profile.planning = req.body.planning;
+    profile.earlyBird = req.body.earlyBird;
+    profile.mtBeachCity = req.body.mtBeachCity;
+    profile.cookEatOut = req.body.cookEatOut;
+    profile.blabla = req.body.blabla;
     profile.firstName = req.body.firstName;
     profile.lastName = req.body.lastName;
     if (req.body.birthDate && !isNaN(new Date(req.body.birthDate).valueOf())) {
