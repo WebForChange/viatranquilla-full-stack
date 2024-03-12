@@ -118,10 +118,11 @@ export const createItem = asyncHandler(async (req,res,next) => {
 })
 
 export const deleteItem = asyncHandler(async (req,res,next) => {
-    const {id} = req.params.id;
-
+    const id = req.params.id;
+    console.log(id);
     try {
         const item = await Item.findById(id)
+        console.log(id);
 
         if (!item) {
             return res.status(404).json({ message: "Item not found!" })
