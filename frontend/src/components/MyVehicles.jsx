@@ -40,18 +40,18 @@ export default function MyVehicles( {username} ) {
             {vehicles.length === 0 ? <h2>No Vehicles</h2> :
                 vehicles.map((vehicle) => {
                 return (
-                <div key={vehicle._id}>
-                <div>
-                <img src={vehicle.image} alt="vehicle" />
+                <div key={vehicle._id} >
+                <div className="flex flex-col md:flex-row md:flex-wrap gap-8 my-12 justify-center card w-80 md:w-1/36 glass text-burnt_sienna-600 text-2xl font-bold">
+                <img src={vehicle.image} alt="Your Vehicle image" />
                 </div>
-                <div>
+                <div className="flex p-3 ml-2 card-body text-sunset-700 card w-80 md:w-1/36 glass ">
                     <p>{vehicle.make}</p>
                     <p>{vehicle.model}</p>
                     <p>{vehicle.year}</p>
                     <p>{vehicle.color}</p>
                     <p>{vehicle.seats}</p>
-                    <button onClick={() => deleteVehicle(vehicle.id)}>Delete</button>
-                    <button onClick={() => editVehicle(vehicle)}>Edit</button>
+                    <button className="text-rose_taupe-700 gap-5" onClick={() => deleteVehicle(vehicle.id)}>Delete</button>
+                    <button className="text-rose_taupe-700 gap-5" onClick={() => editVehicle(vehicle)}>Edit</button>
                 </div>
             </div>
         );
