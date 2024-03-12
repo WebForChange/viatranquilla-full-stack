@@ -1,25 +1,16 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default function ItemCard({ item, onDelete }) {
-    async function deleteItem() {
-        try {
-            const res = await axios.delete(`http://localhost:3000/items/${item._id}`, {
-                withCredentials: true,
-            });
-            console.log("Item deleted successfully:", res.data);
-        } catch (error) {
-            console.log("Error deleting item:", error);
-        }
-    }
-    
-    function handleDelete() {
-        deleteItem();
-    }
+export default function ItemCard({ item, deleteItem }) {
 
-    function handleEdit(itemId) {
+    
+    const handleDelete = () => {
+        deleteItem(item._id);
+    };
+
+    const handleEdit = (itemId) => {
         return `/items/edit/${itemId}`;
-    }
+    };
 
     return (
         <div className="flex card w-80 md:w-1/36 glass">
