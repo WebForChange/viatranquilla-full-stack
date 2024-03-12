@@ -10,7 +10,7 @@ export default function MyVehicles( {username} ) {
     async function getVehicles() {
         try {
             if (username) {
-            const res = await axios.get(`http://localhost:3000/vehicles/${username}`, username, {
+            const res = await axios.get(`http://localhost:3000/vehicles/${username}`, {
                 withCredentials: true
             });
             setVehicles(res.data);
@@ -22,6 +22,7 @@ export default function MyVehicles( {username} ) {
     useEffect(() => {
         getVehicles();
     }, [username]);
+    
     function deleteVehicle(id) {
         axios.delete(`http://localhost:3000/vehicles/${id}`)
             .then(() => {
@@ -39,7 +40,7 @@ export default function MyVehicles( {username} ) {
             {vehicles.length === 0 ? <h2>No Vehicles</h2> :
                 vehicles.map((vehicle) => {
                 return (
-                <div key={vehicle.id}>
+                <div key={vehicle._id}>
                 <div>
                 <img src={vehicle.image} alt="vehicle" />
                 </div>
