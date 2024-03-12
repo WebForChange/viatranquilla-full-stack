@@ -24,13 +24,13 @@ export default function Friendlist({ username }) {
 
   return (
     <div className="m-8">
-      <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+      <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-sunset-400">
         Your Friends
       </h3>
 
-      <div className="text-white text-xl font-bold">
+      <div className="text-white text-xl lg:text-2xl font-bold">
         {friends.length === 0 ? (
-          <p>Du hast noch keine Freunde.</p>
+          <p>Your new friends will appear here.</p>
         ) : (
           <ul>
             {friends.map((friend, index) => {

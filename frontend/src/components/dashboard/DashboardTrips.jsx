@@ -12,16 +12,17 @@ export default function DashboardTrips() {
   }, [user]);
 
   return (
-    <div className="p-8">
+    <div className="px-8">
+      <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-sunset-400">
+        Your Trips
+      </h3>
+
       <Link to="/newtrip">
-        <button className="mb-8 w-340 h-12 px-5 rounded-lg bg-cambridge_blue-200 border-none hover:bg-cambridge_blue-400 text-eggshell-500">
+        <button className="mt-4 w-340  px-7 py-3 rounded-lg bg-delft_blue-300 border-none hover:bg-cambridge_blue-400 text-eggshell-500 font-semibold text-xl">
           Create new Trip
         </button>
       </Link>
 
-      <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
-        Your Trips
-      </h3>
       <div className="flex flex-col md:flex-row md:flex-wrap gap-8 my-12 justify-start">
         {!myTripData ? (
           <p className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">

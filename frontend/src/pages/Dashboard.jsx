@@ -1,7 +1,7 @@
-import DashboardTrips from "../components/trips/DashboardTrips";
+import DashboardTrips from "../components/dashboard/DashboardTrips";
 import ItemList from "../components/items/ItemList";
 import MyVehicles from "../components/MyVehicles";
-import Friendlist from "../components/friends/Friendlist";
+import Friendlist from "../components/dashboard/Friendlist";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 
@@ -11,7 +11,7 @@ function Dashboard() {
   return (
     <div className="my-8">
       <div>
-        <h1 className="mx-8 text-3xl lg:text-5xl font-bold mb-4 text-sunset-400">
+        <h1 className="mx-8 text-center text-3xl lg:text-4xl font-bold mb-4 text-sunset-400">
           Welcome {user.username}!
         </h1>
       </div>
