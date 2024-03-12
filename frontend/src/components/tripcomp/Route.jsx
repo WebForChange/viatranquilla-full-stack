@@ -1,7 +1,7 @@
 import React from "react";
 import * as Unicons from "@iconscout/react-unicons";
 
-function Route() {
+function Route({trip}) {
   return (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-4 text-sunset-400">Route</h2>
@@ -10,11 +10,11 @@ function Route() {
           <div className="collapse collapse-arrow bg-slate_gray-100">
             <input type="radio" name="my-accordion-2" defaultChecked />
             <div className="collapse-title text-xl font-medium text-eggshell-600 flex items-center space-x-4 ">
-              <p> Start in Berlin </p>
+              <p>{trip.pickupAddress}</p>
               <Unicons.UilCarSideview color={"#55BBA5"} size={28} />
             </div>
             <div className="collapse-content text-eggshell-600">
-              <p>23.05. - 08:00</p>
+              <p>{trip.startDate}</p>
             </div>
           </div>
           <div className="collapse collapse-arrow bg-slate_gray-100">
