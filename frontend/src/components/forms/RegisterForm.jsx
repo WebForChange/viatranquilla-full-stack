@@ -65,7 +65,9 @@ export default function RegisterForm() {
                         password: '',
                         password2: ''
                     });
-                    showSuccessAlert()
+                    toast.success("You have successfully registered!", {
+                        position: "top-center"
+                      });
                     setTimeout(() => {
                         navigate("/login");
                     }, 2500)

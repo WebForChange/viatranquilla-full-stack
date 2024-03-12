@@ -174,7 +174,9 @@ export default function Tripform() {
             const res = await axios.post("http://localhost:3000/trips/", trip, {
                 withCredentials: true
             });
-            toast.success("You successfully created a Trip!");
+            toast.success("You successfully created a Trip!", {
+                position: "top-center"
+              });
             console.log(trip);
             navigate("/dashboard");
         } catch (error) {

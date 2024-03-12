@@ -23,7 +23,9 @@ function Navbar() {
       console.log(data);
       setLoggedIn(false);
       navigate("/login");
-      toast.success("You are logged out!");
+      toast.success("You are logged out!", {
+        position: "top-center"
+      });
     } catch (error) {
       toast.error("Error logging out");
     }

@@ -100,7 +100,9 @@ export default function ProfileForm() {
       console.log(response);
 
       navigate(`/user/${username}`);
-      toast.success("You successfully edit your Profile!");
+      toast.success("You successfully edit your Profile!", {
+        position: "top-center"
+      });
     } catch (error) {
       console.log(error.message);
     }
