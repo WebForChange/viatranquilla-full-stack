@@ -5,20 +5,28 @@ import * as carItemController from "../controllers/carItemController.js";
 const router = express.Router();
 
 router
-    .route("/vehicles/:username")
+    .route("/:username")
     .get(verifyToken, carItemController.getVehicleByUsername)
 
 router
-    .route("/vehicles/:id")
+    .route("/:id")
     .delete(verifyToken, carItemController.deleteVehicle)
+    .delete(verifyToken, carItemController.deleteItem)
+
+router
+    .route("/edit/:item")
+    .put(verifyToken, carItemController.updateItem)
+
+router
+    .route("/vehicles/:id")
     .put(verifyToken, carItemController.updateCar)
 
 router
-    .route("/items/:username")
+    .route("/:username")
     .get(verifyToken, carItemController.getItemsByUsername)
 
 router
-    .route("/items/item")
+    .route("/item")
     .post(verifyToken, carItemController.createItem)
 
 router
