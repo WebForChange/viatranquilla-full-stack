@@ -4,12 +4,15 @@ import icon from "../assets/icon.png";
 import React, { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthProvider";
+import { DataContext } from "../contexts/DataContextProvider";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import Search from "./shared/Search";
+import avatar from "../assets/avatar.png";
 
 function Navbar() {
   const { user, loggedIn, setLoggedIn } = useContext(AuthContext);
+  const { profileData } = useContext(DataContext);
   const username = user.username;
   const navigate = useNavigate();
 
@@ -61,7 +64,8 @@ function Navbar() {
               <div className="w-10 rounded-full">
                 <img
                   alt="Useravatar and menu"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  src={loggedIn ? profileData.profilePicture : avatar}
+                  //   className="object-scale-down w-2 h-2" TODO: Fix size of avatar to not be cropped
                 />
               </div>
             </div>
@@ -72,10 +76,16 @@ function Navbar() {
               {loggedIn ? (
                 <>
                   <li>
-                    <Link to={"/dashboard/"} className="justify-between"> Dashboard </Link>
+                    <Link to={"/dashboard/"} className="justify-between">
+                      {" "}
+                      Dashboard{" "}
+                    </Link>
                   </li>
                   <li>
-                    <Link to={"/user/" + username} className="justify-between"> Profile </Link>
+                    <Link to={"/user/" + username} className="justify-between">
+                      {" "}
+                      Profile{" "}
+                    </Link>
                   </li>
                   <li>
                     <button onClick={handleLogout}>Logout</button>
