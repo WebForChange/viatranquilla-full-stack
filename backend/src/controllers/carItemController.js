@@ -9,15 +9,14 @@ export const createCar = asyncHandler(async (req, res, next) => {
     try {
         const { make, model, year, color, seats, image, creator } = req.body;
         const username = req.params.username;
-        let Car = null;
 
         const newCar = await Car.create({
-            make: "",
-            model: "",
-            year: "",
-            color: "",
-            seats: "",
-            image: "",
+            make,
+            model,
+            year,
+            color,
+            seats,
+            image,
             creator: username,
           });
           res.status(201).json({ car: newCar, id: newCar._id, username });
