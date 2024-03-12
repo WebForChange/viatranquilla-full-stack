@@ -22,17 +22,22 @@ export default function Friendlist({ username }) {
   }, [username]);
 
   return (
-    <div>
-      <h2>Deine Freunde</h2>
-      {friends.length === 0 ? (
-        <p>Du hast noch keine Freunde.</p>
-      ) : (
-        <ul>
-          {friends.map((friend, index) => {
-            return <li key={index}>{friend}</li>;
-          })}
-        </ul>
-      )}
+    <div className="m-8">
+      <h3 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400">
+        Your Friends
+      </h3>
+
+      <p className="text-white text-xl font-bold">
+        {friends.length === 0 ? (
+          <p>Du hast noch keine Freunde.</p>
+        ) : (
+          <ul>
+            {friends.map((friend, index) => {
+              return <li key={index}>{friend}</li>;
+            })}
+          </ul>
+        )}
+      </p>
     </div>
   );
 }
