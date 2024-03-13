@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function ItemForm() {
     const { _id } = useParams();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     async function getItemById() {
         try {
             const res = await axios.get(`http://localhost:3000/items/id/${_id}`);
@@ -55,6 +57,10 @@ export default function ItemForm() {
     };
     const handleUpdate = async (e) => {
         setItem({ ...item, image: url  });
+        navigate("/dashboard");
+        toast.success("You have successfully updated your Item!", {
+            position: "top-center"
+          });
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -62,6 +68,10 @@ export default function ItemForm() {
             const res = await axios.post("http://localhost:3000/item", item, {
                 withCredentials: true
             });
+            navigate("/dashboard");
+            toast.success("You have successfully created your Item!", {
+                position: "top-center"
+              });
         } catch (error) {
             console.log(error);
         }
