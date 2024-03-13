@@ -2,6 +2,7 @@ import DashboardTrips from "../components/dashboard/DashboardTrips";
 import ItemList from "../components/items/ItemList";
 import MyVehicles from "../components/MyVehicles";
 import Friendlist from "../components/dashboard/Friendlist";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 
