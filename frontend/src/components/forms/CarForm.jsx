@@ -1,12 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import axios from "axios";
 
 export default function CarForm() {
     const { user } = useContext(AuthContext);
     const { data } = useParams();
+    const navigate = useNavigate();
     const [edit, setEdit] = useState(false);
     const seats = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];
     const [car, setCar] = useState({
@@ -40,6 +42,10 @@ export default function CarForm() {
                 const res = await axios.put(`http://localhost:3000/items/vehicles/${data.id}`, car, {
                     withCredentials: true
                 });
+                navigate("/dashboard");
+            toast.success("You have successfully created your Vehicle!", {
+            position: "top-center"
+          });
             }
             catch (error) {
                 console.log(error);

@@ -19,7 +19,7 @@ function About() {
       : 0);
 
   return (
-    <div className="mt-8 flex flex-col lg:flex-row lg:justify-start items-center text-white">
+    <div className="mt-8 flex flex-col lg:flex-row lg:justify-start items-center text-white lg:m-10">
       <div className="flex flex-col w-full">
         <div className="flex flex-col lg:flex-row justify-start lg:space-x-14">
           <div>

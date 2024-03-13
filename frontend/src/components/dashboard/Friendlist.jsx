@@ -12,7 +12,7 @@ export default function Friendlist({ username }) {
         `http://localhost:3000/users/${username}/friends`
       );
       // console.log("friendlist response",response.data);
-      setFriends(response.data.map(({ username, profilePicture }) => username));
+      setFriends(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -32,9 +32,25 @@ export default function Friendlist({ username }) {
         {friends.length === 0 ? (
           <p>Your new friends will appear here.</p>
         ) : (
-          <ul>
+          <ul className="flex flex-row justify-start">
             {friends.map((friend, index) => {
-              return <li key={index}>{friend}</li>;
+              // <li key={index}>{friend}</li>;
+              if (!friends) return;
+              return (
+                <li key={index} className="flex flex-col items-center ">
+                  <img
+                    src={
+                      friend.profilePicture ||
+                      "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    }
+                    alt="avatar"
+                    className="w-20 h-20 rounded-full mb-2"
+                  />
+                  <span className="text-white font-semibold text-xl">
+                    {friend.username}
+                  </span>
+                </li>
+              );
             })}
           </ul>
         )}

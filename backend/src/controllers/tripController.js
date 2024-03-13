@@ -118,13 +118,38 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
 
   const trip = await Trip.findById(id);
 
-  if (!trip) throw new ErrorResponse(`Trip ${id} does not exist!`, 404);
+  if (!trip) {
+    console.log("TripController: Trip does not exist!");
+    return res.status(404).json({ message: `Trip ${id} does not exist!` });
+  }
 
   // get profile pictures of participants
-  trip.participants = trip.participants.map((username) => {
-    const profile = Profile.findOne({ username: username });
-    return { username: username, profilePicture: profile.profilePicture };
-  });
+  let participantsWithPictures = [];
+
+  for (let username of trip.participants) {
+    try {
+      const profile = await Profile.findOne({ username: username });
+
+      if (!profile) {
+        console.log(
+          "TripController: Profile not found for username: ",
+          username
+        );
+        // Todo: decide how to handle this case. Continuing skips the current iteration.
+        continue;
+      }
+
+      //   console.log("TripController: profile picture: ", profile.profilePicture);
+      participantsWithPictures.push({
+        username: username,
+        profilePicture: profile.profilePicture,
+      });
+    } catch (error) {
+      console.error("Error fetching profile for username: ", username, error);
+      // Todo: Decide how to handle this error. For example continue to the next iteration.
+      continue;
+    }
+  }
 
   try {
     const connections = await Connection.find({
@@ -136,7 +161,9 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
     return res.status(500).json({ message: error.message });
   }
 
-  res.status(200).json(trip);
+  res
+    .status(200)
+    .json({ ...trip.toObject(), participants: participantsWithPictures });
 });
 
 // Currently returns user's created and joined trips regardless of date
