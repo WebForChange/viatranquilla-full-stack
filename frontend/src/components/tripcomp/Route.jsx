@@ -8,6 +8,9 @@ function Route({trip}) {
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
   return (
+    <>
+    {!trip ? <p>Loading...</p> 
+    :
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-4 text-sunset-400">Route</h2>
       <div className="flex flex-col justify-center items-center pb-8">
@@ -15,11 +18,17 @@ function Route({trip}) {
           <div className="collapse collapse-arrow bg-slate_gray-100">
             <input type="radio" name="my-accordion-2" defaultChecked />
             <div className="collapse-title text-xl font-medium text-eggshell-600 flex items-center space-x-4 ">
+              {!trip.pickupAdress ? null
+              :
               <p>{trip.pickupAdress.city}</p>
+              }
               <Unicons.UilCarSideview color={"#55BBA5"} size={28} />
             </div>
             <div className="collapse-content text-eggshell-600">
-              <p>{trip.pickupAdress.address}</p>
+              {!trip.pickupAdress ? null
+              : 
+              <p>{trip.pickupAdress.address}</p> 
+              }
               <p>{formatDate(trip.startDate)}</p>
             </div>
           </div>
@@ -51,6 +60,8 @@ function Route({trip}) {
         </div>
       </div>
     </div>
+  }
+  </>
   );
 }
 
