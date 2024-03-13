@@ -17,7 +17,7 @@ function Travellers({ trip }) {
           </li>
         ))}
       </ul>
-      <div className="space-x-4">
+      {/* <div className="space-x-4">
         <div className="avatar">
           <div className="w-16 lg:w-24 rounded-full">
             <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -41,7 +41,7 @@ function Travellers({ trip }) {
             <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
