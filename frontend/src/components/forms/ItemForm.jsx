@@ -10,7 +10,9 @@ export default function ItemForm() {
     const navigate = useNavigate();
     async function getItemById() {
         try {
-            const res = await axios.get(`http://localhost:3000/items/id/${_id}`);
+            const res = await axios.get(`http://localhost:3000/items/id/${_id}`,
+                { withCredentials: true }
+                );
             setItem(res.data);
         } catch (error) {
             console.log(error);
@@ -56,7 +58,14 @@ export default function ItemForm() {
         setItem({ ...item, [e.target.name]: e.target.value });
     };
     const handleUpdate = async (e) => {
-        setItem({ ...item, image: url  });
+        e.preventDefault();
+        try {
+            const res = await axios.put(`http://localhost:3000/item/${_id}`, item, {
+                withCredentials: true
+            });
+        } catch (error) {
+            console.log(error);
+        }
         navigate("/dashboard");
         toast.success("You have successfully updated your Item!", {
             position: "top-center"
