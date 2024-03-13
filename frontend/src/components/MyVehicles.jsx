@@ -36,7 +36,7 @@ export default function MyVehicles( {username} ) {
         navigate(`/edit-vehicle/${vehicle.id}`, { state: { vehicle } });
     }
     return (
-        <div>
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-8 my-12 justify-center">
             {vehicles.length === 0 ? <h2>No Vehicles</h2> :
                 vehicles.map((vehicle) => {
                 return (
@@ -50,8 +50,8 @@ export default function MyVehicles( {username} ) {
                     <p>{vehicle.year}</p>
                     <p>{vehicle.color}</p>
                     <p>{vehicle.seats}</p>
-                    <button className="text-rose_taupe-700 gap-5" onClick={() => deleteVehicle(vehicle.id)}>Delete</button>
-                    <button className="text-rose_taupe-700 gap-5" onClick={() => editVehicle(vehicle)}>Edit</button>
+                    <button className="text-cambridge_blue-600 gap-5" onClick={() => deleteVehicle(vehicle.id)}>Delete</button>
+                    <button className="text-cambridge_blue-600 gap-5" onClick={() => editVehicle(vehicle)}>Edit</button>
                 </div>
             </div>
         );
