@@ -36,7 +36,7 @@ function ProfileHeader() {
 
   return (
     <div>
-      <div className="flex flex-col-reverse lg:flex-row-reverse justify-end items-center text-white">
+      <div className="flex flex-col-reverse lg:flex-row-reverse justify-end items-center text-white lg:m-10">
         <div className="flex flex-col items-center mx-8">
           <h1 className="text-5xl lg:text-8xl font-bold mb-4 bg-gradient-to-br from-cambridge_blue-400 to-delft_blue-700 bg-clip-text text-transparent uppercase">
             {profileData.username}

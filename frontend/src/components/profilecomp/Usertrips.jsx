@@ -8,8 +8,8 @@ function Usertrips({ tripDataByUser }) {
   }, [tripDataByUser]);
 
   return (
-    <div>
-      <h2 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400 mt-10">
+    <div className=" lg:m-10">
+      <h2 className="text-2xl lg:text-4xl font-bold mb-4 text-sunset-400 mt-4 lg:mt-0">
         My Trips
       </h2>
       {tripDataByUser ? (
