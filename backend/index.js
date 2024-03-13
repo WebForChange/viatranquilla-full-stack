@@ -15,10 +15,10 @@ import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 import pusherInstance from "./src/middlewares/pusher.js";
 import { createServer } from "http";
-import carItemRoutes from "./src/routes/carItemRoutes.js"
+import carItemRoutes from "./src/routes/carItemRoutes.js";
 
 const app = express();
-const httpServer = createServer(app);
+// const httpServer = createServer(app);
 
 const PORT = process.env.PORT || 3000;
 
@@ -43,6 +43,6 @@ app.use("/", carItemRoutes);
 
 app.use(errorHandler);
 
-httpServer.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
