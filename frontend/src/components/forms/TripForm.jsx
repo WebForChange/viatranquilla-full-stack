@@ -223,15 +223,15 @@ export default function Tripform() {
 {/*                 <label htmlFor="image">Image:</label>
                     <input type="file" name="image" id="image" value={trip.image.link} onChange={handleUpload} /> */}
                     <label htmlFor="title">Title:</label>
-                    <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="text" name="title" id="title" value={trip.title} onChange={handleChange} className="p-1 rounded text-eggshell-600"/>
                     <label htmlFor="description">Description:</label>
-                    <textarea name="description" id="description" value={trip.description} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
+                    <textarea name="description" id="description" value={trip.description} onChange={handleChange} className="p-1 rounded text-eggshell-600"/>
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="startDate">Start Date:</label>
-                    <input type="date" name="startDate" id="startDate" value={trip.startDate} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="date" name="startDate" id="startDate" value={trip.startDate} onChange={handleChange} className="p-1 rounded text-eggshell-600"/>
                     <label htmlFor="endDate">End Date:</label>
-                    <input type="date" name="endDate" id="endDate" value={trip.endDate} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="date" name="endDate" id="endDate" value={trip.endDate} onChange={handleChange} className="p-1 rounded text-eggshell-600"/>
                 </div>
             </div>}
 
@@ -239,13 +239,13 @@ export default function Tripform() {
                 <div className="flex flex-col">
                     <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Where does your Trip Start?</h2>
                     <label htmlFor="city">Pickup City:</label>
-                    <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="text" name="city" id="city" value={trip.pickupAdress.city} onChange={handleChange} className="p-1 rounded text-eggshell-600"/>
                     <label htmlFor="address">Pickup Address:</label>
-                    <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="text" name="address" id="address" value={trip.pickupAdress.address} onChange={handleChange} className="p-1 rounded text-eggshell-600"/>
                 </div>
                 <div>
                     <label htmlFor="return">Multiple Stops:</label>
-                    <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="checkbox" name="multiStops" id="multiStops" checked={multiStops} onChange={handleMultiStops} className="p-1 rounded text-eggshell-600"/>
                 </div>
                 <div>
                     {!multiStops ? <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Whats your Destination?</h2> : <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Whats your first Connection during the Trip?</h2>}
@@ -274,11 +274,11 @@ export default function Tripform() {
                             <div className='mt-3 flex flex-col'>
                                 <h2>From</h2>
                                 <label htmlFor="fromCity">City:</label>
-                                <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="text" name="fromCity" id="fromCity" value={connection.from.city} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="fromAddress">Address:</label>
-                                <input type="text" name="fromAddress" id="fromAddress" value={connection.from.address} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="text" name="fromAddress" id="fromAddress" value={connection.from.address} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="startDate">Start Date:</label>
-                                <input type="date" name="startDate" id="startDate" value={connection.startDate} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="date" name="startDate" id="startDate" value={connection.startDate} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="mode">Mode:</label>
                                 <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
                                     {modes.map(mode => (
@@ -289,11 +289,11 @@ export default function Tripform() {
                             <div className='mt-3 flex flex-col'>
                                 <h2>To</h2>
                                 <label htmlFor="toCity">City:</label>
-                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="toAddress">Address:</label>
-                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="endDate">End Date:</label>
-                                <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="date" name="endDate" id="endDate" value={connection.endDate} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                             </div>
                         </div>
                         <button onClick={saveConnection} className="btn mt-3 bg-eggshell-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Save Connection</button>
@@ -324,9 +324,9 @@ export default function Tripform() {
                         <div className="flex flex-col gap-1">
                         <h2>To</h2>
                                 <label htmlFor="toCity">City:</label>
-                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="text" name="toCity" id="toCity" value={connection.to.city} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="toAddress">Address:</label>
-                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} className="p-1 rounded text-delft_blue-100"/>
+                                <input type="text" name="toAddress" id="toAddress" value={connection.to.address} onChange={handleConnection} className="p-1 rounded text-eggshell-600"/>
                                 <label htmlFor="mode">Mode:</label>
                                 <select name="mode" id="mode" value={connection.mode} onChange={handleConnection}>
                                     {modes.map(mode => (
@@ -344,19 +344,19 @@ export default function Tripform() {
             {page === 3 && <div className="flex flex-col">
                     <h2 className="mx-8 text-center text-1xl lg:text-2xl font-bold mb-4 text-sunset-400">Invitation</h2>
                     <label htmlFor="title">Title:</label>
-                    <input type="text" name="title" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
+                    <input type="text" name="title" id="invitationTitle" value={invitation.title} onChange={handleInvitation} className="p-1 rounded text-eggshell-600"/>
                     <label htmlFor="message">Message:</label>
-                    <input type="text" name="message" id="invitationMessage" value={invitation.message} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
-                    <div className="flex flex-col text-delft_blue-100 gap-2">
+                    <input type="text" name="message" id="invitationMessage" value={invitation.message} onChange={handleInvitation} className="p-1 rounded text-eggshell-600"/>
+                    <div className="flex flex-col text-eggshell-600 gap-2">
                         {invitation.invitants &&
                             <ul>
                                 {invitation.invitants.map((invitant) => (
-                                    <li>{invitant}</li>
+                                    <li key={invitation._id}>{invitant}</li>
                                 ))}
                             </ul>
                         }
                         <label htmlFor="invitant">Invitant:</label>
-                        <input type="text" name="invitant" id="invitant" value={invitation.invitant} onChange={handleInvitation} className="p-1 rounded text-delft_blue-100"/>
+                        <input type="text" name="invitant" id="invitant" value={invitation.invitant} onChange={handleInvitation} className="p-1 rounded text-eggshell-600"/>
                         <button onClick={handleAddInvitant} className="btn bg-cambridge_blue-500 text-delft_blue-100 border-none hover:bg-cambridge_blue-500">Add</button>
                     </div>
             </div>}
