@@ -47,8 +47,6 @@ function Route({trip}) {
             </div>
           </div>
         </div>
-
-       
       </div>
     </div>
   );
