@@ -214,7 +214,7 @@ export default function Tripform() {
 
 
     return (
-        <div className="text-eggshell-600 w-full h-screen p-4">
+        <div className="text-eggshell-600 w-full min-h-screen p-4">
             <h1 className="mx-8 text-center text-3xl lg:text-4xl font-bold mb-4 text-sunset-400">Create a Trip</h1>
         <form className="flex flex-col gap-4 justify-between items-center">
             {page === 1 && <div>
