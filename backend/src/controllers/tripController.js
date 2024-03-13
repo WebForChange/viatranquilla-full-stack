@@ -118,25 +118,45 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
 
   const trip = await Trip.findById(id);
 
-  if (!trip) throw new ErrorResponse(`Trip ${id} does not exist!`, 404);
-
-  // get profile pictures of participants
-  trip.participants = trip.participants.map((username) => {
-    const profile = Profile.findOne({ username: username });
-    return { username: username, profilePicture: profile.profilePicture };
-  });
-
-  try {
-    const connections = await Connection.find({
-      _id: { $in: trip.connections },
-    });
-    trip.connections = connections;
-  } catch (error) {
-    console.log("tripController: error fetching connections: ", error.message);
-    return res.status(500).json({ message: error.message });
+  if (!trip) {
+    console.log("TripController: Trip does not exist!");
+    return res.status(404).json({ message: `Trip ${id} does not exist!` });
   }
 
-  res.status(200).json(trip);
+  // get profile pictures of participants
+  let participantsWithPictures = [];
+
+  // Use for...of loop to handle asynchronous operations properly
+  for (let username of trip.participants) {
+    try {
+      const profile = await Profile.findOne({ username: username });
+
+      if (!profile) {
+        console.log(
+          "TripController: Profile not found for username: ",
+          username
+        );
+        // You might want to decide how to handle this case. Continuing skips the current iteration.
+        continue;
+      }
+
+      console.log("TripController: profile picture: ", profile.profilePicture);
+      participantsWithPictures.push({
+        username: username,
+        profilePicture: profile.profilePicture,
+      });
+    } catch (error) {
+      // Handle possible errors during profile fetching
+      console.error("Error fetching profile for username: ", username, error);
+      // Decide how to handle this error. For example, you might continue to the next iteration.
+      continue;
+    }
+  }
+
+  // After gathering all participant data, include it in your response
+  res
+    .status(200)
+    .json({ ...trip.toObject(), participants: participantsWithPictures });
 });
 
 // Currently returns user's created and joined trips regardless of date
