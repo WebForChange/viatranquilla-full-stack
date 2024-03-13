@@ -83,9 +83,11 @@ export const login = async (req, res) => {
     const userId = user._id.toString();
     res.cookie("token", token, {
       maxAge: 3600000,
-      // httpOnly: true,
       secure: false,
       path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
     });
     res.json({
       userId: userId,
@@ -102,8 +104,9 @@ export const logout = asyncHandler(async (req, res, next) => {
   res
     .clearCookie("token", {
       httpOnly: true,
-      secure: false, // set to true in production. HTTPS not setup on local server
+      secure: true, // set to true in production. HTTPS not setup on local server
       path: "/",
+      sameSite: "none",
     })
     .status(200)
     .json({
