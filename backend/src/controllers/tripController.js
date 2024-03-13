@@ -139,7 +139,7 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
         continue;
       }
 
-      console.log("TripController: profile picture: ", profile.profilePicture);
+      //   console.log("TripController: profile picture: ", profile.profilePicture);
       participantsWithPictures.push({
         username: username,
         profilePicture: profile.profilePicture,
@@ -150,8 +150,6 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
       continue;
     }
   }
-
-  //=======================================================
 
   try {
     const connections = await Connection.find({
