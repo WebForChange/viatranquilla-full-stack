@@ -126,7 +126,6 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
   // get profile pictures of participants
   let participantsWithPictures = [];
 
-  // Use for...of loop to handle asynchronous operations properly
   for (let username of trip.participants) {
     try {
       const profile = await Profile.findOne({ username: username });
@@ -136,7 +135,7 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
           "TripController: Profile not found for username: ",
           username
         );
-        // You might want to decide how to handle this case. Continuing skips the current iteration.
+        // Todo: decide how to handle this case. Continuing skips the current iteration.
         continue;
       }
 
@@ -146,14 +145,24 @@ export const getTripDataByID = asyncHandler(async (req, res, next) => {
         profilePicture: profile.profilePicture,
       });
     } catch (error) {
-      // Handle possible errors during profile fetching
       console.error("Error fetching profile for username: ", username, error);
-      // Decide how to handle this error. For example, you might continue to the next iteration.
+      // Todo: Decide how to handle this error. For example continue to the next iteration.
       continue;
     }
   }
 
-  // After gathering all participant data, include it in your response
+  //=======================================================
+
+  try {
+    const connections = await Connection.find({
+      _id: { $in: trip.connections },
+    });
+    trip.connections = connections;
+  } catch (error) {
+    console.log("tripController: error fetching connections: ", error.message);
+    return res.status(500).json({ message: error.message });
+  }
+
   res
     .status(200)
     .json({ ...trip.toObject(), participants: participantsWithPictures });

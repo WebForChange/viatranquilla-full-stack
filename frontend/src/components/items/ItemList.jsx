@@ -3,6 +3,7 @@ import ItemCard from "./ItemCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function ItemList({ username }) {
     const [items, setItems] = useState(null);
@@ -27,6 +28,9 @@ export default function ItemList({ username }) {
                 withCredentials: true,
             });
             getItems();
+            toast.error("Item is deleted!", {
+                position: "top-center"
+              });
         } catch (error) {
             console.log("Error deleting item:", error);
         }
