@@ -28,7 +28,10 @@ function Dashboard() {
         </div>
       </div>
       <div>
+      <h2 className="mx-8 text-center text-3xl lg:text-3xl font-bold mb-4 text-sunset-400">Your Vehicles</h2>
+      <div>
         <MyVehicles username={user.username} />
+      </div>
       </div>
     </div>
   );
