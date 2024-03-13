@@ -56,7 +56,7 @@ export default function LoginForm() {
         localStorage.getItem("token", token);
         navigate("/dashboard");
         toast.success("You have successfully logged in!", {
-          position: "top-center"
+          position: "top-center",
         });
       }
     } catch (error) {
@@ -75,7 +75,7 @@ export default function LoginForm() {
           <input
             type="email"
             id="email"
-            className="p-1 rounded text-delft_blue-100"
+            className="p-1 rounded  text-white"
             value={postLogin.email}
             onChange={handleChange}
           />
@@ -85,7 +85,7 @@ export default function LoginForm() {
           <input
             type="password"
             id="password"
-            className="p-1 rounded text-delft_blue-100"
+            className="p-1 rounded  text-white"
             value={postLogin.password}
             onChange={handleChange}
           />
@@ -95,7 +95,7 @@ export default function LoginForm() {
         </p>
         <button
           type="submit"
-          className="btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500"
+          className="btn bg-cambridge_blue-400 border-none hover:bg-cambridge_blue-500  text-white"
         >
           Log in
         </button>
