@@ -32,7 +32,7 @@ function Route({trip}) {
               <p>{formatDate(trip.startDate)}</p>
             </div>
           </div>
-          <div className="collapse collapse-arrow bg-slate_gray-100">
+{/*           <div className="collapse collapse-arrow bg-slate_gray-100">
             <input type="radio" name="my-accordion-2" />
             <div className="collapse-title text-xl font-medium text-eggshell-600">
               Via Aachen
@@ -40,21 +40,23 @@ function Route({trip}) {
             <div className="collapse-content text-eggshell-600">
               <p>23.05. - 18:00</p>
             </div>
-          </div>
+          </div> */}
           <div className="collapse collapse-arrow bg-slate_gray-100">
             <input type="radio" name="my-accordion-2" />
             <div className="collapse-title text-xl font-medium text-eggshell-600">
-              Paris
+              {!trip.connections ? null
+              :
+              <p>{trip.connections[0].to.city}</p>
+              }
             </div>
             <div className="collapse-content text-eggshell-600">
-              <p>24.05. - 18:00</p>
               <p>
-                25.05. - Montmatre besichtigen & Essen im{" "}
-                <em>Un Zèbre à Montmartre</em>{" "}
+              {!trip.connections ? null
+              :
+              <p>{trip.connections[0].to.address}</p>
+              }
               </p>
-              <p>
-                26.05. - Louvre & Essen im <em>Les Foodies </em>{" "}
-              </p>
+              <p>{formatDate(trip.endDate)}</p>
             </div>
           </div>
         </div>
