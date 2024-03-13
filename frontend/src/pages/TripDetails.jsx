@@ -25,7 +25,7 @@ function TripDetails() {
     <div>
       <Header trip={trip} />
       <Travellers trip={trip} />
-      <Invitation trip={trip} />
+{/*       <Invitation trip={trip} /> */}
       <Route trip={trip} />
     </div>
   );
