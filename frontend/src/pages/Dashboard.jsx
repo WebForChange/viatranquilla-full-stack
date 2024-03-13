@@ -9,7 +9,7 @@ function Dashboard() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="my-8">
+    <div className="bg-dash-img bg-contain bg-no-repeat my-8">
       <div>
         <h1 className="mx-8 text-center text-3xl lg:text-4xl font-bold mb-4 text-sunset-400">
           Welcome {user.username}!

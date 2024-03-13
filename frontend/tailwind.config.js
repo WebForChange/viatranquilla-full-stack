@@ -118,6 +118,8 @@ export default {
     extend: {
       backgroundImage: {
         'hero-img': "url('./src/assets/vw-roadtrip.png')",
+        'dash-img': "url('./src/assets/dashboard.png')",
+        'profile-img': "url('./src/assets/profile.png')",
         '404': "url('./src/assets/404-bg.png')",
         '301': "url('./src/assets/oauth.png')",
       }
