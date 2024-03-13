@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    background: #2e2d2d;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #5a5959;
+    border-radius: 5px;
+}
+ 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #5a5959;
+}
+
+.sent {
+    background-color: #4caf50; /* Change the background color for sent messages */
+    color: #fff; /* Change the text color for sent messages */
+    padding: 8px;
+    margin: 5px;
+    border-radius: 5px;
+    align-self: flex-end;
+  }
+  
+  .received {
+    background-color: #ddd; /* Change the background color for received messages */
+    color: #333; /* Change the text color for received messages */
+    padding: 8px;
+    margin: 5px;
+    border-radius: 5px;
+    align-self: flex-start;
+  }

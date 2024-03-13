@@ -1,0 +1,31 @@
+.ChatModalContainer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px; /* Adjust the width as needed */
+  height: 400px; /* Adjust the height as needed */
+  /* background-color: #ffffff; */
+  border: 1px solid #535353;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  /* color: black; */
+}
+
+.ChatModalHeader {
+  /* background-color: #f1f1f1; */
+  padding: 10px;
+  text-align: right;
+}
+
+.ChatMessagesContainer {
+  overflow-y: auto;
+  /* max-height: 300px; Adjust the max height as needed */
+  padding: 10px;
+  /* color: black; */
+}
+
+/* .ChatInputContainer {
+  padding: 10px;
+  border-top: 1px solid #ccc;
+} */
