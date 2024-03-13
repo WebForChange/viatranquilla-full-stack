@@ -2,6 +2,7 @@ import React from "react";
 import * as Unicons from "@iconscout/react-unicons";
 
 function Route({trip}) {
+  console.log(trip);
   function formatDate(dateString) {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -14,10 +15,11 @@ function Route({trip}) {
           <div className="collapse collapse-arrow bg-slate_gray-100">
             <input type="radio" name="my-accordion-2" defaultChecked />
             <div className="collapse-title text-xl font-medium text-eggshell-600 flex items-center space-x-4 ">
-              <p>{trip.pickupAddress}</p>
+              <p>{trip.pickupAdress.city}</p>
               <Unicons.UilCarSideview color={"#55BBA5"} size={28} />
             </div>
             <div className="collapse-content text-eggshell-600">
+              <p>{trip.pickupAdress.address}</p>
               <p>{formatDate(trip.startDate)}</p>
             </div>
           </div>
